@@ -337,8 +337,8 @@ main{position:relative;z-index:2}
 .cs-beat__block--outcome{border-left-color:var(--ca-ink)}
 .cs-beat__tag{display:block;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:.55rem}
 .cs-beat__block--move .cs-beat__tag,.cs-beat__block--outcome .cs-beat__tag{color:var(--ca-ink)}
-.cs-beat__challenge{font-family:var(--serif-text);font-weight:400;font-size:clamp(1.25rem,2.5vw,1.75rem);
-  line-height:1.35;letter-spacing:0;color:var(--ink)}
+.cs-beat__challenge{font-family:var(--serif-text);font-weight:400;font-size:clamp(1.15rem,1.8vw,1.35rem);
+  line-height:1.45;letter-spacing:0;color:var(--ink)}
 /* serif challenge: one emphasis device — italic in the same ink (no accent, no faux-bold) */
 .cs-beat__challenge em,.cs-beat__challenge b{font-family:inherit;font-style:italic;font-weight:400;color:var(--ink)}
 .cs-beat__move{font-family:var(--serif-text);font-size:clamp(1.02rem,1.45vw,1.18rem);line-height:1.55;color:var(--ink-soft);margin:0 0 .55rem}
