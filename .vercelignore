@@ -1,0 +1,20 @@
+# Internal / confidential — never publish
+Source real assets/
+To review/
+.claude/
+
+# Local dev servers (not needed in production)
+serve.js
+serve.py
+
+# Resume build scratch (node_modules etc.) — the published PDF is resume.pdf at root
+resume-build/
+
+# Secrets / link metadata
+.env
+.env.*
+.vercel
+
+# Cruft
+.DS_Store
+**/.DS_Store

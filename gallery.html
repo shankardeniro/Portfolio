@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Shanky — Spherical Gallery</title>
+  <link rel="stylesheet" href="fonts/fonts.css?v=2" />
+  <style>
+    :root{
+      --bg-a:#efece6;
+      --bg-b:#dcd7cf;
+      --ink:#1c1b19;
+      --muted:#6b675f;
+    }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html,body{ height:100%; }
+    body{
+      font-family:"Instrument Sans", system-ui, sans-serif;
+      color:var(--ink);
+      overflow:hidden;
+      background:
+        radial-gradient(120% 120% at 50% 35%, var(--bg-a) 0%, var(--bg-b) 78%, #cfc9bf 100%);
+      -webkit-font-smoothing:antialiased;
+    }
+
+    /* WebGL canvas */
+    #gl{
+      position:fixed; inset:0; display:block;
+      width:100%; height:100%;
+      cursor:grab; touch-action:none;
+    }
+    #gl.dragging{ cursor:grabbing; }
+    #gl.hovering{ cursor:pointer; }
+
+    /* subtle film grain */
+    .grain{
+      position:fixed; inset:0; pointer-events:none; z-index:2; opacity:.05;
+      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      mix-blend-mode:multiply;
+    }
+
+    /* top + bottom UI chrome */
+    .chrome{ position:fixed; z-index:3; left:0; right:0; pointer-events:none; }
+    .chrome--top{ top:0; padding:26px 34px; display:flex; justify-content:space-between; align-items:flex-start; }
+    .chrome--bottom{ bottom:0; padding:26px 34px; display:flex; justify-content:space-between; align-items:flex-end; }
+    .chrome a{ pointer-events:auto; }
+
+    .brand{ font-weight:600; letter-spacing:.16em; font-size:13px; text-transform:uppercase; display:flex; align-items:center; gap:9px; color:var(--ink); text-decoration:none; }
+    .brand i{ width:8px; height:8px; border-radius:50%; background:var(--ink); display:inline-block; }
+    .eyebrow{ font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+    .title-lg{ font-family:"Instrument Serif", Georgia, serif; font-size:clamp(28px,5vw,56px); line-height:.98; font-weight:400; }
+    .title-lg em{ font-style:italic; }
+    .hint{ display:flex; align-items:center; gap:10px; font-size:12.5px; letter-spacing:.04em; color:var(--muted); transition:opacity .6s ease; }
+    .hint .key{ display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border:1px solid rgba(0,0,0,.16); border-radius:99px; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink); background:rgba(255,255,255,.35); }
+    .hint.hide{ opacity:0; }
+    .counter{ font-variant-numeric:tabular-nums; font-size:12.5px; color:var(--muted); letter-spacing:.06em; }
+
+    /* loader */
+    .loader{ position:fixed; inset:0; z-index:10; display:grid; place-items:center; background:var(--bg-a);
+      transition:opacity .8s ease, visibility .8s ease; }
+    .loader.done{ opacity:0; visibility:hidden; }
+    .loader__txt{ font-family:"Instrument Serif",Georgia,serif; font-size:clamp(30px,6vw,64px); }
+    .loader__bar{ position:absolute; left:34px; right:34px; bottom:30px; height:1px; background:rgba(0,0,0,.12); }
+    .loader__bar i{ display:block; height:100%; width:0%; background:var(--ink); transition:width .25s ease; }
+
+    /* ---------- Detail page overlay ---------- */
+    .detail{
+      position:fixed; inset:0; z-index:6; visibility:hidden;
+      clip-path:circle(0px at 50% 50%);
+      display:flex; flex-direction:column;
+      color:#15140f;
+    }
+    .detail.open{ visibility:visible; }
+    .detail__bg{ position:absolute; inset:0; z-index:-1; }
+    .detail__inner{ max-width:1100px; width:100%; margin:0 auto; padding:120px 40px 60px; flex:1; display:grid;
+      grid-template-columns:1.05fr 1fr; gap:56px; align-items:center; }
+    .detail__meta .tag{ display:inline-block; padding:7px 14px; border-radius:99px; background:#1c1b19; color:#fff;
+      font-size:12px; letter-spacing:.04em; margin-bottom:26px; }
+    .detail__title{ font-family:"Instrument Serif",Georgia,serif; font-weight:400; font-size:clamp(40px,6vw,82px);
+      line-height:.96; margin-bottom:24px; }
+    .detail__title em{ font-style:italic; }
+    .detail__desc{ font-size:17px; line-height:1.6; max-width:46ch; color:#34322c; margin-bottom:34px; }
+    .detail__stats{ display:flex; gap:38px; }
+    .detail__stat b{ display:block; font-family:"Instrument Serif",Georgia,serif; font-size:34px; font-weight:400; }
+    .detail__stat span{ font-size:12.5px; color:#5d5a52; letter-spacing:.03em; }
+    .detail__media{ aspect-ratio:4/5; border-radius:18px; overflow:hidden; box-shadow:0 40px 90px -40px rgba(0,0,0,.5); }
+    .detail__media img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .detail__top{ position:absolute; top:0; left:0; right:0; z-index:2; padding:26px 34px;
+      display:flex; justify-content:space-between; align-items:center; }
+    .back{ pointer-events:auto; cursor:pointer; background:none; border:1px solid rgba(0,0,0,.25); color:inherit;
+      border-radius:99px; padding:10px 18px 10px 14px; font:inherit; font-size:13px; display:flex; align-items:center; gap:9px;
+      transition:background .25s ease, padding .25s ease; }
+    .back:hover{ background:rgba(0,0,0,.06); }
+    .back svg{ width:16px; height:16px; }
+    .detail__index{ font-family:"Instrument Serif",Georgia,serif; font-size:14px; }
+    @media (max-width:860px){
+      .detail__inner{ grid-template-columns:1fr; gap:30px; padding:100px 26px 50px; align-content:center; }
+      .detail__media{ order:-1; max-height:38vh; }
+      .chrome--bottom .title-lg{ display:none; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gl"></canvas>
+  <div class="grain"></div>
+
+  <!-- chrome -->
+  <header class="chrome chrome--top">
+    <a class="brand" href="index.html"><i></i>SHANKY</a>
+    <span class="eyebrow">Selected Work — 2026</span>
+  </header>
+  <div class="chrome chrome--bottom">
+    <h1 class="title-lg">The <em>Gallery</em></h1>
+    <div style="text-align:right; display:flex; flex-direction:column; gap:12px; align-items:flex-end;">
+      <span class="counter" id="counter">— / —</span>
+      <span class="hint" id="hint">
+        <span class="key">Drag</span> to look around
+        <span class="key">Click</span> a card
+      </span>
+    </div>
+  </div>
+
+  <!-- loader -->
+  <div class="loader" id="loader">
+    <div class="loader__txt">Building the sphere…</div>
+    <div class="loader__bar"><i id="loaderbar"></i></div>
+  </div>
+
+  <!-- detail page -->
+  <section class="detail" id="detail" aria-hidden="true">
+    <div class="detail__bg" id="detailBg"></div>
+    <div class="detail__top">
+      <button class="back" id="back" aria-label="Back to gallery">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back
+      </button>
+      <span class="detail__index" id="detailIndex">01</span>
+    </div>
+    <div class="detail__inner">
+      <div class="detail__meta">
+        <span class="tag" id="detailTag">Case study</span>
+        <h2 class="detail__title" id="detailTitle">Title</h2>
+        <p class="detail__desc" id="detailDesc">Description</p>
+        <div class="detail__stats" id="detailStats"></div>
+      </div>
+      <div class="detail__media"><img id="detailImg" alt="" /></div>
+    </div>
+  </section>
+
+  <script src="vendor/gsap.min.js?v=2"></script>
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three.module.js?v=2" } }
+  </script>
+  <script type="module" src="js/gallery.js?v=1"></script>
+</body>
+</html>

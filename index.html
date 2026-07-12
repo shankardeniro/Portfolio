@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Shanky, Product Designer</title>
+  <meta name="description" content="Sankaranarayanan (Shanky), Product Designer bridging business goals with user needs. UX research & strategy across gaming, fintech and B2C." />
+  <script>
+    // set theme before paint to avoid a flash
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (!t) t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { document.documentElement.setAttribute("data-theme", "dark"); }
+    })();
+  </script>
+  <link rel="stylesheet" href="fonts/fonts.css?v=11" />
+  <link rel="stylesheet" href="css/style.css?v=11" />
+</head>
+<body>
+  <!-- Custom cursor -->
+  <div class="cursor" data-cursor>
+    <span class="cursor__label" data-cursor-label></span>
+  </div>
+
+  <!-- Loader -->
+  <div class="loader" data-loader>
+    <div class="loader__inner">
+      <div class="loader__count"><span data-loader-count>0</span><i>%</i></div>
+      <div class="loader__name">
+        <span class="reveal-line"><span>Sankaranarayanan</span></span>
+      </div>
+    </div>
+    <div class="loader__bar"><div class="loader__bar-fill" data-loader-bar></div></div>
+  </div>
+
+  <!-- Three.js canvas -->
+  <canvas id="webgl" data-webgl></canvas>
+  <div class="grain"></div>
+
+  <!-- Nav -->
+  <header class="nav" data-nav>
+    <a href="#top" class="nav__brand" data-cursor-hover>
+      <span class="nav__dot"></span>SHANKY
+    </a>
+    <nav class="nav__links">
+      <a href="#work" data-cursor-hover>Work</a>
+      <a href="#about" data-cursor-hover>About</a>
+      <a href="/resume.pdf" target="_blank" rel="noopener" data-cursor-hover>Résumé</a>
+      <a href="#contact" class="nav__cta" data-cursor-hover>Let's talk</a>
+      <button class="nav__theme" data-theme-toggle data-cursor-hover aria-label="Toggle light and dark theme">
+        <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main data-scroll-root>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero__top">
+        <span class="tag" data-fade>Senior Product Designer · UX Researcher</span>
+        <span class="tag tag--right" data-fade>Gaming · Fintech · B2C</span>
+      </div>
+
+      <h1 class="hero__title" data-cursor-hover>
+        <span class="line"><span class="word" data-hero-word>Shan</span><span class="word italic" data-hero-word>ky</span></span>
+      </h1>
+
+      <div class="hero__bottom">
+        <div class="hero__meta" data-fade>
+          <span class="hero__loc">Stockholm-based · Open to remote · Available 2026</span>
+          <span class="hero__loc hero__loc--auth">Right to work in Sweden — no visa sponsorship</span>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-cue" data-cursor-hover aria-label="Scroll down">
+        <span>Scroll</span>
+        <span class="scroll-cue__line"><i></i></span>
+      </a>
+    </section>
+
+    <!-- INTRO / STATEMENT -->
+    <section class="statement" id="about">
+      <p class="statement__eyebrow">(About)</p>
+      <h2 class="statement__text">
+        <span class="sw" data-word>I'm</span> <span class="sw" data-word>a</span>
+        <span class="sw" data-word>Product</span> <span class="sw" data-word>Designer</span>
+        <span class="sw" data-word>&amp;</span> <span class="sw" data-word>Researcher</span>
+        <span class="sw" data-word>with</span> <span class="sw italic" data-word>5+</span>
+        <span class="sw" data-word>years</span> <span class="sw" data-word>turning</span>
+        <span class="sw" data-word>messy</span> <span class="sw" data-word>problems</span>
+        <span class="sw" data-word>into</span> <span class="sw" data-word>decisions</span>
+        <span class="sw" data-word>a</span> <span class="sw" data-word>team</span> <span class="sw italic" data-word>can</span>
+        <span class="sw italic" data-word>actually</span> <span class="sw" data-word>act</span> <span class="sw" data-word>on.</span>
+      </h2>
+      <div class="statement__foot">
+        <p>For the last <b>five years</b> I've been at a licensed European gaming operator. It's regulated, high-stakes work where the research and the design can't really be separated, so I do both.</p>
+        <p>Lately I lean on AI tools, Figma Make, Cursor, Claude and Lovable, to work faster and dig a bit deeper.</p>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="stat" data-stat>
+        <span class="stat__num"><span data-count="0">0</span></span>
+        <span class="stat__label">Compliance violations, Swedish launch</span>
+      </div>
+      <div class="stat" data-stat>
+        <span class="stat__num"><span data-count="11" data-prefix="+" data-suffix=" pts">0</span></span>
+        <span class="stat__label">Onboarding conversion, 43% → 54%</span>
+      </div>
+      <div class="stat" data-stat>
+        <span class="stat__num">0→1</span>
+        <span class="stat__label">Research practice, built from scratch</span>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section class="work" id="work">
+      <div class="work__head">
+        <h2 class="section-title"><span>Selected</span> <span class="italic">Work</span></h2>
+        <span class="section-index">03 · Projects</span>
+      </div>
+
+      <ul class="projects" data-projects>
+        <li class="project" data-project data-color="#c6f24e">
+          <a href="https://designshanky.com/case-study/winning-over-sweden" data-case="winning-over-sweden" class="project__link" data-cursor-label="Read">
+            <span class="project__index">01</span>
+            <span class="project__title">Winning Over Sweden</span>
+            <span class="project__desc">Launching a compliant, user-centred casino for the Swedish market, end-to-end UX research &amp; design.</span>
+            <span class="project__tags"><i>UX Research</i><i>Strategy</i><i>UX Design</i></span>
+            <span class="project__result">Go-to-market</span>
+          </a>
+        </li>
+        <li class="project" data-project data-color="#ff8a5c">
+          <a href="https://designshanky.com/case-study/reimagining-onboarding" data-case="reimagining-onboarding" class="project__link" data-cursor-label="Read">
+            <span class="project__index">02</span>
+            <span class="project__title">Reimagining Onboarding</span>
+            <span class="project__desc">Research-driven redesign using interviews, surveys &amp; usability testing to remove friction.</span>
+            <span class="project__tags"><i>Evaluative Research</i><i>A/B Testing</i><i>Onboarding Funnel</i></span>
+            <span class="project__result">Now the only flow</span>
+          </a>
+        </li>
+        <li class="project" data-project data-color="#7aa2ff">
+          <a href="https://designshanky.com/case-study/user-research-framework" data-case="user-research-framework" class="project__link" data-cursor-label="Read">
+            <span class="project__index">03</span>
+            <span class="project__title">Founding a Research Practice</span>
+            <span class="project__desc">Came in as the first researcher and built the function from zero into the practice that now steers the roadmap.</span>
+            <span class="project__tags"><i>Research Strategy</i><i>0→1</i><i>Leadership</i></span>
+            <span class="project__result">Now steers the roadmap</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- MARQUEE -->
+    <section class="marquee" aria-hidden="true">
+      <div class="marquee__track" data-marquee>
+        <span>User Research</span><span class="dot">✦</span>
+        <span>Evaluative Research</span><span class="dot">✦</span>
+        <span>Exploratory Research</span><span class="dot">✦</span>
+        <span>Data-Driven Design</span><span class="dot">✦</span>
+        <span>Strategy</span><span class="dot">✦</span>
+        <span>AI-Augmented</span><span class="dot">✦</span>
+        <span>User Research</span><span class="dot">✦</span>
+        <span>Evaluative Research</span><span class="dot">✦</span>
+        <span>Exploratory Research</span><span class="dot">✦</span>
+        <span>Data-Driven Design</span><span class="dot">✦</span>
+        <span>Strategy</span><span class="dot">✦</span>
+        <span>AI-Augmented</span><span class="dot">✦</span>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+      <div class="services__head">
+        <h2 class="section-title"><span>What I do</span></h2>
+      </div>
+      <ul class="services__list">
+        <li class="service" data-service>
+          <span class="service__no">01</span>
+          <h3 class="service__name">User Research</h3>
+          <p class="service__desc">I talk to users, watch them use things, and make sense of it so we know what to do next.</p>
+        </li>
+        <li class="service" data-service>
+          <span class="service__no">02</span>
+          <h3 class="service__name">Data-Driven Design</h3>
+          <p class="service__desc">Analytics and A/B tests, so when someone asks why we did it, there's a number behind the answer.</p>
+        </li>
+        <li class="service" data-service>
+          <span class="service__no">03</span>
+          <h3 class="service__name">Strategic Thinking</h3>
+          <p class="service__desc">Keeping what users need and what the business needs pointed the same way, so we ship something that matters, not just screens.</p>
+        </li>
+        <li class="service" data-service>
+          <span class="service__no">04</span>
+          <h3 class="service__name">AI-Augmented Design</h3>
+          <p class="service__desc">Using Figma Make, Cursor, Claude and Lovable to get from an idea to a working screen faster.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- TOOLS -->
+    <section class="tools">
+      <p class="tools__label">Tools of the trade</p>
+      <div class="tools__grid">
+        <span data-tool>Figma</span><span data-tool>R Studio</span><span data-tool>Hotjar</span>
+        <span data-tool>PostHog</span><span data-tool>Notion</span>
+        <span data-tool>Lovable</span><span data-tool>Claude</span>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <p class="contact__eyebrow">(Get in touch)</p>
+      <a href="mailto:mail2contactshankar@gmail.com" class="contact__big" data-cursor-label="Email" data-magnetic>
+        <span class="reveal-line"><span>Let's build</span></span>
+        <span class="reveal-line"><span class="italic">something good.</span></span>
+      </a>
+      <div class="contact__row">
+        <a href="mailto:mail2contactshankar@gmail.com" class="contact__mail" data-cursor-hover>mail2contactshankar@gmail.com</a>
+        <div class="contact__socials">
+          <a href="https://www.linkedin.com/in/sankaranarayanan-subramanian-553379212/" target="_blank" rel="noopener" data-cursor-hover>LinkedIn ↗</a>
+          <a href="/resume.pdf" target="_blank" rel="noopener" data-cursor-hover>Résumé ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© 2026 Sankaranarayanan S.</span>
+      <span class="footer__mid">Designed with research, built with care</span>
+      <button class="footer__top" data-cursor-hover onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top ↑</button>
+    </footer>
+  </main>
+
+  <!-- Case study reader -->
+  <div class="case" data-case-overlay role="dialog" aria-modal="true" aria-hidden="true" aria-label="Case study">
+    <div class="case__bar">
+      <span class="case__bar-label" data-case-eyebrow>Case Study</span>
+      <span class="case__chapter" data-case-chapter aria-hidden="true"></span>
+      <button class="case__close" data-case-close data-cursor-hover aria-label="Close case study">
+        Close <span class="case__close-x">✕</span>
+      </button>
+    </div>
+    <div class="case__progress"><div class="case__progress-fill" data-case-progress></div></div>
+    <div class="case__scroll" data-case-scroll>
+      <article class="case__inner" data-case-content></article>
+    </div>
+  </div>
+
+  <script src="vendor/gsap.min.js?v=11"></script>
+  <script src="vendor/ScrollTrigger.min.js?v=11"></script>
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three.module.js?v=11" } }
+  </script>
+  <script type="module" src="js/scene.js?v=11"></script>
+  <script type="module" src="js/main.js?v=11"></script>
+</body>
+</html>

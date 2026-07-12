@@ -1,0 +1,15 @@
+# Secrets / deploy metadata
+.vercel
+.env*
+
+# Confidential — never commit (raw usability PDFs, WIP)
+Source real assets/
+To review/
+
+# Dependencies / build scratch
+node_modules/
+resume-build/node_modules/
+
+# OS cruft
+.DS_Store
+**/.DS_Store
