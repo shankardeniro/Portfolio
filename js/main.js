@@ -519,13 +519,13 @@ const CASES = {
         "And that flow is where the money is made: getting through onboarding and making a first deposit is one of the numbers the business lives on. So when a third of pre-checked users walked away right before verification, that wasn't a small UX issue, it was real money leaving. The question was <em>why</em>." ] },
       { eyebrow: "The funnel", h: "Following the drop-off", p: [
         "First, the data. I tracked every user from sign-up through to verified, depositing player, step by step, to find where the funnel leaked worst. One step stood out from the rest." ],
-        table: { head: ["Step", "Count", "Step conv.", "Drop-off", "Cumulative"], rows: [
-          ["Registered", "79,602", "100.00%", "—", "100.00%"],
-          ["Activated", "78,085", "98.09%", "1,517", "98.09%"],
-          ["Pre-checked", "66,294", "84.90%", "11,791", "83.28%"],
-          ["Attempted verification", "44,452", "67.05%", "21,842", "55.84%"],
-          ["Verified", "39,609", "89.11%", "4,843", "49.76%"],
-          ["Verified depositors", "34,462", "87.01%", "5,147", "43.29%"] ] } },
+        funnel: { caption: "Every user from sign-up to depositing player, each bar as a share of everyone who registered. Scroll and watch it narrow.", rows: [
+          { label: "Registered", count: 79602 },
+          { label: "Activated", count: 78085, drop: "1,517" },
+          { label: "Pre-checked", count: 66294, drop: "11,791" },
+          { label: "Attempted verification", count: 44452, drop: "21,842", big: true },
+          { label: "Verified", count: 39609, drop: "4,843" },
+          { label: "Verified depositors", count: 34462, drop: "5,147" } ] } },
       { verdict: { label: "The biggest leak", text: "<b>21,842 users</b>, a full third of everyone who'd been pre-checked, vanished between <em>pre-checked</em> and <em>attempted verification</em>, right where they were meant to start KYC. Closing that gap became the goal: get the number of <em>verified</em> users as close as possible to the number who <em>registered</em>." } },
       { eyebrow: "Problem statement", h: "The question we set out to answer", p: [
         "<em>How can we seamlessly guide users through the signup process and KYC verification to increase overall conversion rates?</em>",
@@ -943,6 +943,43 @@ function flowHTML() {
     <figcaption>${esc(F.caption)} <button class="cs-flow__full" data-zoom-src="${F.full}">See the original map ↗</button></figcaption>
   </figure>`;
 }
+// Scroll-scrubbed funnel: each bar fills to its share of the top-of-funnel count
+// and the number ticks up, all driven by the case reader's own scroll position,
+// so scrolling down literally walks the drop-off. A high-water mark keeps a bar
+// filled once reached (it never un-fills on scroll-up), and reduced-motion just
+// paints the final state.
+let _funnelCleanup = null;
+function initFunnel(root) {
+  if (_funnelCleanup) { _funnelCleanup(); _funnelCleanup = null; }
+  const fig = root.querySelector("[data-funnel]");
+  if (!fig) return;
+  const scroll = root.closest("[data-case-scroll]") || document.querySelector("[data-case-scroll]");
+  if (!scroll) return;
+  const rows = [...fig.querySelectorAll(".cs-funnel__row")].map((r) => ({
+    el: r, w: parseFloat(r.dataset.w) || 100, count: parseInt(r.dataset.count, 10) || 0, max: 0,
+    fill: r.querySelector(".cs-funnel__fill"), num: r.querySelector(".cs-funnel__num"),
+  }));
+  const paint = (r, p) => {
+    if (r.fill) r.fill.style.transform = `scaleX(${(p * r.w / 100).toFixed(4)})`;
+    if (r.num) r.num.textContent = Math.round(p * r.count).toLocaleString("en-US");
+    r.el.classList.toggle("is-on", p > 0.02);
+  };
+  if (reduce) { rows.forEach((r) => paint(r, 1)); return; }
+  const update = () => {
+    const vh = scroll.clientHeight, top = scroll.getBoundingClientRect().top;
+    rows.forEach((r) => {
+      const y = r.el.getBoundingClientRect().top - top;   // row position within the reader viewport
+      let p = (vh * 0.88 - y) / (vh * 0.33);              // 0 as it enters low, 1 by ~mid-screen
+      p = Math.max(0, Math.min(1, p));
+      if (p > r.max) r.max = p;                            // high-water mark: fill, don't un-fill
+      paint(r, r.max);
+    });
+  };
+  update();
+  scroll.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  _funnelCleanup = () => { scroll.removeEventListener("scroll", update); window.removeEventListener("resize", update); };
+}
 let _flow = null;
 function disposeFlow() { if (_flow) { try { _flow(); } catch (e) {} _flow = null; } }
 function initFlow(root) {
@@ -1067,6 +1104,14 @@ function renderCase(slug) {
     // labelled synthesis cards, e.g. what we got right / wrong / didn't expect
     if (s.cards) txt += `<div class="cs-cards" style="--cols:${s.cards.length}">${s.cards.map((c) => `<div class="cs-card cs-card--${c.tone || "neutral"}"><span class="cs-card__label">${esc(c.label)}</span><ul>${c.items.map((i) => `<li>${i}</li>`).join("")}</ul></div>`).join("")}</div>`;
     if (s.table) txt += `<div class="cs-table-wrap"><table class="cs-table"><thead><tr>${s.table.head.map((x) => `<th>${esc(x)}</th>`).join("")}</tr></thead><tbody>${s.table.rows.map((r) => `<tr>${r.map((x) => `<td>${esc(x)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+    if (s.funnel) {
+      const fmax = s.funnel.rows[0].count;
+      const frows = s.funnel.rows.map((r) => {
+        const w = (r.count / fmax * 100).toFixed(2);
+        return `<div class="cs-funnel__row${r.big ? " cs-funnel__row--big" : ""}" data-w="${w}" data-count="${r.count}"><div class="cs-funnel__head"><span class="cs-funnel__label">${esc(r.label)}</span><span class="cs-funnel__num" aria-hidden="true">0</span></div><div class="cs-funnel__track"><span class="cs-funnel__fill"></span></div>${r.drop ? `<span class="cs-funnel__drop">&minus;${esc(r.drop)} dropped</span>` : ""}</div>`;
+      }).join("");
+      txt += `<figure class="cs-funnel" data-funnel role="img" aria-label="Onboarding funnel: from 79,602 registered (100%) down to 34,462 verified depositors (43%). The biggest single drop is 21,842 users at attempted verification.">${frows}${s.funnel.caption ? `<figcaption class="cs-cap">${esc(s.funnel.caption)}</figcaption>` : ""}</figure>`;
+    }
     if (s.metrics) txt += `<div class="cs-metrics">${s.metrics.map((m) => `<div class="cs-metric"><b>${esc(m[0])}</b><span>${esc(m[1])}</span></div>`).join("")}</div>`;
     if (s.result) txt += `<div class="cs-result"><span class="cs-result__n">${esc(s.result.n)}</span><span class="cs-result__label">${esc(s.result.label)}</span>${s.result.note ? `<p class="cs-result__note">${s.result.note}</p>` : ""}</div>`;
     if (s.verdict) txt += `<div class="cs-verdict"><span class="cs-verdict__label">${esc(s.verdict.label)}</span><p class="cs-verdict__text">${s.verdict.text}</p></div>`;
@@ -1249,6 +1294,7 @@ function initCaseStudies() {
     initZoomables(content);
     initReel(content);
     initFlow(content);
+    initFunnel(content);
     document.body.classList.add("case-open");
     overlay.setAttribute("aria-hidden", "false");
     // The slide itself is a CSS transition (class toggle), so it never depends on
@@ -1266,6 +1312,9 @@ function initCaseStudies() {
 
   function close() {
     overlay.classList.remove("is-open");
+    overlay.classList.remove("is-flip");
+    overlay.style.clipPath = "";
+    overlay.style.opacity = "";
     overlay.setAttribute("aria-hidden", "true");
     document.body.classList.remove("case-open");
     teardownReading();
@@ -1274,10 +1323,107 @@ function initCaseStudies() {
   function reset() {
     if (overlay.classList.contains("is-open")) return; // re-opened during the delay
     disposeFlow();
+    if (_funnelCleanup) { _funnelCleanup(); _funnelCleanup = null; }
     if (_reelTL) { _reelTL.kill(); _reelTL = null; }
     if (_reelCleanup) { _reelCleanup(); _reelCleanup = null; }
     content.innerHTML = "";
     current = null;
+  }
+
+  // Shared-element open: the clicked project title flies up and grows into the
+  // case-study header, so opening reads as one continuous space rather than a
+  // panel sliding over. We suppress the CSS slide and crossfade the overlay
+  // instead, flying a fixed clone of the title from the card to the header, then
+  // handing off to the real title. Falls back to a plain open when there's no
+  // source title (cross-links), reduced-motion is on, or GSAP is unavailable.
+  function flipOpen(sourceEl, slug) {
+    const titleEl = sourceEl && sourceEl.querySelector && sourceEl.querySelector(".project__title");
+    if (reduce || !window.gsap || !titleEl) { open(slug); return; }
+    const first = titleEl.getBoundingClientRect();
+    const ss = getComputedStyle(titleEl);
+    overlay.classList.add("is-flip");
+    overlay.style.opacity = "0";
+    open(slug);
+    const target = content.querySelector(".case__title");
+    if (!target) { overlay.classList.remove("is-flip"); overlay.style.opacity = ""; return; }
+    // Clone keeps the card title's own width and wrapping, so the motion begins
+    // seamlessly from exactly what was on screen (no first-frame jump).
+    const clone = titleEl.cloneNode(true);
+    Object.assign(clone.style, {
+      position: "fixed", left: "0", top: "0", margin: "0", zIndex: "600", pointerEvents: "none",
+      width: first.width + "px", transformOrigin: "0 0",
+      fontFamily: ss.fontFamily, fontWeight: ss.fontWeight, fontStyle: ss.fontStyle,
+      fontSize: ss.fontSize, lineHeight: ss.lineHeight, letterSpacing: ss.letterSpacing, color: ss.color,
+    });
+    document.body.appendChild(clone);
+    gsap.set(clone, { x: first.left, y: first.top, scale: 1 });
+    titleEl.style.visibility = "hidden";
+    target.style.visibility = "hidden";
+
+    // Header content rises in just behind the settling title, so the page builds
+    // around it rather than the whole panel appearing at once.
+    const header = content.querySelector(".case__head");
+    const followers = [
+      content.querySelector(".case__num"),
+      content.querySelector(".case__tagline"),
+      content.querySelector(".case__meta"),
+      header && header.nextElementSibling,
+    ].filter(Boolean);
+
+    requestAnimationFrame(() => {
+      const last = target.getBoundingClientRect();
+      const ts = getComputedStyle(target);
+      const scale = parseFloat(ts.fontSize) / parseFloat(ss.fontSize) || 1;
+
+      gsap.to(overlay, { opacity: 1, duration: 0.5, ease: "power2.out",
+        onComplete: () => { overlay.style.opacity = ""; overlay.classList.remove("is-flip"); } });
+      gsap.set(followers, { opacity: 0, y: 18 });
+
+      const tl = gsap.timeline();
+      // the title glides up and eases to a stop (power3 = smooth glide-to-settle)
+      tl.to(clone, { x: last.left, y: last.top, scale: scale, color: ts.color, duration: 0.62, ease: "power3.out" }, 0);
+      // soft handoff as it lands: real title fades in, clone fades out, which also
+      // hides any difference in how the two titles wrap
+      tl.add(() => { target.style.visibility = ""; }, 0.44);
+      tl.fromTo(target, { opacity: 0 }, { opacity: 1, duration: 0.34, ease: "power1.out" }, 0.44);
+      tl.to(clone, { opacity: 0, duration: 0.28, ease: "power1.out",
+        onComplete: () => { titleEl.style.visibility = ""; clone.remove(); } }, 0.46);
+      // the rest of the header rises in with a gentle, tight stagger
+      tl.to(followers, { opacity: 1, y: 0, duration: 0.55, stagger: 0.05, ease: "power3.out" }, 0.5);
+    });
+  }
+
+  // Alternative open: the overlay unmasks from the clicked row — a clip-path band
+  // sitting where the row is expands to fill the screen — while the header
+  // staggers up. No title morph, so it's robust to any wrapping. Reduced-motion
+  // or no-GSAP falls back to a plain open.
+  function unmaskOpen(sourceEl, slug) {
+    if (reduce || !window.gsap) { open(slug); return; }
+    const rowEl = (sourceEl && sourceEl.closest && sourceEl.closest(".project")) || sourceEl;
+    const r = rowEl.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const topPct = Math.max(0, Math.min(100, r.top / vh * 100));
+    const botPct = Math.max(0, Math.min(100, (vh - r.bottom) / vh * 100));
+    overlay.classList.add("is-flip");
+    overlay.style.opacity = "1";
+    overlay.style.clipPath = `inset(${topPct.toFixed(2)}% 0% ${botPct.toFixed(2)}% 0%)`;
+    open(slug);
+    const header = content.querySelector(".case__head");
+    const followers = [
+      content.querySelector(".case__num"),
+      content.querySelector(".case__title"),
+      content.querySelector(".case__tagline"),
+      content.querySelector(".case__meta"),
+      header && header.nextElementSibling,
+    ].filter(Boolean);
+    gsap.set(followers, { opacity: 0, y: 24 });
+    requestAnimationFrame(() => {
+      const tl = gsap.timeline({ onComplete: () => {
+        overlay.style.clipPath = ""; overlay.style.opacity = ""; overlay.classList.remove("is-flip");
+      } });
+      tl.to(overlay, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.72, ease: "power3.inOut" }, 0);
+      tl.to(followers, { opacity: 1, y: 0, duration: 0.6, stagger: 0.05, ease: "power3.out" }, 0.3);
+    });
   }
 
   function bindNav() {
@@ -1290,7 +1436,7 @@ function initCaseStudies() {
 
   // open from project links
   document.querySelectorAll("[data-case]").forEach((a) => {
-    a.addEventListener("click", (e) => { e.preventDefault(); open(a.dataset.case); });
+    a.addEventListener("click", (e) => { e.preventDefault(); unmaskOpen(a, a.dataset.case); });
   });
   // open from cross-references inside case content (links injected after boot)
   content.addEventListener("click", (e) => {
