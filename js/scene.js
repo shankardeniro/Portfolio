@@ -33,39 +33,47 @@ float snoise(vec3 v){
 }`;
 
 const vertex = `
-uniform float uTime;uniform float uAmp;uniform float uPointer;
-varying float vNoise;varying vec3 vNormal;varying vec3 vView;
+uniform float uTime;uniform float uAmp;uniform float uPointer;uniform vec2 uPtr;
+varying float vNoise;varying vec3 vNormal;varying vec3 vView;varying float vFacing;
 ${noiseGLSL}
 void main(){
   float t=uTime*0.28;
   float n=snoise(position*0.9+vec3(t))*0.55+snoise(position*2.1-vec3(t*0.6))*0.25;
   vNoise=n;
-  vec3 displaced=position+normal*n*uAmp*(1.0+uPointer*0.6);
   vNormal=normalize(normalMatrix*normal);
+  // how strongly this point faces the cursor, in view space so it tracks the
+  // pointer regardless of the orb's own spin
+  float facing=dot(vNormal,normalize(vec3(uPtr,0.85)));
+  vFacing=facing;
+  float bulge=max(facing,0.0)*uPointer*0.22;
+  vec3 displaced=position+normal*(n*uAmp*(1.0+uPointer*0.6)+bulge);
   vec4 mv=modelViewMatrix*vec4(displaced,1.0);
   vView=normalize(-mv.xyz);
   gl_Position=projectionMatrix*mv;
 }`;
 
 const fragment = `
-uniform vec3 uColorA;uniform vec3 uColorB;uniform float uLight;
-varying float vNoise;varying vec3 vNormal;varying vec3 vView;
+uniform vec3 uColorA;uniform vec3 uColorB;uniform float uLight;uniform float uPointer;
+varying float vNoise;varying vec3 vNormal;varying vec3 vView;varying float vFacing;
 void main(){
   float fres=pow(1.0-max(dot(vNormal,vView),0.0),2.4);
   vec3 base=mix(uColorA,uColorB,smoothstep(-0.5,0.6,vNoise));
+  float hot=smoothstep(0.2,1.0,vFacing)*uPointer;   // a bright spot that tracks the cursor
   if(uLight>0.5){
     // light theme: a soft dark-glass orb over the pale page (normal blending)
     vec3 c=mix(vec3(0.10,0.14,0.03), uColorB*0.55, fres);
-    gl_FragColor=vec4(c, clamp(0.18+fres*0.55,0.0,0.82));
+    c+=uColorB*hot*0.45;
+    gl_FragColor=vec4(c, clamp(0.18+fres*0.55+hot*0.32,0.0,0.92));
   } else {
     vec3 col=base*0.16+vec3(0.78,0.95,0.30)*fres*1.2;
-    gl_FragColor=vec4(col, clamp(fres*1.1+0.1,0.0,1.0));
+    col+=vec3(0.85,1.0,0.5)*hot*1.0;
+    gl_FragColor=vec4(col, clamp(fres*1.1+0.1+hot*0.55,0.0,1.0));
   }
 }`;
 
 let renderer, scene, camera, mesh, mat, wireMat, raf;
 const pointer = { x: 0, y: 0, tx: 0, ty: 0, intensity: 0, ti: 0 };
-let scrollY = 0;
+let scrollY = 0, ampBase = 0;
 
 function init() {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
@@ -89,6 +97,7 @@ function init() {
       uTime: { value: 0 },
       uAmp: { value: 0.0 },
       uPointer: { value: 0 },
+      uPtr: { value: new THREE.Vector2(0, 0) },
       uLight: { value: 0 },
       uColorA: { value: new THREE.Color("#1b2a0a") },
       uColorB: { value: new THREE.Color("#c6f24e") },
@@ -121,13 +130,13 @@ function init() {
 }
 
 function animateIntro() {
-  if (prefersReduced) { mat.uniforms.uAmp.value = 0.36; return; }
+  if (prefersReduced) { ampBase = 0.36; mat.uniforms.uAmp.value = 0.36; return; }
   const start = performance.now();
   const dur = 2200;
   (function ramp(now) {
     const p = Math.min((now - start) / dur, 1);
     const e = 1 - Math.pow(1 - p, 3);
-    mat.uniforms.uAmp.value = e * 0.36;
+    ampBase = e * 0.36;
     if (p < 1) requestAnimationFrame(ramp);
   })(performance.now());
 }
@@ -154,13 +163,16 @@ function onResize() {
 const clock = new THREE.Clock();
 function loop() {
   raf = requestAnimationFrame(loop);
+  scrollY = window.scrollY;                 // read fresh so reload/scroll-restore stays in sync
   const t = clock.getElapsedTime();
   mat.uniforms.uTime.value = t;
+  mat.uniforms.uAmp.value = ampBase;
 
   pointer.x += (pointer.tx - pointer.x) * 0.05;
   pointer.y += (pointer.ty - pointer.y) * 0.05;
   pointer.intensity += (pointer.ti - pointer.intensity) * 0.06;
   mat.uniforms.uPointer.value = pointer.intensity;
+  mat.uniforms.uPtr.value.set(pointer.x, pointer.y);   // feed the smoothed cursor to the shader
 
   if (mesh) {
     mesh.rotation.y += 0.0016 + pointer.x * 0.004;

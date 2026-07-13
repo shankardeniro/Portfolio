@@ -15,6 +15,44 @@ function boot() {
   runLoader();
   initCaseStudies();
   if (!isTouch) initCursor();
+  if (!isTouch) initWorkPeek();
+}
+
+/* ---------- WORK-LIST PEEK ----------
+   Hovering a project row floats a preview of that case (its hero image) just
+   above the cursor and lets it trail the pointer, so the hover previews where
+   you're going instead of only changing colour. Pointer-only (skipped on touch);
+   the image is pointer-transparent so clicks still open the case. */
+function initWorkPeek() {
+  const list = document.querySelector("[data-projects]");
+  if (!list || typeof CASES === "undefined") return;
+  const peek = document.createElement("div");
+  peek.className = "work-peek";
+  peek.setAttribute("aria-hidden", "true");
+  peek.innerHTML = '<div class="work-peek__inner"><img alt="" loading="lazy"></div>';
+  document.body.appendChild(peek);
+  const img = peek.querySelector("img");
+
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2, px = mx, py = my;
+  const OFFX = 28, OFFY = -118;
+  (function render() {
+    px += (mx - px) * 0.16; py += (my - py) * 0.16;
+    peek.style.transform = `translate3d(${px}px,${py}px,0)`;
+    requestAnimationFrame(render);
+  })();
+
+  list.querySelectorAll("[data-case]").forEach((a) => {
+    const c = CASES[a.dataset.case];
+    if (!c || !c.hero) return;
+    a.addEventListener("pointerenter", (e) => {
+      if (img.getAttribute("src") !== c.hero) img.src = c.hero;
+      mx = e.clientX + OFFX; my = e.clientY + OFFY;
+      px = mx; py = my;                       // snap on enter, no fly-in from the corner
+      peek.classList.add("is-on");
+    });
+    a.addEventListener("pointermove", (e) => { mx = e.clientX + OFFX; my = e.clientY + OFFY; });
+    a.addEventListener("pointerleave", () => peek.classList.remove("is-on"));
+  });
 }
 
 /* ---------- THEME (light / dark) ---------- */

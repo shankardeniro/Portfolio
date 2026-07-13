@@ -185,6 +185,15 @@ main{position:relative;z-index:2}
   border:1px solid var(--line);border-radius:100px;padding:.3rem .65rem;color:var(--ink-dim)}
 .project__result{justify-self:end;white-space:nowrap;font-size:.78rem;font-weight:500;background:var(--bg-soft);
   border-radius:100px;padding:.5rem .9rem;color:var(--accent-ink)}
+/* work-list peek: a case preview that trails the cursor on row hover */
+.work-peek{position:fixed;top:0;left:0;z-index:400;pointer-events:none;will-change:transform}
+.work-peek__inner{width:clamp(190px,19vw,264px);border-radius:12px;overflow:hidden;background:var(--bg);
+  box-shadow:0 26px 64px -26px rgba(0,0,0,.5);opacity:0;
+  transform:translate(-50%,-50%) scale(.9) rotate(-3deg);
+  transition:opacity .3s ease,transform .5s cubic-bezier(.16,1,.3,1)}
+.work-peek.is-on .work-peek__inner{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-3deg)}
+.work-peek__inner img{display:block;width:100%;height:100%;aspect-ratio:16/10;object-fit:cover}
+@media(hover:none),(pointer:coarse){.work-peek{display:none}}
 @media(max-width:980px){
   .project__link{grid-template-columns:40px 1fr;gap:.6rem 1rem}
   .project__desc{grid-column:2;max-width:none}
