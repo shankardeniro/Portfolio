@@ -1,207 +1,351 @@
 import * as THREE from "three";
 
-/* Animated, noise-displaced sphere with fresnel rim, the hero centrepiece.
-   Lightweight, reacts to scroll + pointer, and degrades on small screens. */
+/* ============================================================
+   HERO — a live usability study of the visitor.
+   Instead of a decorative orb, the hero canvas runs the kind of
+   instrumentation a UX researcher would recognise:
+   · cursor dwells become numbered fixations joined by saccade
+     lines, an eye-tracking scanpath of your own visit
+   · movement leaves a slowly decaying heat trace (Hotjar-style)
+   · clicks are logged as click-map ripples
+   · when nobody interacts (or on touch), a ghost cursor replays
+     a "recorded session" over the real hero UI
+   Plain 2D canvas: cheap, theme-aware, honours reduced motion.
+   ============================================================ */
 
 const canvas = document.querySelector("[data-webgl]");
 const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const isTouch = window.matchMedia("(hover:none),(pointer:coarse)").matches;
 
-const noiseGLSL = `
-vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
-vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
-vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
-vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
-float snoise(vec3 v){
-  const vec2 C=vec2(1.0/6.0,1.0/3.0);const vec4 D=vec4(0.0,0.5,1.0,2.0);
-  vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);
-  vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.0-g;vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);
-  vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;
-  i=mod289(i);
-  vec4 p=permute(permute(permute(i.z+vec4(0.0,i1.z,i2.z,1.0))+i.y+vec4(0.0,i1.y,i2.y,1.0))+i.x+vec4(0.0,i1.x,i2.x,1.0));
-  float n_=0.142857142857;vec3 ns=n_*D.wyz-D.xzx;
-  vec4 j=p-49.0*floor(p*ns.z*ns.z);
-  vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.0*x_);
-  vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;vec4 h=1.0-abs(x)-abs(y);
-  vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);
-  vec4 s0=floor(b0)*2.0+1.0;vec4 s1=floor(b1)*2.0+1.0;vec4 sh=-step(h,vec4(0.0));
-  vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
-  vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);
-  vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
-  p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
-  vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);m=m*m;
-  return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
-}`;
+const PAL = {
+  dark:  { line: [198, 242, 78], heat: [198, 242, 78], heatA: 0.028, bg: [10, 10, 12] },
+  light: { line: [74, 98, 16],   heat: [140, 176, 40], heatA: 0.034, bg: [244, 242, 234] },
+};
+let pal = PAL.dark;
+const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+const TAU = Math.PI * 2;
 
-const vertex = `
-uniform float uTime;uniform float uAmp;uniform float uPointer;uniform vec2 uPtr;
-varying float vNoise;varying vec3 vNormal;varying vec3 vView;varying float vFacing;
-${noiseGLSL}
-void main(){
-  float t=uTime*0.28;
-  float n=snoise(position*0.9+vec3(t))*0.55+snoise(position*2.1-vec3(t*0.6))*0.25;
-  vNoise=n;
-  vNormal=normalize(normalMatrix*normal);
-  // how strongly this point faces the cursor, in view space so it tracks the
-  // pointer regardless of the orb's own spin
-  float facing=dot(vNormal,normalize(vec3(uPtr,0.85)));
-  vFacing=facing;
-  float bulge=max(facing,0.0)*uPointer*0.22;
-  vec3 displaced=position+normal*(n*uAmp*(1.0+uPointer*0.6)+bulge);
-  vec4 mv=modelViewMatrix*vec4(displaced,1.0);
-  vView=normalize(-mv.xyz);
-  gl_Position=projectionMatrix*mv;
-}`;
+let ctx, heat, hctx, W, H, raf;
+let intro = prefersReduced ? 1 : 0;
+let scrollFade = 1;
 
-const fragment = `
-uniform vec3 uColorA;uniform vec3 uColorB;uniform float uLight;uniform float uPointer;
-varying float vNoise;varying vec3 vNormal;varying vec3 vView;varying float vFacing;
-void main(){
-  float fres=pow(1.0-max(dot(vNormal,vView),0.0),2.4);
-  vec3 base=mix(uColorA,uColorB,smoothstep(-0.5,0.6,vNoise));
-  float hot=smoothstep(0.2,1.0,vFacing)*uPointer;   // a bright spot that tracks the cursor
-  if(uLight>0.5){
-    // light theme: a soft dark-glass orb over the pale page (normal blending)
-    vec3 c=mix(vec3(0.10,0.14,0.03), uColorB*0.55, fres);
-    c+=uColorB*hot*0.45;
-    gl_FragColor=vec4(c, clamp(0.18+fres*0.55+hot*0.32,0.0,0.92));
-  } else {
-    vec3 col=base*0.16+vec3(0.78,0.95,0.30)*fres*1.2;
-    col+=vec3(0.85,1.0,0.5)*hot*1.0;
-    gl_FragColor=vec4(col, clamp(fres*1.1+0.1+hot*0.55,0.0,1.0));
+const trail = [];        // raw pointer path, fades within a second
+const fixations = [];    // {x,y,r,born,kill,n,ghost}
+const ripples = [];      // click-map marks {x,y,born}
+let fixCount = 0;
+
+const ptr = { x: -1, y: -1, last: -1e9 };
+let dwell = null;        // {x,y,since,fix}
+
+function addFixation(x, y, ghost) {
+  const f = { x, y, r: 9, born: performance.now(), kill: 0, n: ++fixCount, ghost };
+  fixations.push(f);
+  // keep the scanpath readable: retire the oldest once it gets crowded
+  const alive = fixations.filter((k) => !k.kill);
+  if (alive.length > 9) alive[0].kill = f.born;
+  return f;
+}
+
+const lastStamp = { x: -1e9, y: -1e9 };
+function stampHeat(x, y) {
+  // throttle by distance: a resting cursor shouldn't saturate its spot
+  if (Math.hypot(x - lastStamp.x, y - lastStamp.y) < 7) return;
+  lastStamp.x = x; lastStamp.y = y;
+  const g = hctx.createRadialGradient(x / 2, y / 2, 0, x / 2, y / 2, 17);
+  g.addColorStop(0, rgba(pal.heat, pal.heatA));
+  g.addColorStop(1, rgba(pal.heat, 0));
+  hctx.globalCompositeOperation = "lighter";
+  hctx.fillStyle = g;
+  hctx.fillRect(x / 2 - 17, y / 2 - 17, 34, 34);
+}
+
+/* ---------- the visitor's own session ---------- */
+function onMove(e) {
+  const now = performance.now();
+  ptr.x = e.clientX; ptr.y = e.clientY; ptr.last = now;
+  if (scrollFade <= 0) return;
+  trail.push({ x: ptr.x, y: ptr.y, t: now });
+  stampHeat(ptr.x, ptr.y);
+  // a new dwell zone starts whenever the cursor breaks away
+  if (!dwell || Math.hypot(ptr.x - dwell.x, ptr.y - dwell.y) > 36) {
+    dwell = { x: ptr.x, y: ptr.y, since: now, fix: null };
   }
-}`;
+}
 
-let renderer, scene, camera, mesh, mat, wireMat, raf;
-const pointer = { x: 0, y: 0, tx: 0, ty: 0, intensity: 0, ti: 0 };
-let scrollY = 0, ampBase = 0;
+function onDown(e) {
+  if (scrollFade <= 0) return;
+  ripples.push({ x: e.clientX, y: e.clientY, born: performance.now() });
+}
 
-function init() {
-  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
-  renderer.setClearColor(0x000000, 0);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
+function updateDwell(now) {
+  if (!dwell || now - ptr.last > 2600) return;
+  if (now - dwell.since > 300) {
+    if (!dwell.fix) dwell.fix = addFixation(dwell.x, dwell.y, false);
+    // fixation duration = circle size, as in real gaze plots
+    dwell.fix.r = Math.min(9 + (now - dwell.since - 300) * 0.011, 26);
+  }
+}
 
-  scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-  camera.position.z = 5;
+/* ---------- the ghost session replay ---------- */
+const ghost = {
+  x: 0, y: 0, alpha: 0, phase: "idle", from: null, to: null,
+  t0: 0, dur: 0, holdUntil: 0, fix: null, queue: [],
+};
 
-  const geo = new THREE.IcosahedronGeometry(1.4, window.innerWidth < 768 ? 5 : 6);
-
-  mat = new THREE.ShaderMaterial({
-    vertexShader: vertex,
-    fragmentShader: fragment,
-    transparent: true,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-    uniforms: {
-      uTime: { value: 0 },
-      uAmp: { value: 0.0 },
-      uPointer: { value: 0 },
-      uPtr: { value: new THREE.Vector2(0, 0) },
-      uLight: { value: 0 },
-      uColorA: { value: new THREE.Color("#1b2a0a") },
-      uColorB: { value: new THREE.Color("#c6f24e") },
-    },
+// waypoints come from the actual hero UI, so the replay reads like
+// a real participant scanning the page
+function ghostTargets() {
+  const els = document.querySelectorAll(
+    ".tag, .hero__title, .hero__meta, .scroll-cue, .nav__cta, .nav__brand"
+  );
+  const pts = [];
+  els.forEach((el) => {
+    const r = el.getBoundingClientRect();
+    if (!r.width || r.bottom < 0 || r.top > window.innerHeight) return;
+    pts.push({
+      x: r.left + r.width * (0.2 + Math.random() * 0.6),
+      y: r.top + r.height * (0.25 + Math.random() * 0.5),
+    });
   });
-
-  // let the page theme switch the orb between additive glow (dark) and a soft
-  // dark-glass look (light) so it never washes out on the pale background
-  window.setHeroTheme = function (light) {
-    if (!mat) return;
-    mat.uniforms.uLight.value = light ? 1 : 0;
-    mat.blending = light ? THREE.NormalBlending : THREE.AdditiveBlending;
-    mat.needsUpdate = true;
-    if (wireMat) wireMat.opacity = light ? 0.12 : 0.05;
-  };
-
-  mesh = new THREE.Mesh(geo, mat);
-  // sit the blob slightly right/back so the headline reads over it
-  mesh.position.set(window.innerWidth < 768 ? 0 : 1.4, window.innerWidth < 768 ? 0.4 : 0, 0);
-  scene.add(mesh);
-
-  // a faint second wireframe shell for depth
-  wireMat = new THREE.MeshBasicMaterial({ color: 0xc6f24e, wireframe: true, transparent: true, opacity: 0.05 });
-  const wire = new THREE.Mesh(new THREE.IcosahedronGeometry(1.7, 2), wireMat);
-  mesh.add(wire);
-
-  addEvents();
-  animateIntro();
-  loop();
+  // a plausible reading order with a little shuffle
+  for (let i = pts.length - 1; i > 0; i--) {
+    if (Math.random() < 0.35) { const j = Math.max(0, i - 1); [pts[i], pts[j]] = [pts[j], pts[i]]; }
+  }
+  return pts;
 }
 
-function animateIntro() {
-  if (prefersReduced) { ampBase = 0.36; mat.uniforms.uAmp.value = 0.36; return; }
-  const start = performance.now();
-  const dur = 2200;
-  (function ramp(now) {
-    const p = Math.min((now - start) / dur, 1);
-    const e = 1 - Math.pow(1 - p, 3);
-    ampBase = e * 0.36;
-    if (p < 1) requestAnimationFrame(ramp);
-  })(performance.now());
+function updateGhost(now, dt) {
+  const wantOn = scrollFade > 0.1 && (isTouch || now - ptr.last > 4500);
+  ghost.alpha += ((wantOn ? 1 : 0) - ghost.alpha) * (wantOn ? 0.04 : 0.18);
+  if (ghost.alpha < 0.02) { ghost.phase = "idle"; return; }
+
+  if (ghost.phase === "idle") {
+    if (!ghost.queue.length) ghost.queue = ghostTargets();
+    if (!ghost.queue.length) return;
+    ghost.to = ghost.queue.shift();
+    if (!ghost.from) { ghost.x = window.innerWidth * 0.72; ghost.y = window.innerHeight * 0.4; }
+    ghost.from = { x: ghost.x, y: ghost.y };
+    const d = Math.hypot(ghost.to.x - ghost.from.x, ghost.to.y - ghost.from.y);
+    ghost.dur = Math.min(Math.max(d * 1.6, 480), 1500);
+    ghost.t0 = now;
+    ghost.phase = "move";
+  } else if (ghost.phase === "move") {
+    const p = Math.min((now - ghost.t0) / ghost.dur, 1);
+    const e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+    const dx = ghost.to.x - ghost.from.x, dy = ghost.to.y - ghost.from.y;
+    const len = Math.hypot(dx, dy) || 1;
+    // slight arc perpendicular to the path so it moves like a hand, not a robot
+    const arc = Math.sin(p * Math.PI) * Math.min(len * 0.08, 26);
+    ghost.x = ghost.from.x + dx * e - (dy / len) * arc;
+    ghost.y = ghost.from.y + dy * e + (dx / len) * arc;
+    trail.push({ x: ghost.x, y: ghost.y, t: now });
+    stampHeat(ghost.x, ghost.y);
+    if (p >= 1) {
+      ghost.phase = "hold";
+      ghost.holdUntil = now + 420 + Math.random() * 750;
+      ghost.fix = addFixation(ghost.to.x, ghost.to.y, true);
+    }
+  } else if (ghost.phase === "hold") {
+    if (ghost.fix) ghost.fix.r = Math.min(ghost.fix.r + dt * 0.008, 22);
+    if (now >= ghost.holdUntil) { ghost.fix = null; ghost.phase = "idle"; }
+  }
 }
 
-function addEvents() {
-  window.addEventListener("resize", onResize, { passive: true });
-  window.addEventListener("pointermove", (e) => {
-    pointer.tx = (e.clientX / window.innerWidth) * 2 - 1;
-    pointer.ty = -(e.clientY / window.innerHeight) * 2 + 1;
-    pointer.ti = 1;
-  }, { passive: true });
-  window.addEventListener("pointerout", () => (pointer.ti = 0));
-  window.addEventListener("scroll", () => (scrollY = window.scrollY), { passive: true });
+/* ---------- drawing ---------- */
+function fixAlpha(f, now) {
+  const LIFE = 16000;
+  const inA = Math.min((now - f.born) / 260, 1);
+  const end = f.kill ? Math.min(f.kill + 900, f.born + LIFE) : f.born + LIFE;
+  return inA * Math.max(Math.min((end - now) / 900, 1), 0);
 }
 
-function onResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  mesh.position.x = window.innerWidth < 768 ? 0 : 1.4;
+function drawTrail(now) {
+  while (trail.length && now - trail[0].t > 900) trail.shift();
+  ctx.lineWidth = 1.1;
+  ctx.lineCap = "round";
+  for (let i = 1; i < trail.length; i++) {
+    const p0 = trail[i - 1], p1 = trail[i];
+    if (p1.t - p0.t > 120) continue;               // gap: real/ghost handoff
+    ctx.strokeStyle = rgba(pal.line, (1 - (now - p1.t) / 900) * 0.28);
+    ctx.beginPath(); ctx.moveTo(p0.x, p0.y); ctx.lineTo(p1.x, p1.y); ctx.stroke();
+  }
 }
 
-const clock = new THREE.Clock();
+function drawSaccades(now) {
+  ctx.lineWidth = 1;
+  for (let i = 1; i < fixations.length; i++) {
+    const a = fixations[i - 1], b = fixations[i];
+    const al = Math.min(fixAlpha(a, now), fixAlpha(b, now)) * 0.45;
+    if (al <= 0) continue;
+    const dx = b.x - a.x, dy = b.y - a.y;
+    const d = Math.hypot(dx, dy);
+    if (d < a.r + b.r + 6) continue;               // circles overlap, skip the connector
+    const ux = dx / d, uy = dy / d;
+    ctx.strokeStyle = rgba(pal.line, al);
+    ctx.setLineDash(a.ghost || b.ghost ? [4, 5] : []);
+    ctx.beginPath();
+    ctx.moveTo(a.x + ux * (a.r + 3), a.y + uy * (a.r + 3));
+    ctx.lineTo(b.x - ux * (b.r + 3), b.y - uy * (b.r + 3));
+    ctx.stroke();
+  }
+  ctx.setLineDash([]);
+}
+
+function drawFixations(now) {
+  ctx.font = "600 10px Inter, system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  for (let i = fixations.length - 1; i >= 0; i--) {
+    const f = fixations[i];
+    const a = fixAlpha(f, now);
+    if (a <= 0 && now > f.born + 1000) { fixations.splice(i, 1); continue; }
+    ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, TAU);
+    ctx.fillStyle = rgba(pal.line, 0.13 * a);
+    ctx.fill();
+    ctx.lineWidth = 1.1;
+    ctx.strokeStyle = rgba(pal.line, 0.85 * a);
+    if (f.ghost) ctx.setLineDash([3, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = rgba(pal.line, a);
+    ctx.fillText(String(f.n), f.x, f.y + 0.5);
+  }
+}
+
+function drawRipples(now) {
+  for (let i = ripples.length - 1; i >= 0; i--) {
+    const r = ripples[i];
+    const p = (now - r.born) / 750;
+    if (p >= 1) { ripples.splice(i, 1); continue; }
+    ctx.lineWidth = 1.4;
+    ctx.strokeStyle = rgba(pal.line, (1 - p) * 0.9);
+    ctx.beginPath(); ctx.arc(r.x, r.y, 8 + p * 38, 0, TAU); ctx.stroke();
+    ctx.fillStyle = rgba(pal.line, 1 - p);
+    ctx.beginPath(); ctx.arc(r.x, r.y, 2.4, 0, TAU); ctx.fill();
+  }
+}
+
+function drawGhost(now) {
+  if (ghost.alpha < 0.02) return;
+  const a = ghost.alpha;
+  ctx.save();
+  ctx.translate(ghost.x, ghost.y);
+  ctx.beginPath(); ctx.arc(3, 6, 15, 0, TAU);
+  ctx.fillStyle = rgba(pal.line, 0.08 * a);
+  ctx.fill();
+  // classic cursor arrow, outlined in the page colour so it reads over text
+  ctx.beginPath();
+  ctx.moveTo(0, 0); ctx.lineTo(0, 15); ctx.lineTo(3.6, 11.8);
+  ctx.lineTo(6.4, 17.6); ctx.lineTo(8.8, 16.4); ctx.lineTo(6, 10.8);
+  ctx.lineTo(10.8, 10.4); ctx.closePath();
+  ctx.fillStyle = rgba(pal.line, 0.95 * a);
+  ctx.strokeStyle = rgba(pal.bg, 0.9 * a);
+  ctx.lineWidth = 1.5;
+  ctx.stroke(); ctx.fill();
+  // "replay" tag with a blinking record dot
+  const blink = 0.55 + 0.45 * Math.sin(now * 0.006);
+  ctx.fillStyle = rgba(pal.line, 0.9 * a * blink);
+  ctx.beginPath(); ctx.arc(16, 23.5, 2, 0, TAU); ctx.fill();
+  ctx.font = "600 8px Inter, system-ui, sans-serif";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = rgba(pal.line, 0.75 * a);
+  ctx.fillText("R E P L A Y", 22, 24);
+  ctx.restore();
+}
+
+/* ---------- lifecycle ---------- */
+function resize() {
+  W = window.innerWidth; H = window.innerHeight;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  heat.width = Math.ceil(W / 2); heat.height = Math.ceil(H / 2);
+  if (prefersReduced) renderStatic();
+}
+
+// reduced motion: a single still scanpath over the hero, nothing moves
+function renderStatic() {
+  fixations.length = 0; fixCount = 0;
+  ghostTargets().slice(0, 6).forEach((p) => {
+    const f = addFixation(p.x, p.y, false);
+    f.r = 12 + Math.random() * 10;
+  });
+  const settled = performance.now() + 1000;
+  ctx.clearRect(0, 0, W, H);
+  drawSaccades(settled);
+  drawFixations(settled);
+}
+
+let prev = 0, cleared = false;
 function loop() {
   raf = requestAnimationFrame(loop);
-  scrollY = window.scrollY;                 // read fresh so reload/scroll-restore stays in sync
-  const t = clock.getElapsedTime();
-  mat.uniforms.uTime.value = t;
-  mat.uniforms.uAmp.value = ampBase;
+  const now = performance.now();
+  const dt = Math.min(now - (prev || now), 50);
+  prev = now;
 
-  pointer.x += (pointer.tx - pointer.x) * 0.05;
-  pointer.y += (pointer.ty - pointer.y) * 0.05;
-  pointer.intensity += (pointer.ti - pointer.intensity) * 0.06;
-  mat.uniforms.uPointer.value = pointer.intensity;
-  mat.uniforms.uPtr.value.set(pointer.x, pointer.y);   // feed the smoothed cursor to the shader
-
-  if (mesh) {
-    mesh.rotation.y += 0.0016 + pointer.x * 0.004;
-    mesh.rotation.x = pointer.y * 0.25;
-    // gentle drift + scroll-linked sink/scale
-    const sp = scrollY / window.innerHeight;
-    mesh.position.y = (window.innerWidth < 768 ? 0.4 : 0) - sp * 1.2;
-    const base = window.innerWidth < 768 ? 0.66 : 1;
-    const s = Math.max(0.001, base * (1 - sp * 0.25));
-    mesh.scale.setScalar(s);
-    // recede the canvas after the hero so content reads on clean black
-    canvas.style.opacity = String(Math.max(0, 1 - sp * 1.25));
-    mat.uniforms.uColorB.value.lerpColors(
-      new THREE.Color("#c6f24e"),
-      new THREE.Color("#7aa2ff"),
-      Math.min(sp * 0.5, 0.5)
-    );
+  scrollFade = Math.max(0, 1 - (window.scrollY / window.innerHeight) * 1.25);
+  if (intro < 1) intro = Math.min(intro + dt / 1200, 1);
+  canvas.style.opacity = String(scrollFade * intro);
+  if (scrollFade <= 0) {
+    if (!cleared) { ctx.clearRect(0, 0, W, H); cleared = true; }
+    return;                                       // nothing visible, skip the work
   }
-  renderer.render(scene, camera);
+  cleared = false;
+
+  // the window can report 0×0 before first layout; recover once it's real
+  if (!canvas.width || !heat.width) { resize(); if (!canvas.width || !heat.width) return; }
+
+  updateDwell(now);
+  updateGhost(now, dt);
+
+  hctx.globalCompositeOperation = "destination-out";
+  hctx.fillStyle = "rgba(0,0,0,0.02)";
+  hctx.fillRect(0, 0, heat.width, heat.height);
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.drawImage(heat, 0, 0, W, H);
+  drawTrail(now);
+  drawSaccades(now);
+  drawFixations(now);
+  drawRipples(now);
+  drawGhost(now);
 }
 
-// guard: WebGL may be unavailable
+function init() {
+  ctx = canvas.getContext("2d");
+  heat = document.createElement("canvas");
+  hctx = heat.getContext("2d");
+
+  // main.js flips this when the theme toggles
+  window.setHeroTheme = function (isLight) {
+    pal = isLight ? PAL.light : PAL.dark;
+    if (hctx) hctx.clearRect(0, 0, heat.width, heat.height);
+    if (prefersReduced && ctx) renderStatic();
+  };
+  pal = document.documentElement.getAttribute("data-theme") === "light" ? PAL.light : PAL.dark;
+
+  resize();
+  window.addEventListener("resize", resize, { passive: true });
+
+  if (prefersReduced) {
+    // keep the still frame in sync with scroll + late layout shifts
+    window.addEventListener("scroll", () => {
+      canvas.style.opacity = String(Math.max(0, 1 - (window.scrollY / window.innerHeight) * 1.25));
+    }, { passive: true });
+    window.addEventListener("load", renderStatic);
+    return;
+  }
+  window.addEventListener("pointermove", onMove, { passive: true });
+  window.addEventListener("pointerdown", onDown, { passive: true });
+  raf = requestAnimationFrame(loop);   // first frame async, outside init's try/catch
+}
+
 try {
   if (canvas) init();
 } catch (err) {
-  console.warn("WebGL init failed, falling back to gradient", err);
+  console.warn("Hero canvas init failed", err);
   if (canvas) canvas.style.display = "none";
-  document.body.style.background =
-    "radial-gradient(60% 60% at 70% 30%, rgba(198,242,78,.12), transparent 70%), #0a0a0c";
 }
 
 window.addEventListener("beforeunload", () => cancelAnimationFrame(raf));
