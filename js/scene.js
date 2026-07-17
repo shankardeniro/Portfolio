@@ -304,7 +304,7 @@ function loop() {
   updateGhost(now, dt);
 
   hctx.globalCompositeOperation = "destination-out";
-  hctx.fillStyle = "rgba(0,0,0,0.02)";
+  hctx.fillStyle = "rgba(0,0,0,0.028)";
   hctx.fillRect(0, 0, heat.width, heat.height);
 
   ctx.clearRect(0, 0, W, H);
@@ -337,7 +337,11 @@ function init() {
     window.addEventListener("scroll", () => {
       canvas.style.opacity = String(Math.max(0, 1 - (window.scrollY / window.innerHeight) * 1.25));
     }, { passive: true });
+    // the hero intro still shifts elements around after load — re-render once
+    // things settle so the fixations sit on real UI, not mid-flight positions
     window.addEventListener("load", renderStatic);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => renderStatic());
+    setTimeout(renderStatic, 3200);
     return;
   }
   // touch drags are scrolling, not cursor behaviour — don't log them as a

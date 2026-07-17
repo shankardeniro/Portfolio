@@ -135,6 +135,7 @@ function startSite() {
       .from("[data-fade]", { y: 24, opacity: 0, duration: 0.9, stagger: 0.06 }, "-=0.8")
       .from(".nav", { y: -20, opacity: 0, duration: 0.8 }, "-=0.7");
     if (!reduce) initScrollAnim();
+    else initStaticValues();
     initMarquee();
   };
 
@@ -151,6 +152,14 @@ function startSite() {
       if (window.ScrollTrigger) ScrollTrigger.refresh();
     });
   }
+}
+
+/* Reduced motion skips the scroll choreography, but the numbers are data,
+   not decoration — land the counters on their final values immediately. */
+function initStaticValues() {
+  document.querySelectorAll("[data-stat] [data-count]").forEach((el) => {
+    el.textContent = (el.dataset.prefix || "") + el.dataset.count + (el.dataset.suffix || "");
+  });
 }
 
 function initScrollAnim() {
