@@ -42,7 +42,7 @@ function addFixation(x, y, ghost) {
   fixations.push(f);
   // keep the scanpath readable: retire the oldest once it gets crowded
   const alive = fixations.filter((k) => !k.kill);
-  if (alive.length > 9) alive[0].kill = f.born;
+  if (alive.length > (window.innerWidth < 700 ? 6 : 9)) alive[0].kill = f.born;
   return f;
 }
 
@@ -95,8 +95,12 @@ const ghost = {
 // waypoints come from the actual hero UI, so the replay reads like
 // a real participant scanning the page
 function ghostTargets() {
+  // on touch the replay stays inside the hero content — circles over the
+  // nav read as clutter on a small screen
   const els = document.querySelectorAll(
-    ".tag, .hero__title, .hero__meta, .scroll-cue, .nav__cta, .nav__brand"
+    isTouch
+      ? ".tag, .hero__title, .hero__meta, .scroll-cue"
+      : ".tag, .hero__title, .hero__meta, .scroll-cue, .nav__cta, .nav__brand"
   );
   const pts = [];
   els.forEach((el) => {
@@ -336,8 +340,12 @@ function init() {
     window.addEventListener("load", renderStatic);
     return;
   }
-  window.addEventListener("pointermove", onMove, { passive: true });
-  window.addEventListener("pointerdown", onDown, { passive: true });
+  // touch drags are scrolling, not cursor behaviour — don't log them as a
+  // session; touch devices get the ghost replay only
+  if (!isTouch) {
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerdown", onDown, { passive: true });
+  }
   raf = requestAnimationFrame(loop);   // first frame async, outside init's try/catch
 }
 
