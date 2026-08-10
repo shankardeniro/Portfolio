@@ -125,12 +125,14 @@ const doc = new Document({
             link("designshanky.com", "https://designshanky.com"),
             new TextRun({ text: "  |  ", size: 19, color: MUTED, font: FONT }),
             link("linkedin.com/in/sankaranarayanan-subramanian", "https://www.linkedin.com/in/sankaranarayanan-subramanian-553379212/"),
+            new TextRun({ text: "  |  ", size: 19, color: MUTED, font: FONT }),
+            link("github.com/shankardeniro", "https://github.com/shankardeniro"),
           ],
         }),
         new Paragraph({
           spacing: { after: 60 },
           border: bottomRule(RULE, 6),
-          children: [new TextRun({ text: "Permanent resident — authorized to work in Sweden, no visa sponsorship required.", size: 19, italics: true, color: MUTED, font: FONT })],
+          children: [new TextRun({ text: "Permanent resident, authorized to work in Sweden, no visa sponsorship required.", size: 19, italics: true, color: MUTED, font: FONT })],
         }),
 
         // ---------- SUMMARY ----------
@@ -138,9 +140,7 @@ const doc = new Document({
         new Paragraph({
           spacing: { after: 60, line: LINE, lineRule: "auto" },
           children: [
-            new TextRun({ text: "Product designer and UX researcher with 5+ years turning ambiguous, high-stakes problems into measurable product outcomes — and the rare profile that ", size: 21, color: INK, font: FONT }),
-            new TextRun({ text: "frames the problem with research and ships the design, with no hand-off in between", bold: true, size: 21, color: INK, font: FONT }),
-            new TextRun({ text: ". I founded a user-research practice from 0→1, led the go-to-market design for a regulated Swedish launch (zero compliance violations), and lifted end-to-end onboarding conversion 11 points. AI-native in my workflow (Figma Make, Cursor, Claude, Lovable), I compress the path from insight to shipped, evidence-based interface.", size: 21, color: INK, font: FONT }),
+            new TextRun({ text: "Product designer and UX researcher with 5+ years turning ambiguous, high-stakes problems into measurable product outcomes. I frame the problem with research and ship the design, with no hand-off in between. I founded a user-research practice from 0→1, led the go-to-market design for a regulated Swedish launch (zero compliance violations) and lifted end-to-end onboarding conversion 11 points. With AI-native in my workflow, I compress the path from insight to shipped, evidence-based interface.", size: 21, color: INK, font: FONT }),
           ],
         }),
 
@@ -197,20 +197,9 @@ const doc = new Document({
           { text: "Synthesized findings into MVP feature priorities that shaped the team’s product-market-fit bets." },
         ]),
 
-        ...roleHeader("IIT Madras", "Chennai, India", "Senior Research Fellow", "2012 – 2016"),
-        bullet([
-          { text: "Designed and ran quantitative and qualitative experiments for micro/nano biosensing devices; published and presented findings. The statistical and experimental rigour built here now powers my approach to product experimentation and quantitative UX." },
-        ]),
-
-        // ---------- EDUCATION ----------
-        sectionHeading("EDUCATION"),
-        bullet([{ text: "Google UX Design Professional Certificate — Coursera, 2021" }]),
-        bullet([{ text: "M.Tech, Chemical Engineering — Anna University, 2011" }]),
-        bullet([{ text: "B.Tech, Chemical Engineering — Anna University" }]),
-
         // ---------- CERTIFICATIONS ----------
         sectionHeading("CERTIFICATIONS"),
-        body("Google UX Design Specialization · Data-Driven Design: Quantitative Research for UX · High-Fidelity Designs & Prototypes in Figma · Foundations of User Experience (UX) Design", { after: 0 }),
+        body("IxDF - Conducting Usability Testing · IxDF - Data-Driven Design: Quantitative Research for UX · Google UX Design Specialization · High-Fidelity Designs & Prototypes in Figma · Foundations of User Experience (UX) Design", { after: 0 }),
       ],
     },
   ],
