@@ -359,7 +359,7 @@ const CASES = {
       { eyebrow: "The design system", h: "A system, not a pile of screens",
         p: ["Going straight to high-fidelity on a deadline only works if you're not redrawing everything each time. So it all sat on a shared system, tokens and components defined once and reused everywhere. That's what the licensing-critical screens were built from."] },
       { eyebrow: "Foundations", h: "Built on tokens, not hard-coded values",
-        p: ["It scaled because nothing pointed at a raw colour or size. The primitives (the full Wunderino ramps) feed <b>semantic tokens</b> named for what they're for, not their value, <code>Surface · Brand · Default</code>, and those feed the components. Change one token and it updates everywhere, which made dark mode and retheming easy and kept twenty-odd flows in sync. <em>Swipe through the foundations, tap any sheet to enlarge.</em>"],
+        p: ["Nothing points at a raw colour or size: primitives feed <b>semantic tokens</b> named for what they're for (<code>Surface · Brand · Default</code>), and tokens feed the components. Change one token and it updates everywhere — dark mode, retheming, twenty-odd flows in sync. <em>Swipe through the foundations, tap any sheet to enlarge.</em>"],
         carousel: [
           { src: "images/winning-over-sweden/ds-token-structure.webp", caption: "Token architecture, named by UI element, colour role and modifier, so meaning travels with the value." },
           { src: "images/winning-over-sweden/ds-colors.webp", caption: "Primitives, the full brand, neutral and semantic colour ramps." },
@@ -395,7 +395,7 @@ const CASES = {
           challengeLabel: "The idea, and the risk",
           challenge: "Compliance got us in the door but wouldn't make us stand out. The plan was to be the fairest casino around by having the best <em>Return-to-Player</em> (RTP) rates. But the whole idea rested on one thing we hadn't checked: <em>do players even understand or care about RTP?</em>",
           moveLabel: "The move",
-          move: "Instead of betting the brand on a hunch, I treated it as a question to test. I ran a quick, no-budget research sprint, short interviews with players at <b>Svenska Spel</b> and <b>ATG</b> kiosks around Stockholm, using prompt cards they could answer in a few seconds." },
+          move: "Instead of betting the brand on a hunch, I treated it as a question to test: a quick, no-budget sprint of kiosk interviews with real players, using prompt cards they could answer in seconds." },
         figrow: [
           { src: "images/winning-over-sweden/interview-guide.webp", caption: "The question guide, funnelling broad prompts down to whether players grasp RTP and let it steer game choice." },
           { src: "images/winning-over-sweden/prompt-cards.webp", caption: "The prompt cards, printed and used in the field at Svenska Spel and ATG kiosks across Stockholm." }] },
@@ -413,10 +413,10 @@ const CASES = {
       { eyebrow: "Reading the field",
         beat: {
           challenge: "If players misread RTP, leading on it could be a costly mistake. Was there still an opening worth taking?",
-          move: "I scored five of the top competitors against Nielsen's heuristics, looking at how clearly they handled RTP, responsible gaming and onboarding, to find a gap no one had taken.",
+          move: "I scored the top competitors against Nielsen's heuristics — how clearly they handled RTP, responsible gaming and onboarding — hunting for a gap no one had claimed.",
           outcome: "There's a growing, valuable group who actively hunt for <b>Max-RTP</b> games, and no one had claimed that ground." },
         figure: { src: "images/winning-over-sweden/competitive-audit.webp", caption: "Competitive audit, five Swedish operators scored against Nielsen's heuristics." } },
-      { verdict: { label: "What we decided", text: "The bet mostly held, with a twist. For the savvy players who hunt <em>Max RTP</em>, leading on fairness wins them and pays off over time, we'd give up a little margin upfront but earn their long-term loyalty by being visibly fair. But most players misread the number, so we couldn't just advertise it. We'd have to put it in <em>plain language</em> and lean on trust signals people already believe, familiar providers and payment methods. That set up Goal 03." } },
+      { verdict: { label: "What we decided", text: "The bet mostly held, with a twist. The savvy <em>Max-RTP</em> hunters reward visible fairness — worth a little margin for their long-term loyalty. But most players misread the number, so we'd put it in <em>plain language</em> and lean on trust signals people already believe. That set up Goal 03." } },
 
       // ---------- GOAL 3 ----------
       { chapter: { no: "Goal 03", hud: "The journey", title: "Turn trust into players",
@@ -439,11 +439,11 @@ const CASES = {
       { eyebrow: "Watching for hesitation",
         beat: {
           challenge: "A journey map shows the route, not where real people stumble.",
-          move: "So I ran moderated, remote think-aloud sessions with <b>10 Swedish players</b>, both experienced and first-time, recruited through UserInterviews.com and paid €100 for 30 minutes, with stakeholders watching live. Seeing where they hesitated showed us exactly what to fix.",
+          move: "So I ran moderated think-aloud sessions with <b>10 Swedish players</b>, first-timers and veterans, with stakeholders watching live. Seeing where they hesitated showed us exactly what to fix.",
           outcome: "19 distinct patterns, from critical blockers to positive signals." },
-        figure: { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress, watching where real players hesitate." } },
+        figure: { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress — participants recruited through UserInterviews.com, €100 for 30 minutes." } },
       { eyebrow: "From signal to priorities", h: "19 patterns, triaged",
-        p: ["Every pattern had a participant quote and a video frame from the exact moment it happened, then a severity score: <b>2 critical, 5 high, 8 medium</b>, plus 2 positive signals, an opportunity and a bug. I sorted by severity and impact, and shipped fixes for the three biggest ones (below)."],
+        p: ["Every pattern had a participant quote, a video frame from the exact moment it happened, and a severity score. I sorted by severity and impact, and shipped fixes for the three biggest ones (below)."],
         table: { head: ["Severity", "Pattern", "Participants"], rows: [
           ["Critical", "Withdrawal flow — buried, broken & inconsistent", "4"],
           ["Critical", "Spelpaus self-exclusion silently blocked registration", "2"],
@@ -481,7 +481,7 @@ const CASES = {
         beat: {
           challenge: "Just as Goal 02 predicted, every participant scanned first for “BankID,” “Swish” and known provider logos as proof they could trust us, and read their absence as a red flag.",
           moveLabel: "The fix",
-          move: "I put the payment-method and provider logos front and centre, borrowing the trust people already give those names. Goal 02's fairness story finally had a place on the screen.",
+          move: "I put the payment-method and provider logos front and centre, borrowing the trust people already give those names.",
           quote: "BankID is number one. That's the first thing I look at.",
           cite: "Rolf, usability participant" },
         compare: { before: { src: "images/winning-over-sweden/trust-before.webp" }, after: { src: "images/winning-over-sweden/trust-after.webp" },
@@ -541,7 +541,7 @@ const CASES = {
       { eyebrow: "Getting people to use it", h: "A schedule only works if people show up", p: [
         "A calendar entry changes nothing on its own. I got product, design and engineering, plus data, CRM and marketing, using the same simple steps and one shared folder for findings. The readout turned into a regular meeting people actually came to, and after a while research was something they expected instead of something they had to request." ] },
       { eyebrow: "Measuring it", h: "I started tracking satisfaction properly", p: [
-        "I ran a CSAT survey every quarter, eight rounds over about three years, and reported it to leadership each time. Every score came with an open “why” and a 95% confidence interval, so we only reacted when a change was real and not just noise. I took the method from Chapman &amp; Rodden's <a href=\"https://quantuxbook.com/\" target=\"_blank\" rel=\"noopener\" data-cursor-hover>Quantitative UX Research ↗</a>." ],
+        "I ran a CSAT survey every quarter and reported it to leadership each time. Every score came with an open “why” and a 95% confidence interval, so we only reacted when a change was real — method from Chapman &amp; Rodden's <a href=\"https://quantuxbook.com/\" target=\"_blank\" rel=\"noopener\" data-cursor-hover>Quantitative UX Research ↗</a>." ],
         figures: [
           { src: "images/user-research-framework/csat-trend.webp", caption: "CSAT average across eight rounds, Oct 2022 to Jun 2025." },
           { src: "images/user-research-framework/csat-ci.webp", caption: "Each round's ratings, with 95% confidence intervals." } ] },
@@ -587,7 +587,7 @@ const CASES = {
       { eyebrow: "Research plan", h: "How I'd learn", p: [
         "Talking to the users who'd dropped off was the obvious place to start. I ran a mixed-methods study, a screener survey feeding in-depth interviews, then moderated usability testing with screen-recording and behavioural analysis, so I could triangulate what users <em>said</em> against what they actually <em>did</em>." ] },
       { eyebrow: "Screener survey", h: "Start with the people who left", p: [
-        "I designed the survey questionnaire and ran cognitive testing to reliably gather high-quality responses, then collaborated with the CRM team to identify and reach the right customers. It also helped weed out customers who'd be less useful to the research. When asked why they hadn't completed verification, users said:" ],
+        "I surveyed the drop-offs directly — cognitive-testing the questionnaire first, and working with CRM to reach the right customers. Asked why they hadn't completed verification, they said:" ],
         donut: { caption: "Survey — reasons for not completing the verification process.", items: [
           { label: "I tried to verify myself, but without success", value: 28.2 },
           { label: "I assumed the process might be too time-consuming", value: 17.9 },
@@ -607,7 +607,7 @@ const CASES = {
       { chapter: { no: "02", hud: "Usability test", title: "Watch where it breaks down",
         blurb: "A moderated study to surface the hiccups in the flow, the copy and the information architecture." } },
       { eyebrow: "Usability study", h: "Watching real users move through it", p: [
-        "I ran a moderated study with <b>10 participants</b> (7 mobile, 3 desktop), each asked to make a deposit and play across the different KYC states they might land in. I had the cross-functional team, UX, KYC, BI and operations, observe live, so the friction was witnessed first-hand, not relayed in a deck. Low task-completion and high error rates made the verdict blunt: the flow had to change. Here's what the sessions surfaced." ],
+        "I ran a moderated study with <b>10 participants</b> (7 mobile, 3 desktop), each trying to deposit and play across the KYC states they might land in, with the cross-functional team observing live. Low task-completion and high error rates made the verdict blunt: the flow had to change." ],
         figure: { src: "images/reimagining-onboarding/usability-session.webp", caption: "A moderated session observed live, the participant and interviewer on screen, the UX, KYC, BI and operations team watching where players stalled in real time." } },
       { eyebrow: "Key observations · Registration flow", h: "What we saw", cards: [
         { tone: "yes", label: "Relevant facts", items: [
@@ -640,7 +640,7 @@ const CASES = {
         beat: {
           challenge: "Registration ran on an external provider, a black box we couldn't tune. Every fix the research pointed to was a vendor ticket and a wait.",
           moveLabel: "What I did",
-          move: "I turned the usability evidence into the case for bringing registration in-house, the UX argument (control over the flow, faster iteration) alongside the financial one (cheaper than the vendor). That case won product and engineering leadership over, and I then owned the flow end-to-end: designing, iterating, and proving it met the objectives.",
+          move: "I turned the usability evidence into the case for bringing registration in-house — control and faster iteration on the UX side, cheaper than the vendor on the financial side. Leadership bought it, and I owned the flow end-to-end from there.",
           outcomeLabel: "Why it mattered",
           outcome: "It turned a fixed, outsourced funnel into something the team controlled, so every friction the research surfaced was now ours to design out, not request and hope for." } },
       { eyebrow: "Two-step registration", h: "Cut it to the essentials",
@@ -652,7 +652,7 @@ const CASES = {
       { eyebrow: "Design process", h: "From happy path to hi-fi",
         beat: {
           challenge: "A tight timeline meant I couldn't afford to design the same screens twice.",
-          move: "I mapped tasks and flows to find the happy path, prototyped in Figma to internal- and guerrilla-test fast, then leaned on our established design language to jump straight to high-fidelity, refining through regular product and engineering feedback.",
+          move: "I mapped the happy path, prototyped in Figma for fast internal and guerrilla tests, then used the design system to jump straight to high-fidelity.",
           outcomeLabel: "Why this way",
           outcome: "Skipping mid-fi was a calculated bet: the design system made hi-fi cheap, so the time saved went into testing the flow, not polishing screens we'd throw away." },
         gallery: [
@@ -665,13 +665,13 @@ const CASES = {
           { src: "images/reimagining-onboarding/reg-step2.webp", caption: "Step 2, identity details fronted by a plain-language banner, “enter your name and address as it appears on your identity document.” The “why am I giving this?” confusion, answered in context, right where users hesitated." }] },
       { eyebrow: "The KYC bottleneck", h: "Fix the step, not just the form",
         beat: {
-          challenge: "A leaner form only got users <em>to</em> verification faster, and verification was where they dropped off. The top survey reason for quitting said it plainly, <b>“I tried to verify myself, but without success” (28.2%)</b>, a technical failure no copy could rewrite.",
+          challenge: "A leaner form only got users <em>to</em> verification faster — and verification was where they dropped off. The top reason for quitting was blunt: <b>they tried to verify, and it failed.</b> No copy could rewrite that.",
           moveLabel: "What I did",
-          move: "I kept those “it just wouldn't work” quotes in front of the team and pushed us to treat the KYC provider as a design variable, not a fixed constraint. We benchmarked vendors on pass-rate, speed and coverage and moved to <b>Sonio</b>, pairing it with faster verification methods so more users cleared KYC on the first attempt.",
+          move: "I pushed the team to treat the KYC provider as a design variable, not a fixed constraint. We benchmarked vendors and moved to <b>Sonio</b>, paired with faster verification methods, so more users cleared KYC on the first attempt.",
           outcomeLabel: "Why it mattered",
           outcome: "It hit the single biggest drop-off at its source, and it meant we weren't tied to one onboarding partner any more, which is where both the conversion lift and the cost saving came from." } },
       { eyebrow: "A/B testing", h: "Test it, and read the result honestly", p: [
-        "I tested the new registration flow against the previous one, exposing only <b>20%</b> of traffic to the test variant. A 50/50 split has more statistical power, but a smaller exposure limits the downside of a risky new feature while still gathering data." ],
+        "I tested the new flow against the old with only <b>20%</b> of traffic on the variant — less statistical power than a 50/50 split, but it capped the downside of a risky new flow while still gathering data." ],
         table: { head: ["Variant", "Registrations", "Exposure", "Win probability"], rows: [
           ["Control (previous flow)", "8,875", "22,181", "23.58%"],
           ["Test (new flow)", "2,352", "5,782", "76.42%"] ] },
@@ -680,7 +680,7 @@ const CASES = {
       { eyebrow: "Phased improvements", h: "Ship value early, improve over time", p: [
         "Rather than wait on a clean experiment, we rolled the flow out in phases, a good experience out of the box, improvements prioritised over time, then watched the live funnel instead of a 20% sample." ] },
       { eyebrow: "The payoff", h: "What the funnel did next", p: [
-        "The controlled A/B never reached significance, but the full rollout settled it. With a leaner registration getting users to KYC with less fatigue, and <b>Sonio</b> clearing the verification failures that had been the number-one reason for quitting, the live funnel moved, most at the exact step we'd set out to fix." ],
+        "The controlled A/B never reached significance; the full rollout settled it. Once the leaner registration and <b>Sonio</b> reached every user, the live funnel moved — most at the exact step we'd set out to fix." ],
         metrics: [["54.4%", "end-to-end conversion, up from 43.3%"], ["75.2%", "cleared the KYC step, up from 67.1%"], ["25%", "drop-off before KYC, down from 33%"]] },
       { eyebrow: "Before / after", h: "The funnel, re-measured", p: [
         "Cumulative conversion at every step, the original flow against the redesigned one." ],
