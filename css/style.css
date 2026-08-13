@@ -37,10 +37,12 @@ a{color:inherit;text-decoration:none}
 li{list-style:none}
 /* ========================================================================
    TYPE & ACCENT SYSTEM (keep to this)
-   - Serif (--serif): DISPLAY only — titles, headings, statement, big numbers,
-     pull-quotes, the "challenge" problem-line. The `.italic` class is the
-     serif-italic display device.
-   - Sans (--sans): all running text + UI — body, beats, verdict, lists, etc.
+   - Serif (--serif): DISPLAY only — titles, headings, statement, big numbers.
+     The `.italic` class is the serif-italic display device.
+   - Serif text (--serif-text): QUOTES only — pull-quotes and participant
+     voices, the italic "spoken" accents.
+   - Sans (--sans): all running text + UI — body, beats, challenge, verdict,
+     lists, cards, annotations.
    - Emphasis is TONAL, never coloured: body <em> = ink + 500 roman; <b> = ink 600.
      Inside a serif display line, emphasis = italic in the same ink.
    - Accent (--ca / --ca-ink) is for STRUCTURE only: eyebrows, labels, table
@@ -324,7 +326,7 @@ main{position:relative;z-index:2}
 .cs-eyebrow{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ca-ink);margin-bottom:1rem}
 .cs-h{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3.4vw,2.4rem);line-height:1.05;
   letter-spacing:-.01em;margin-bottom:1.1rem}
-.cs-p{font-family:var(--serif-text);font-size:clamp(1.02rem,1.45vw,1.18rem);line-height:1.55;color:var(--ink-soft);max-width:64ch;margin-bottom:1rem}
+.cs-p{font-family:var(--sans);font-size:clamp(.98rem,1.35vw,1.08rem);line-height:1.6;color:var(--ink-soft);max-width:64ch;margin-bottom:1rem}
 .cs-p em,.cs-p .em{color:var(--ink);font-style:normal}
 .cs-p code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;
   background:color-mix(in srgb,var(--ca) 12%,transparent);color:var(--ink);
@@ -334,7 +336,7 @@ main{position:relative;z-index:2}
   text-decoration-thickness:1.5px;transition:text-decoration-color .25s}
 .cs-p a:hover,.cs-cap a:hover{text-decoration-color:var(--ca)}
 .cs-list{display:flex;flex-direction:column;gap:.7rem;margin:1.2rem 0;max-width:62ch}
-.cs-list li{position:relative;padding-left:1.6rem;font-family:var(--serif-text);font-size:1.08rem;line-height:1.5;color:var(--ink-soft)}
+.cs-list li{position:relative;padding-left:1.6rem;font-family:var(--sans);font-size:1rem;line-height:1.55;color:var(--ink-soft)}
 .cs-list li::before{content:"";position:absolute;left:0;top:.6em;width:7px;height:7px;border-radius:50%;
   background:var(--ca-ink)}
 .cs-list li b{color:var(--ink);font-weight:600}
@@ -347,14 +349,14 @@ main{position:relative;z-index:2}
 .cs-beat__block--outcome{border-left-color:var(--ca-ink)}
 .cs-beat__tag{display:block;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:.55rem}
 .cs-beat__block--move .cs-beat__tag,.cs-beat__block--outcome .cs-beat__tag{color:var(--ca-ink)}
-.cs-beat__challenge{font-family:var(--serif-text);font-weight:400;font-size:clamp(1.15rem,1.8vw,1.35rem);
+.cs-beat__challenge{font-family:var(--sans);font-weight:400;font-size:clamp(1.08rem,1.7vw,1.25rem);
   line-height:1.45;letter-spacing:0;color:var(--ink)}
 /* serif challenge: one emphasis device — italic in the same ink (no accent, no faux-bold) */
 .cs-beat__challenge em,.cs-beat__challenge b{font-family:inherit;font-style:italic;font-weight:400;color:var(--ink)}
-.cs-beat__move{font-family:var(--serif-text);font-size:clamp(1.02rem,1.45vw,1.18rem);line-height:1.55;color:var(--ink-soft);margin:0 0 .55rem}
+.cs-beat__move{font-family:var(--sans);font-size:clamp(.98rem,1.35vw,1.08rem);line-height:1.6;color:var(--ink-soft);margin:0 0 .55rem}
 .cs-beat__move:last-child{margin:0}
 .cs-beat__move b{color:var(--ink);font-weight:600}
-.cs-beat__outcome{font-family:var(--serif-text);font-size:1.12rem;line-height:1.5;color:var(--ink);margin:0}
+.cs-beat__outcome{font-family:var(--sans);font-size:1.05rem;line-height:1.55;color:var(--ink);margin:0}
 .cs-beat__outcome b{color:var(--ink);font-weight:600}
 /* a real participant voice inside a beat, the "show" behind the "tell" */
 .cs-beat__quote{margin:0;padding-left:1.25rem;border-left:2px solid var(--ca-ink);
@@ -382,7 +384,7 @@ main{position:relative;z-index:2}
 .cs-card--aha .cs-card__label{color:var(--ca-ink)}
 .cs-card--aha .cs-card__label::before{content:"\2726"}
 .cs-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.7rem}
-.cs-card li{font-family:var(--serif-text);font-size:1rem;line-height:1.5;color:var(--ink-soft)}
+.cs-card li{font-family:var(--sans);font-size:.94rem;line-height:1.55;color:var(--ink-soft)}
 .cs-card li b{color:var(--ink);font-weight:600}
 @media(max-width:760px){.cs-cards{grid-template-columns:1fr}}
 
@@ -436,7 +438,7 @@ main{position:relative;z-index:2}
   padding:clamp(1.2rem,2.4vw,1.8rem);margin:1.6rem 0;max-width:56ch;
   background:linear-gradient(120deg,color-mix(in srgb,var(--ca) 7%,transparent),transparent 70%)}
 .cs-verdict__label{display:inline-block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ca-ink);margin-bottom:.8rem}
-.cs-verdict__text{font-family:var(--serif-text);font-size:clamp(1.1rem,1.7vw,1.45rem);line-height:1.5;color:var(--ink)}
+.cs-verdict__text{font-family:var(--sans);font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.55;color:var(--ink)}
 .cs-verdict__text em{font-family:inherit;font-style:italic;font-weight:400;color:var(--ink)}
 
 /* narrative chapter dividers, the storytelling beats along the path */
