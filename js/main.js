@@ -424,9 +424,9 @@ const CASES = {
       { eyebrow: "Making fairness legible", h: "Putting it in plain language",
         beat: {
           challengeLabel: "The problem to solve",
-          challenge: "Goal 02 left a problem: players read <em>“97% RTP”</em> as <b>“this game pays big right now,”</b> not “I keep more of my money over time.” A fairness bet only works if people can actually <em>read</em> the fairness, and that part wasn't built yet.",
+          challenge: "Players read <em>“97% RTP”</em> as <b>“this game pays big right now”</b> — the opposite of what it means. A fairness bet only works if people can actually <em>read</em> the fairness.",
           moveLabel: "The move",
-          move: "I made fairness easy to see right where people pick a game. Each tile now shows its RTP, with a one-tap <b>“Return to player (RTP)”</b> guide that explains it as <em>more entertainment for your money</em>, not a promise of a big win. Alongside it we built <b>Epic Pulse</b>: a live readout that plots a game's recent RTP against Wunderino's ~96% house average over the last 27,000 rounds, plus how often <em>small</em> (20–100×), <em>big</em> (100–500×) and <em>mega</em> (500×+) wins have actually landed. Instead of one number you have to trust, players see the real ones, in the open.",
+          move: "I put fairness where people pick a game: every tile shows its RTP with a one-tap plain-language guide, and <b>Epic Pulse</b> plots each game's live payout numbers against the house average. Real figures in the open, not one number you have to trust.",
           outcome: "RTP went from a number people misread to a reason to pick a game." },
         gallery: [
           { src: "images/winning-over-sweden/rtp-lobby.webp", caption: "RTP surfaced on every game tile in the lobby, with a tap-through “Return to player (RTP): read guide” explainer." },
