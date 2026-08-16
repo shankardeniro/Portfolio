@@ -354,9 +354,9 @@ const CASES = {
         beat: {
           challenge: "Registration and the responsible-gaming screens are the heaviest, highest-stakes parts of the product, and exactly where first-time players tend to quit.",
           move: "I wireframed every step to keep it clear, checked each one with compliance and local testers, then used our design system to jump straight to high-fidelity, since the licensing clock was tight." } },
-      { eyebrow: "The design system", h: "A system, not a pile of screens",
+      { eyebrow: "The design system", h: "One system behind every screen",
         p: ["Going straight to high-fidelity on a deadline only works if you're not redrawing everything each time. So it all sat on a shared system, tokens and components defined once and reused everywhere. That's what the licensing-critical screens were built from."] },
-      { eyebrow: "Foundations", h: "Built on tokens, not hard-coded values",
+      { eyebrow: "Foundations", h: "Built on tokens",
         p: ["Nothing points at a raw colour or size: primitives feed <b>semantic tokens</b> named for what they're for (<code>Surface · Brand · Default</code>), and tokens feed the components. Change one token and it updates everywhere — dark mode, retheming, twenty-odd flows in sync. <em>Swipe through the foundations, tap any sheet to enlarge.</em>"],
         carousel: [
           { src: "images/winning-over-sweden/ds-token-structure.webp", caption: "Token architecture, named by UI element, colour role and modifier, so meaning travels with the value." },
@@ -466,15 +466,15 @@ const CASES = {
           notes: [
             { x: 93, y: 20, tag: "State · disclosure", text: "Detail on demand. The full bonus mechanics sit behind the <b>“i”</b>, a tap-through leaflet, so the screen stays scannable while the curious can still dig in. Progressive disclosure beats a wall of terms." },
             { x: 46, y: 55, tag: "Hierarchy", text: "The benefit leads. <b>“100%”</b> is the single largest element on the screen, above the brand and even the CTA, so a first-time player grasps the upside in under a second." },
-            { x: 50, y: 67, tag: "Microcopy", text: "The catch, up front. Min-deposit, <b>35× wagering</b> and 60-day expiry sit inline on the offer, not buried behind “T&C”. Goal 02 showed Swedish players distrust hidden conditions, so honesty is the trust play." },
-            { x: 51, y: 75, tag: "Component choice", text: "One action, not two. Deposit and bonus-claim collapse into a <b>single primary button</b>, the Finding 01 fix, ending the back-and-forth between a deposit step and a separate claim." }] } },
+            { x: 50, y: 67, tag: "Microcopy", text: "The catch, up front. Min-deposit, <b>35× wagering</b> and 60-day expiry sit inline on the offer, in plain sight. Goal 02 showed Swedish players distrust hidden conditions, so honesty is the trust play." },
+            { x: 51, y: 75, tag: "Component choice", text: "Two actions become one. Deposit and bonus-claim collapse into a <b>single primary button</b>, the Finding 01 fix, ending the back-and-forth between a deposit step and a separate claim." }] } },
       { eyebrow: "Finding 02 · Live-casino navigation",
         beat: {
           challenge: "Asked to open a live-casino game, participants couldn't find the live-casino navigation, buried in the bottom menu.",
           moveLabel: "The fix",
           move: "Moved it up into a clear top tab bar, separating the two sections. Testers found it instantly and task success went up." },
         compare: { before: { src: "images/winning-over-sweden/livecasino-before.webp" }, after: { src: "images/winning-over-sweden/livecasino-after.webp" },
-          decision: "<b>A top tab bar, not a buried menu item.</b> Casino and Live Casino now sit side by side at the top, so the two read as separate the moment the lobby loads, no digging through the bottom menu to switch." } },
+          decision: "<b>Moved up into a top tab bar.</b> Casino and Live Casino now sit side by side at the top, so the two read as separate the moment the lobby loads, no digging through the bottom menu to switch." } },
       { eyebrow: "Finding 03 · Trust signals",
         beat: {
           challenge: "Just as Goal 02 predicted, every participant scanned first for “BankID,” “Swish” and known provider logos as proof they could trust us, and read their absence as a red flag.",
@@ -520,7 +520,7 @@ const CASES = {
       { eyebrow: "The starting point", h: "What that meant day to day", p: [
         "When I arrived, this is what having no research looked like:" ],
         list: [
-          "We decided on opinion, not on anything a user had actually said.",
+          "Product decisions ran on gut feel and meeting-room consensus.",
           "There was no reliable way to reach real users.",
           "The odd study happened, then got lost in someone's drive.",
           "With no shared place for findings, we kept asking the same questions.",
@@ -661,11 +661,11 @@ const CASES = {
         gallery: [
           { src: "images/reimagining-onboarding/reg-step1.webp", caption: "Step 1, the bare minimum to get started: country, email, password. A direct answer to the “it's tedious” complaint, you're in before you can feel the friction." },
           { src: "images/reimagining-onboarding/reg-step2.webp", caption: "Step 2, identity details fronted by a plain-language banner, “enter your name and address as it appears on your identity document.” The “why am I giving this?” confusion, answered in context, right where users hesitated." }] },
-      { eyebrow: "The KYC bottleneck", h: "Fix the step, not just the form",
+      { eyebrow: "The KYC bottleneck", h: "Fix verification itself",
         beat: {
           challenge: "A leaner form only got users <em>to</em> verification faster, and verification was where they dropped off. The top reason for quitting was blunt: <b>they tried to verify, and it failed.</b> No copy could rewrite that.",
           moveLabel: "What I did",
-          move: "I pushed the team to treat the KYC provider as a design variable, not a fixed constraint. We benchmarked vendors and moved to <b>Sonio</b>, paired with faster verification methods, so more users cleared KYC on the first attempt.",
+          move: "I pushed the team to treat the KYC provider as a decision we owned. We benchmarked vendors and moved to <b>Sonio</b>, paired with faster verification methods, so more users cleared KYC on the first attempt.",
           outcomeLabel: "Why it mattered",
           outcome: "It hit the single biggest drop-off at its source, and it meant we weren't tied to one onboarding partner any more, which is where both the conversion lift and the cost saving came from." } },
       { eyebrow: "A/B testing", h: "Test it, and read the result honestly", p: [
