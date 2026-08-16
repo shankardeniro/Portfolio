@@ -140,7 +140,7 @@ const doc = new Document({
         new Paragraph({
           spacing: { after: 60, line: LINE, lineRule: "auto" },
           children: [
-            new TextRun({ text: "Product designer and UX researcher who runs the study and ships the screen, with no hand-off in between. Over five years I've launched a regulated Swedish casino with zero compliance violations, lifted end-to-end onboarding conversion 11 points, and built a research practice from zero that now steers the roadmap. I work with AI daily to move at the pace of a team.", size: 21, color: INK, font: FONT }),
+            new TextRun({ text: "Product designer and UX researcher with 5+ years in gaming, fintech and B2C. Equal parts researcher and designer: I plan and run the studies, then design and ship what they point to. Highlights: a regulated Swedish launch with zero compliance violations, an 11-point lift in onboarding conversion, and a research practice built from zero. Daily AI user (Claude, Cursor, Figma Make, Lovable).", size: 21, color: INK, font: FONT }),
           ],
         }),
 
