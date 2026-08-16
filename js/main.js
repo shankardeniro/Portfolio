@@ -514,7 +514,7 @@ const CASES = {
     sections: [
       { eyebrow: "Overview", h: "There was no research when I joined", p: [
         "The team shipped on opinion. There were no users to talk to on any regular basis, no place to keep what we learned, and no habit of asking before building. I was the first researcher, so there was nothing to inherit.",
-        "I'm a designer too, so I could run the research and design the fix myself. But the real job wasn't any single study. It was giving the team a way to keep learning after I stopped pushing." ] },
+        "I'm a designer too, so I could run the research and design the fix myself. But the real job was bigger than any single study: giving the team a way to keep learning after I stopped pushing." ] },
       { eyebrow: "Where it went", metrics: [["0 → 1", "research, built from nothing"], ["On a schedule", "runs every month and quarter"], ["8 rounds", "of CSAT over ~3 years"]] },
 
       { chapter: { no: "01", hud: "Before", title: "No research, at all",
@@ -530,7 +530,7 @@ const CASES = {
 
       { chapter: { no: "02", hud: "The rhythm", title: "I put research on a schedule",
         blurb: "Research that waits to be asked for doesn't happen. So I gave it a regular beat." } },
-      { eyebrow: "The rhythm", h: "A regular beat, not a request", p: [
+      { eyebrow: "The rhythm", h: "A regular beat", p: [
         "Instead of waiting for someone to ask, I put research on the calendar and matched the method to what we needed to learn. It ran whether or not anyone remembered to ask." ],
         table: { head: ["How often", "What I ran", "To learn"], rows: [
           ["Every month", "User interviews", "Why people do what they do"],
@@ -539,9 +539,9 @@ const CASES = {
           ["Always on", "Behavioural data", "What people actually do in the product"] ] },
         cap: "A full usability round, start to readout, is in <a data-case=\"winning-over-sweden\" data-cursor-hover>Winning Over Sweden →</a>." },
       { eyebrow: "Getting people to use it", h: "A schedule only works if people show up", p: [
-        "A calendar entry changes nothing on its own. I got product, design and engineering, plus data, CRM and marketing, using the same simple steps and one shared folder for findings. The readout turned into a regular meeting people actually came to, and after a while research was something they expected instead of something they had to request." ] },
+        "A calendar entry changes nothing on its own. I got product, design and engineering, plus data, CRM and marketing, using the same simple steps and one shared folder for findings. The readout turned into a regular meeting people came to, and after a while research was simply something the team expected." ] },
       { eyebrow: "Measuring it", h: "I started tracking satisfaction properly", p: [
-        "I ran a CSAT survey every quarter and reported it to leadership each time. Every score came with an open “why” and a 95% confidence interval, so we only reacted when a change was real — method from Chapman &amp; Rodden's <a href=\"https://quantuxbook.com/\" target=\"_blank\" rel=\"noopener\" data-cursor-hover>Quantitative UX Research ↗</a>." ],
+        "I ran a CSAT survey every quarter and reported it to leadership each time. Every score came with an open “why” and a 95% confidence interval, so we only reacted when a change was real. The method comes from Chapman &amp; Rodden's <a href=\"https://quantuxbook.com/\" target=\"_blank\" rel=\"noopener\" data-cursor-hover>Quantitative UX Research ↗</a>." ],
         figures: [
           { src: "images/user-research-framework/csat-trend.webp", caption: "CSAT average across eight rounds, Oct 2022 to Jun 2025." },
           { src: "images/user-research-framework/csat-ci.webp", caption: "Each round's ratings, with 95% confidence intervals." } ] },
@@ -549,7 +549,7 @@ const CASES = {
       { chapter: { no: "03", hud: "With AI", title: "Then I used AI to keep up",
         blurb: "One person can't run a team's worth of research by hand. AI closed the gap." } },
       { eyebrow: "Where AI fits", h: "It does the slow part", p: [
-        "The slow part of research is going through everything afterwards. I use AI (Claude) to transcribe sessions, take a first pass at grouping what people said, and surface patterns across interviews and open survey answers. I still make the calls, but it means one person can keep the whole schedule running, and it's how I'd set research up inside an AI product from the start." ] },
+        "The slow part of research is going through everything afterwards. I use AI (Claude) to transcribe sessions, take a first pass at grouping what people said, and spot patterns across interviews and open survey answers. I still make the calls, but it means one person can keep the whole schedule running, and it's how I'd set research up inside an AI product from the start." ] },
 
       { verdict: { label: "Where it ended up", text: "When I joined there was no research. Now the team plans around it. I did most of it on my own by giving research a rhythm and letting AI take the grind, and the studies it produced fed <a data-case=\"reimagining-onboarding\" data-cursor-hover>Reimagining Onboarding →</a> (conversion up 11 points) and <a data-case=\"winning-over-sweden\" data-cursor-hover>Winning Over Sweden →</a>." } },
     ],
@@ -563,9 +563,9 @@ const CASES = {
     sections: [
       { eyebrow: "The challenge", h: "When you can't take the easy sign-up", p: [
         "Most apps onboard you in a tap, Google, Apple, done. We legally can't. As a regulated <em>financial institution</em>, every player has to hand over full details and pass a KYC check, by bank transfer or government ID, before they can play.",
-        "And that flow is where the money is made: getting through onboarding and making a first deposit is one of the numbers the business lives on. So when a third of pre-checked users walked away right before verification, that wasn't a small UX issue, it was real money leaving. The question was <em>why</em>." ] },
+        "And that flow is where the money is made: getting through onboarding and making a first deposit is one of the numbers the business lives on. A third of pre-checked users were walking away right before verification, and nobody knew why." ] },
       { eyebrow: "The funnel", h: "Following the drop-off", p: [
-        "First, the data. I tracked every user from sign-up through to verified, depositing player, step by step, to find where the funnel leaked worst. One step stood out from the rest." ],
+        "I started with the data: every user tracked from sign-up through to verified, depositing player, step by step. One step leaked far more than the rest." ],
         funnel: { caption: "Every user from sign-up to depositing player, each bar as a share of everyone who registered. Scroll and watch it narrow.", rows: [
           { label: "Registered", count: 79602 },
           { label: "Activated", count: 78085, drop: "1,517" },
@@ -575,8 +575,8 @@ const CASES = {
           { label: "Verified depositors", count: 34462, drop: "5,147" } ] } },
       { verdict: { label: "The biggest leak", text: "<b>21,842 users</b>, a full third of everyone who'd been pre-checked, vanished between <em>pre-checked</em> and <em>attempted verification</em>, right where they were meant to start KYC. Closing that gap became the goal: get the number of <em>verified</em> users as close as possible to the number who <em>registered</em>." } },
       { eyebrow: "Problem statement", h: "The question we set out to answer", p: [
-        "<em>How can we seamlessly guide users through the signup process and KYC verification to increase overall conversion rates?</em>",
-        "Before initiating discovery, we asked ourselves two questions, and our answers became hypotheses to plan the study around:" ],
+        "<em>How do we guide users through sign-up and KYC verification so more of them make it out the other side?</em>",
+        "Before starting discovery, we asked ourselves two questions and planned the study around them:" ],
         list: [
           "What might be the reasons for users not completing the process / getting verified?",
           "How efficient are our sign-up and KYC processes?"] },
@@ -585,9 +585,9 @@ const CASES = {
       { chapter: { no: "01", hud: "Discovery", title: "Talk to the people who left",
         blurb: "Survey the users who dropped out of KYC, interview a screened few, then watch real people move through the flow." } },
       { eyebrow: "Research plan", h: "How I'd learn", p: [
-        "Talking to the users who'd dropped off was the obvious place to start. I ran a mixed-methods study, a screener survey feeding in-depth interviews, then moderated usability testing with screen-recording and behavioural analysis, so I could triangulate what users <em>said</em> against what they actually <em>did</em>." ] },
+        "Talking to the users who'd dropped off was the obvious place to start. I ran a mixed-methods study, a screener survey feeding in-depth interviews, then moderated usability testing with screen-recording and behavioural analysis, so I could check what users <em>said</em> against what they <em>did</em>." ] },
       { eyebrow: "Screener survey", h: "Start with the people who left", p: [
-        "I surveyed the drop-offs directly — cognitive-testing the questionnaire first, and working with CRM to reach the right customers. Asked why they hadn't completed verification, they said:" ],
+        "I surveyed the drop-offs directly, cognitive-testing the questionnaire first and working with CRM to reach the right customers. Asked why they hadn't completed verification, they said:" ],
         donut: { caption: "Survey — reasons for not completing the verification process.", items: [
           { label: "I tried to verify myself, but without success", value: 28.2 },
           { label: "I assumed the process might be too time-consuming", value: 17.9 },
@@ -600,7 +600,7 @@ const CASES = {
         "I screened <b>7 participants</b> for in-house interviews on the whole onboarding journey, with the verification steps under the microscope, probing where people stall, what they misread about KYC, and where privacy worries set in." ],
         figure: { src: "images/reimagining-onboarding/interview.mp4", caption: "A video snippet from a user-interview session." } },
       { eyebrow: "Research synthesis", h: "From scattered insight to clear themes", p: [
-        "Using the insights and feedback from the surveys and interviews, we organised the data into a digestible affinity map, grouping it into actionable insights about user expectations and common frustrations." ],
+        "We clustered everything from the surveys and interviews into an affinity map: four themes covering what users expected and where they got stuck." ],
         figure: { src: "images/reimagining-onboarding/affinity-cut.webp", bare: true, wide: true, caption: "The affinity map, survey and interview data clustered into four themes: requests for assistance, technical & document issues, privacy & security, and motivation." } },
 
       // ---------- ACT 2 ----------
@@ -631,7 +631,7 @@ const CASES = {
           "Some tap <b>“Zahlungsmethode”</b> expecting to add a payment method (irritation).",
           "“Not identified” vs “identified” raises questions, some think identified already means verified.",
           "Sofort verification draws attention as the highlighted, fastest option, but many don't know how it works and are put off when asked for bank details on the next page."] } ] },
-      { verdict: { label: "The pivot", text: "Four frictions stood out, <b>process</b> (KYC feels long and complex), <b>technical</b> (verification simply fails, broken scans, failed uploads), <b>privacy</b> (reluctance to share documents) and <b>motivation</b> (no clear payoff). Privacy and motivation sat with legal and CRM. The two doing the most damage, and the two I could actually move, were <em>process</em> and <em>technical</em>: make the form feel effortless, and make verification actually work. So the redesign ran on two fronts, the registration flow and the KYC step itself." } },
+      { verdict: { label: "The pivot", text: "Four problems stood out: <b>process</b> (KYC feels long and complex), <b>technical</b> (verification simply fails: broken scans, failed uploads), <b>privacy</b> (reluctance to share documents) and <b>motivation</b> (no clear payoff). Privacy and motivation sat with legal and CRM. The two doing the most damage, and the two I could move, were process and technical. So the redesign ran on two fronts: the registration form, and the verification step itself." } },
 
       // ---------- ACT 3 ----------
       { chapter: { no: "03", hud: "The redesign", title: "Rebuilding onboarding",
@@ -640,21 +640,21 @@ const CASES = {
         beat: {
           challenge: "Registration ran on an external provider, a black box we couldn't tune. Every fix the research pointed to was a vendor ticket and a wait.",
           moveLabel: "What I did",
-          move: "I turned the usability evidence into the case for bringing registration in-house — control and faster iteration on the UX side, cheaper than the vendor on the financial side. Leadership bought it, and I owned the flow end-to-end from there.",
+          move: "I turned the usability evidence into the case for bringing registration in-house: control and faster iteration on the UX side, cheaper than the vendor on the financial side. Leadership bought it, and I owned the flow end-to-end from there.",
           outcomeLabel: "Why it mattered",
-          outcome: "It turned a fixed, outsourced funnel into something the team controlled, so every friction the research surfaced was now ours to design out, not request and hope for." } },
+          outcome: "It turned a fixed, outsourced funnel into something the team controlled. Every problem the research had found was now ours to fix directly." } },
       { eyebrow: "Two-step registration", h: "Cut it to the essentials",
         beat: {
           challenge: "Testing's clearest complaint was blunt: registration felt <em>tedious</em>. People quit not because the steps were hard, but because there were too many of them.",
-          move: "I benchmarked competitors and industry leaders, stripped the form to only what we and the regulator actually need, and collapsed the rest into a concise <b>two-step</b> flow.",
+          move: "I benchmarked competitors and industry leaders, stripped the form to only what we and the regulator need, and collapsed the rest into a concise <b>two-step</b> flow.",
           outcomeLabel: "Why it works",
-          outcome: "Fewer fields, fewer screens, less time-on-task, lifting the exact friction the funnel showed was bleeding users before verification." } },
+          outcome: "Fewer fields, fewer screens, less time on task, aimed squarely at the step where the funnel lost the most people." } },
       { eyebrow: "Design process", h: "From happy path to hi-fi",
         beat: {
           challenge: "A tight timeline meant I couldn't afford to design the same screens twice.",
           move: "I mapped the happy path, prototyped in Figma for fast internal and guerrilla tests, then used the design system to jump straight to high-fidelity.",
           outcomeLabel: "Why this way",
-          outcome: "Skipping mid-fi was a calculated bet: the design system made hi-fi cheap, so the time saved went into testing the flow, not polishing screens we'd throw away." },
+          outcome: "Skipping mid-fi was a calculated bet: the design system made hi-fi cheap, so the time saved went into testing the flow instead of polishing throwaway screens." },
         gallery: [
           { src: "images/reimagining-onboarding/iteration-6.webp", caption: "An early iteration of the registration → activation flow." },
           { src: "images/reimagining-onboarding/iteration-7.webp", caption: "Happy path, iteration 7, with regulatory requirements integrated." }] },
@@ -665,13 +665,13 @@ const CASES = {
           { src: "images/reimagining-onboarding/reg-step2.webp", caption: "Step 2, identity details fronted by a plain-language banner, “enter your name and address as it appears on your identity document.” The “why am I giving this?” confusion, answered in context, right where users hesitated." }] },
       { eyebrow: "The KYC bottleneck", h: "Fix the step, not just the form",
         beat: {
-          challenge: "A leaner form only got users <em>to</em> verification faster — and verification was where they dropped off. The top reason for quitting was blunt: <b>they tried to verify, and it failed.</b> No copy could rewrite that.",
+          challenge: "A leaner form only got users <em>to</em> verification faster, and verification was where they dropped off. The top reason for quitting was blunt: <b>they tried to verify, and it failed.</b> No copy could rewrite that.",
           moveLabel: "What I did",
           move: "I pushed the team to treat the KYC provider as a design variable, not a fixed constraint. We benchmarked vendors and moved to <b>Sonio</b>, paired with faster verification methods, so more users cleared KYC on the first attempt.",
           outcomeLabel: "Why it mattered",
           outcome: "It hit the single biggest drop-off at its source, and it meant we weren't tied to one onboarding partner any more, which is where both the conversion lift and the cost saving came from." } },
       { eyebrow: "A/B testing", h: "Test it, and read the result honestly", p: [
-        "I tested the new flow against the old with only <b>20%</b> of traffic on the variant — less statistical power than a 50/50 split, but it capped the downside of a risky new flow while still gathering data." ],
+        "I tested the new flow against the old with only <b>20%</b> of traffic on the variant: less statistical power than a 50/50 split, but it capped the downside of a risky new flow while still gathering data." ],
         table: { head: ["Variant", "Registrations", "Exposure", "Win probability"], rows: [
           ["Control (previous flow)", "8,875", "22,181", "23.58%"],
           ["Test (new flow)", "2,352", "5,782", "76.42%"] ] },
@@ -680,7 +680,7 @@ const CASES = {
       { eyebrow: "Phased improvements", h: "Ship value early, improve over time", p: [
         "Rather than wait on a clean experiment, we rolled the flow out in phases, a good experience out of the box, improvements prioritised over time, then watched the live funnel instead of a 20% sample." ] },
       { eyebrow: "The payoff", h: "What the funnel did next", p: [
-        "The controlled A/B never reached significance; the full rollout settled it. Once the leaner registration and <b>Sonio</b> reached every user, the live funnel moved — most at the exact step we'd set out to fix." ],
+        "The controlled A/B never reached significance, but the full rollout removed the doubt. Once the leaner registration and <b>Sonio</b> reached every user, the live funnel moved, most at the exact step we'd set out to fix." ],
         metrics: [["54.4%", "end-to-end conversion, up from 43.3%"], ["75.2%", "cleared the KYC step, up from 67.1%"], ["25%", "drop-off before KYC, down from 33%"]] },
       { eyebrow: "Before / after", h: "The funnel, re-measured", p: [
         "Cumulative conversion at every step, the original flow against the redesigned one." ],
@@ -692,12 +692,12 @@ const CASES = {
           ["Verified", "49.8%", "58.4%"],
           ["Verified depositors", "43.3%", "54.4%"] ] } },
       { result: { n: "+11 pts", label: "end-to-end onboarding conversion",
-        note: "Registered → verified depositor climbed from 43.3% to 54.4% once the leaner flow and Sonio reached every user, the leak that opened the case, measurably narrower." } },
-      { verdict: { label: "The business case", text: "The redesign paid off beyond conversion. Bringing registration in-house and moving KYC to <b>Sonio</b> cut onboarding costs a lot and meant we weren't relying on a single partner, while the funnel gains brought <em>verified</em> users measurably closer to <em>registered</em>, which was the goal, with privacy and motivation the next things to tackle." } },
+        note: "Registered → verified depositor climbed from 43.3% to 54.4% once the leaner flow and Sonio reached every user." } },
+      { verdict: { label: "The business case", text: "The redesign paid off beyond conversion. Bringing registration in-house and moving KYC to <b>Sonio</b> cut onboarding costs and ended our dependence on a single partner. Verified users moved measurably closer to registered, which was the goal. Privacy and motivation are the next things to tackle." } },
       { eyebrow: "Learnings", h: "What I'd carry, and change", p: [
         "<b>The experiment trade-off was mine to own.</b> I capped the test at 20% of traffic to protect the business from a risky new flow, but that caution cost me the sample size to reach significance. Next time I'd size exposure against the runway up front, and decide deliberately whether I'm optimising to protect the funnel or to prove the lift.",
         "<b>Shipping beats certainty when the system keeps learning.</b> Rather than wait for a clean result, we rolled the flow out in phases and kept improving it. The more durable win was cultural: sharing findings openly moved the team from one-off projects toward continuous discovery.",
-        "Across all of it, I led the research, the plan, interview guides and survey design, and owned the end-to-end onboarding design against our design system, the work that made a heavy, regulated flow actually feel manageable." ] },
+        "Across all of it, I led the research, the plan, interview guides and survey design, and owned the end-to-end onboarding design against our design system, the work that made a heavy, regulated flow feel manageable." ] },
     ],
   },
 };
