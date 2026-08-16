@@ -498,9 +498,9 @@ const CASES = {
           "And it wasn't anyone's job to fix that." ] },
 
       { chapter: { no: "02", hud: "The rhythm", title: "I put research on a schedule",
-        blurb: "Research that waits to be asked for doesn't happen. So I gave it a regular beat." } },
+        blurb: "Left to requests, research never happened. So I gave it a regular beat." } },
       { eyebrow: "The rhythm", h: "A regular beat", p: [
-        "Instead of waiting for someone to ask, I put research on the calendar and matched the method to what we needed to learn. It ran whether or not anyone remembered to ask." ],
+        "I put research on the calendar and matched the method to what we needed to learn. It ran whether or not anyone remembered to ask." ],
         table: { head: ["How often", "What I ran", "To learn"], rows: [
           ["Every month", "User interviews", "Why people do what they do"],
           ["Every quarter", "Surveys", "How common those things are"],
@@ -516,7 +516,7 @@ const CASES = {
           { src: "images/user-research-framework/csat-ci.webp", caption: "Each round's ratings, with 95% confidence intervals." } ] },
 
       { chapter: { no: "03", hud: "With AI", title: "Then I used AI to keep up",
-        blurb: "One person can't run a team's worth of research by hand. AI closed the gap." } },
+        blurb: "One person can't run a team's worth of research by hand, so I used AI to close the gap." } },
       { eyebrow: "Where AI fits", h: "It does the slow part", p: [
         "The slow part of research is going through everything afterwards. I use AI (Claude) to transcribe sessions, take a first pass at grouping what people said, and spot patterns across interviews and open survey answers. I still make the calls, but it means one person can keep the whole schedule running, and it's how I'd set research up inside an AI product from the start." ] },
 
