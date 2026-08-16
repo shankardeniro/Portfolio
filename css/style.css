@@ -469,7 +469,14 @@ main{position:relative;z-index:2}
 .cs-frame img,.cs-frame video{width:100%;height:auto;display:block;border-radius:inherit}
 /* light mode: a soft, tight lift gives the edge-to-edge image separation on white */
 :root[data-theme="light"] .cs-frame{background:#fff;box-shadow:0 10px 30px -22px rgba(20,20,26,.16)}
-.cs-figure{margin:2rem 0}
+/* the figure shrink-wraps its image (display:table) and the caption renders as a
+   table-caption, so its width and left edge always match the image it describes */
+.cs-figure{margin:2rem auto;display:table;max-width:100%}
+.cs-figure > figcaption{display:table-caption;caption-side:bottom}
+/* bare figures float a frameless transparent image on the page background;
+   table sizing fights their height cap, so they centre the caption instead */
+.cs-figure--bare{display:block}
+.cs-figure--bare > figcaption{display:block;text-align:center}
 /* standalone figures: cap tall/portrait images so they don't dominate the page,
    and let the frame shrink to the image so the border hugs it, centred */
 .cs-figure .cs-frame{width:fit-content;max-width:100%;margin-inline:auto}
