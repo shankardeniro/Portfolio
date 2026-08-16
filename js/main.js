@@ -346,14 +346,10 @@ const CASES = {
       { chapter: { no: "Goal 01", hud: "Compliance", title: "Get the licence",
         blurb: "Meet every Swedish regulation. It's the price of entry, and the first thing that makes players trust you." } },
       { eyebrow: "Turning regulation into UX",
-        beat: {
-          challenge: "Swedish law has dozens of player-safety rules, deposit limits, reality-checks, session reminders. If you bolt them on at the end, the whole experience buckles under them.",
-          move: "I went through every <b>Spelinspektionen</b> (the regulator) requirement and mapped each one to a UI pattern and the copy it needed. By the first wireframe, compliance was already part of the design." },
+        p: ["Swedish law hands you dozens of player-safety rules: deposit limits, reality checks, session reminders. Add them at the end and the whole experience buckles under them. So I went through every <b>Spelinspektionen</b> (the regulator) requirement and mapped each one to a UI pattern and the copy it needed. By the first wireframe, compliance was already part of the design."],
         figure: { src: "images/winning-over-sweden/requirements-map.webp", zoom: true, caption: "The UX Requirements Map, regulation → UX pattern → design action. Tap to read in full." } },
       { eyebrow: "The heaviest flows",
-        beat: {
-          challenge: "Registration and the responsible-gaming screens are the heaviest, highest-stakes parts of the product, and exactly where first-time players tend to quit.",
-          move: "I wireframed every step to keep it clear, checked each one with compliance and local testers, then used our design system to jump straight to high-fidelity, since the licensing clock was tight." } },
+        p: ["Registration and the responsible-gaming screens are the heaviest parts of the product, and exactly where first-time players tend to quit. I wireframed every step to keep them clear, checked each one with compliance and local testers, then used our design system to jump straight to high-fidelity, since the licensing clock was tight."] },
       { eyebrow: "The design system", h: "One system behind every screen",
         p: ["Going straight to high-fidelity on a deadline only works if you're not redrawing everything each time. So it all sat on a shared system, tokens and components defined once and reused everywhere. That's what the licensing-critical screens were built from."] },
       { eyebrow: "Foundations", h: "Built on tokens",
@@ -373,10 +369,8 @@ const CASES = {
           { src: "images/winning-over-sweden/ds-section-heading.webp", caption: "Section headings, the pre-heading, headline, sub-heading and icon anatomy." },
           { src: "images/winning-over-sweden/ds-game-card.webp", caption: "Game cards, the core lobby unit, with the Epic Pulse graph built in." }] },
       { eyebrow: "The screens that get us licensed",
-        beat: {
-          challenge: "Engineering couldn't start on the architecture until the licensing-critical screens existed.",
-          move: "So I took the responsible-gaming and account screens, deposit limits, account summary, reality-check, straight to high-fidelity so the team had something real to build against.",
-          outcome: "Shipped the MVP the whole licence application was built on." },
+        p: ["Engineering couldn't start on the architecture until the licensing-critical screens existed. So I took the responsible-gaming and account screens, deposit limits, account summary, reality check, straight to high-fidelity, and the team had something real to build against."],
+        beat: { outcome: "Shipped the MVP the whole licence application was built on." },
         gallery: [
           { src: "images/winning-over-sweden/mvp-deposit-limit.webp", caption: "Deposit-limit step" },
           { src: "images/winning-over-sweden/mvp-account-summary.webp", caption: "Account-summary modal" },
@@ -389,11 +383,7 @@ const CASES = {
         blurb: "Stand out with the best payout rates in the market, but first check whether players actually care." } },
       { quote: "The whole plan rested on an assumption nobody had tested." },
       { eyebrow: "The bet",
-        beat: {
-          challengeLabel: "The idea, and the risk",
-          challenge: "Compliance got us in the door but wouldn't make us stand out. The plan was to be the fairest casino around by having the best <em>Return-to-Player</em> (RTP) rates. But the whole idea rested on one thing we hadn't checked: <em>do players even understand or care about RTP?</em>",
-          moveLabel: "The move",
-          move: "I treated it as a question to test. With no budget, I ran short kiosk interviews with real players, using prompt cards they could answer in seconds." },
+        p: ["Compliance got us in the door, but it wouldn't make us stand out. The plan was to be the fairest casino in the market, with the best <em>Return-to-Player</em> (RTP) rates anywhere, and it hinged on one thing nobody had checked: <em>do players even understand or care about RTP?</em> So before we bet the brand on it, I treated it as a question to test. With no budget, I ran short kiosk interviews with real players, using prompt cards they could answer in seconds."],
         figrow: [
           { src: "images/winning-over-sweden/interview-guide.webp", caption: "The question guide, funnelling broad prompts down to whether players grasp RTP and let it steer game choice." },
           { src: "images/winning-over-sweden/prompt-cards.webp", caption: "The prompt cards, printed and used in the field at Svenska Spel and ATG kiosks across Stockholm." }] },
@@ -409,10 +399,8 @@ const CASES = {
           { tone: "aha", label: "What surprised us", items: [
             "Which games a casino had, and how well they were <b>curated</b>, mattered far more to people's choice than we'd assumed."] }] },
       { eyebrow: "Reading the field",
-        beat: {
-          challenge: "If players misread RTP, leading on it could be a costly mistake. Was there still an opening worth taking?",
-          move: "I scored five competitors against Nielsen's heuristics on how clearly they handled RTP, responsible gaming and onboarding.",
-          outcome: "There's a growing, valuable group who actively hunt for <b>Max-RTP</b> games, and no one had claimed that ground." },
+        p: ["If players misread RTP, leading on it could be a costly mistake. To see whether an opening was still there, I scored five competitors against Nielsen's heuristics on how clearly they handled RTP, responsible gaming and onboarding."],
+        beat: { outcome: "There's a growing, valuable group who actively hunt for <b>Max-RTP</b> games, and no one had claimed that ground." },
         figure: { src: "images/winning-over-sweden/competitive-audit.webp", caption: "Competitive audit, five Swedish operators scored against Nielsen's heuristics." } },
       { verdict: { label: "What we decided", text: "The bet mostly held, with a twist. Savvy players who hunt <em>Max-RTP</em> games reward visible fairness, and their loyalty is worth a little margin. Most players, though, misread the number. So the plan became: explain fairness in plain language, and reassure everyone else with the things they already trust — familiar payment methods and game providers." } },
 
@@ -420,25 +408,17 @@ const CASES = {
       { chapter: { no: "Goal 03", hud: "The journey", title: "Turn trust into players",
         blurb: "Licence in hand, now make the fairness bet obvious in the product, smooth out the journey, and show players the things they told us they look for." } },
       { eyebrow: "Making fairness legible", h: "Putting it in plain language",
-        beat: {
-          challengeLabel: "The problem to solve",
-          challenge: "Players read <em>“97% RTP”</em> as <b>“this game pays big right now”</b>, the opposite of what it means. A fairness bet only works if people can read the fairness.",
-          moveLabel: "The move",
-          move: "I put fairness where people pick a game. Every tile shows its RTP with a one-tap plain-language guide, and <b>Epic Pulse</b> plots each game's live payout numbers against the house average, so a sceptical player can check the claim themselves.",
-          outcome: "RTP went from a number people misread to a reason to pick a game." },
+        p: ["Players read <em>“97% RTP”</em> as <b>“this game pays big right now”</b>, the opposite of what it means. A fairness bet only works if people can read the fairness, so I put it where people pick a game. Every tile shows its RTP with a one-tap plain-language guide, and <b>Epic Pulse</b> plots each game's live payout numbers against the house average, where a sceptical player can check the claim themselves."],
+        beat: { outcome: "RTP went from a number people misread to a reason to pick a game." },
         gallery: [
           { src: "images/winning-over-sweden/rtp-lobby.webp", caption: "RTP surfaced on every game tile in the lobby, with a tap-through “Return to player (RTP): read guide” explainer." },
           { src: "images/winning-over-sweden/epic-pulse.webp", caption: "Epic Pulse, a live transparency readout: a game's recent RTP trend against the ~96% house average, plus how often small, big and mega wins have actually landed over the last 27,000 rounds." }] },
       { eyebrow: "From BankID to gameplay",
-        beat: {
-          challenge: "The end-to-end journey, BankID registration → first deposit → gameplay → responsible-gambling tools, is where a first-time player can quietly get lost.",
-          move: "I mapped the whole thing to find where to make steps clearer and add reassurance before people needed to ask, so no one gets stranded partway through." },
+        p: ["The end-to-end journey, BankID registration → first deposit → gameplay → responsible-gambling tools, is where a first-time player can quietly get lost. I mapped the whole thing to find where to make steps clearer and add reassurance before people needed to ask, so no one gets stranded partway through."],
         figure: { src: "images/winning-over-sweden/user-journey.webp", caption: "The complete end-to-end journey map." } },
       { eyebrow: "Watching for hesitation",
-        beat: {
-          challenge: "A journey map shows the route. It doesn't show where real people stumble.",
-          move: "So I ran moderated think-aloud sessions with <b>10 Swedish players</b>, first-timers and veterans, with stakeholders watching live. Seeing where they hesitated showed us exactly what to fix.",
-          outcome: "19 distinct patterns, from critical blockers to positive signals." },
+        p: ["A journey map shows the route. It doesn't show where real people stumble. So I ran moderated think-aloud sessions with ten Swedish players, first-timers and veterans, with stakeholders watching live. Seeing where they hesitated showed us exactly what to fix."],
+        beat: { outcome: "19 distinct patterns, from critical blockers to positive signals." },
         figure: { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress — participants recruited through UserInterviews.com, €100 for 30 minutes." } },
       { eyebrow: "From signal to priorities", h: "19 patterns, triaged",
         p: ["Every pattern had a participant quote, a video frame from the exact moment it happened, and a severity score. I sorted by severity and impact, and shipped fixes for the three biggest ones (below)."],
@@ -451,11 +431,8 @@ const CASES = {
           ["High", "Game viewport bug — desktop layout rendered on mobile", "1"],
           ["High", "Live-casino entry — confusing screen-name bug", "1"] ] } },
       { eyebrow: "Finding 01 · Bonus claim",
-        beat: {
-          challenge: "People struggled to claim the deposit bonus right after signing up, the moment we could least afford to lose them.",
-          moveLabel: "The fix",
-          move: "Redesigned the flow to keep people in context with a clear sense of progress, and folded the bonus into the deposit step instead of making it a separate one.",
-          quote: "I would prefer to do it in one flow, like not have to go back and forth.",
+        p: ["People struggled to claim the deposit bonus right after signing up, the moment we could least afford to lose them. I redesigned the flow to keep people in context with a clear sense of progress, and folded the bonus claim into the deposit step."],
+        beat: { quote: "I would prefer to do it in one flow, like not have to go back and forth.",
           cite: "Rolf, usability participant" },
         compare: { stacked: true, before: { src: "images/winning-over-sweden/bonus-before.webp" }, after: { src: "images/winning-over-sweden/bonus-after.webp" } } },
       { eyebrow: "Craft, up close", h: "Why the redesign works, up close",
@@ -469,18 +446,12 @@ const CASES = {
             { x: 50, y: 67, tag: "Microcopy", text: "The catch, up front. Min-deposit, <b>35× wagering</b> and 60-day expiry sit inline on the offer, in plain sight. Goal 02 showed Swedish players distrust hidden conditions, so honesty is the trust play." },
             { x: 51, y: 75, tag: "Component choice", text: "Two actions become one. Deposit and bonus-claim collapse into a <b>single primary button</b>, the Finding 01 fix, ending the back-and-forth between a deposit step and a separate claim." }] } },
       { eyebrow: "Finding 02 · Live-casino navigation",
-        beat: {
-          challenge: "Asked to open a live-casino game, participants couldn't find the live-casino navigation, buried in the bottom menu.",
-          moveLabel: "The fix",
-          move: "Moved it up into a clear top tab bar, separating the two sections. Testers found it instantly and task success went up." },
+        p: ["Asked to open a live-casino game, participants couldn't find the live-casino navigation, buried in the bottom menu. I moved it up into a clear top tab bar, separating the two sections. Testers found it instantly and task success went up."],
         compare: { before: { src: "images/winning-over-sweden/livecasino-before.webp" }, after: { src: "images/winning-over-sweden/livecasino-after.webp" },
           decision: "<b>Moved up into a top tab bar.</b> Casino and Live Casino now sit side by side at the top, so the two read as separate the moment the lobby loads, no digging through the bottom menu to switch." } },
       { eyebrow: "Finding 03 · Trust signals",
-        beat: {
-          challenge: "Just as Goal 02 predicted, every participant scanned first for “BankID,” “Swish” and known provider logos as proof they could trust us, and read their absence as a red flag.",
-          moveLabel: "The fix",
-          move: "I put the payment-method and provider logos front and centre, borrowing the trust people already give those names.",
-          quote: "BankID is number one. That's the first thing I look at.",
+        p: ["Just as Goal 02 predicted, every participant scanned first for “BankID,” “Swish” and known provider logos as proof they could trust us, and read their absence as a red flag. So I put the payment-method and provider logos front and centre, borrowing the trust people already give those names."],
+        beat: { quote: "BankID is number one. That's the first thing I look at.",
           cite: "Rolf, usability participant" },
         compare: { before: { src: "images/winning-over-sweden/trust-before.webp" }, after: { src: "images/winning-over-sweden/trust-after.webp" },
           decision: "<b>Lead with the logos people already trust.</b> BankID, Swish and Trustly sit right where the decision happens, each with a plain reassurance, secure login, fast withdrawals. Goal 02 showed people read familiar payment methods as proof of safety, so the screen <em>borrows</em> trust from names they already believe." } },
@@ -1142,6 +1113,7 @@ function renderCase(slug) {
     if (s.eyebrow) txt += `<p class="cs-eyebrow">${s.eyebrow}</p>`;
     if (s.h) txt += `<h3 class="cs-h">${s.h}</h3>`;
     // problem/solution beat: the work as Challenge -> Move -> Outcome, scannable
+    if (s.p) txt += s.p.map((p) => `<p class="cs-p">${p}</p>`).join("");
     if (s.beat) {
       const b = s.beat;
       txt += `<div class="cs-beat">`;
@@ -1151,7 +1123,6 @@ function renderCase(slug) {
       if (b.quote) txt += `<blockquote class="cs-beat__quote">“${b.quote}”${b.cite ? `<cite>— ${esc(b.cite)}</cite>` : ""}</blockquote>`;
       txt += `</div>`;
     }
-    if (s.p) txt += s.p.map((p) => `<p class="cs-p">${p}</p>`).join("");
     if (s.list) txt += `<ul class="cs-list">${s.list.map((li) => `<li>${li}</li>`).join("")}</ul>`;
     // labelled synthesis cards, e.g. what we got right / wrong / didn't expect
     if (s.cards) txt += `<div class="cs-cards" style="--cols:${s.cards.length}">${s.cards.map((c) => `<div class="cs-card cs-card--${c.tone || "neutral"}"><span class="cs-card__label">${esc(c.label)}</span><ul>${c.items.map((i) => `<li>${i}</li>`).join("")}</ul></div>`).join("")}</div>`;
