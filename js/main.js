@@ -606,24 +606,15 @@ const CASES = {
       { chapter: { no: "03", hud: "The redesign", title: "Rebuilding onboarding",
         blurb: "Bring registration in-house, cut it to the essentials, and test it honestly before rolling it out." } },
       { eyebrow: "The opportunity", h: "Make the case to build in-house",
-        beat: {
-          challenge: "Registration ran on an external provider, a black box we couldn't tune. Every fix the research pointed to was a vendor ticket and a wait.",
-          moveLabel: "What I did",
-          move: "I turned the usability evidence into the case for bringing registration in-house: control and faster iteration on the UX side, cheaper than the vendor on the financial side. Leadership bought it, and I owned the flow end-to-end from there.",
-          outcomeLabel: "Why it mattered",
+        p: ["Registration ran on an external provider, a black box we couldn't tune, and every fix the research pointed to was a vendor ticket and a wait. So I turned the usability evidence into the case for bringing it in-house: control and faster iteration on the UX side, cheaper than the vendor on the financial side. Leadership bought it, and I owned the flow end-to-end from there."],
+        beat: { outcomeLabel: "Why it mattered",
           outcome: "It turned a fixed, outsourced funnel into something the team controlled. Every problem the research had found was now ours to fix directly." } },
       { eyebrow: "Two-step registration", h: "Cut it to the essentials",
-        beat: {
-          challenge: "Testing's clearest complaint was blunt: registration felt <em>tedious</em>. People quit not because the steps were hard, but because there were too many of them.",
-          move: "I benchmarked competitors and industry leaders, stripped the form to only what we and the regulator need, and collapsed the rest into a concise <b>two-step</b> flow.",
-          outcomeLabel: "Why it works",
+        p: ["Testing's clearest complaint was blunt: registration felt <em>tedious</em>. The steps weren't hard, there were simply too many of them. I benchmarked competitors and industry leaders, stripped the form to only what we and the regulator need, and collapsed the rest into a concise <b>two-step</b> flow."],
+        beat: { outcomeLabel: "Why it works",
           outcome: "Fewer fields, fewer screens, less time on task, aimed squarely at the step where the funnel lost the most people." } },
       { eyebrow: "Design process", h: "From happy path to hi-fi",
-        beat: {
-          challenge: "A tight timeline meant I couldn't afford to design the same screens twice.",
-          move: "I mapped the happy path, prototyped in Figma for fast internal and guerrilla tests, then used the design system to jump straight to high-fidelity.",
-          outcomeLabel: "Why this way",
-          outcome: "Skipping mid-fi was a calculated bet: the design system made hi-fi cheap, so the time saved went into testing the flow instead of polishing throwaway screens." },
+        p: ["A tight timeline meant I couldn't afford to design the same screens twice. I mapped the happy path, prototyped in Figma for fast internal and guerrilla tests, then used the design system to jump straight to high-fidelity. Skipping mid-fi was a calculated bet: hi-fi was cheap, so the time saved went into testing the flow instead of polishing throwaway screens."],
         gallery: [
           { src: "images/reimagining-onboarding/iteration-6.webp", caption: "An early iteration of the registration → activation flow." },
           { src: "images/reimagining-onboarding/iteration-7.webp", caption: "Happy path, iteration 7, with regulatory requirements integrated." }] },
@@ -633,11 +624,8 @@ const CASES = {
           { src: "images/reimagining-onboarding/reg-step1.webp", caption: "Step 1, the bare minimum to get started: country, email, password. A direct answer to the “it's tedious” complaint, you're in before you can feel the friction." },
           { src: "images/reimagining-onboarding/reg-step2.webp", caption: "Step 2, identity details fronted by a plain-language banner, “enter your name and address as it appears on your identity document.” The “why am I giving this?” confusion, answered in context, right where users hesitated." }] },
       { eyebrow: "The KYC bottleneck", h: "Fix verification itself",
-        beat: {
-          challenge: "A leaner form only got users <em>to</em> verification faster, and verification was where they dropped off. The top reason for quitting was blunt: <b>they tried to verify, and it failed.</b> No copy could rewrite that.",
-          moveLabel: "What I did",
-          move: "I pushed the team to treat the KYC provider as a decision we owned. We benchmarked vendors and moved to <b>Sonio</b>, paired with faster verification methods, so more users cleared KYC on the first attempt.",
-          outcomeLabel: "Why it mattered",
+        p: ["A leaner form only got users <em>to</em> verification faster, and verification was where they dropped off. The top reason for quitting said it plainly: <b>they tried to verify, and it failed.</b> No copy could rewrite that, so I pushed the team to treat the KYC provider as a decision we owned. We benchmarked vendors and moved to <b>Sonio</b>, paired with faster verification methods, so more users cleared KYC on the first attempt."],
+        beat: { outcomeLabel: "Why it mattered",
           outcome: "It hit the single biggest drop-off at its source, and it meant we weren't tied to one onboarding partner any more, which is where both the conversion lift and the cost saving came from." } },
       { eyebrow: "A/B testing", h: "Test it, and read the result honestly", p: [
         "I tested the new flow against the old with only <b>20%</b> of traffic on the variant: less statistical power than a 50/50 split, but it capped the downside of a risky new flow while still gathering data." ],
