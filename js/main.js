@@ -737,7 +737,7 @@ const IMG_DIMS = {
   "reimagining-onboarding/affinity.webp": [1920, 978], "reimagining-onboarding/affinity-cut.webp": [1719, 564], "reimagining-onboarding/ab-test.webp": [1920, 1159],
   "reimagining-onboarding/iteration-6.webp": [1920, 1165], "reimagining-onboarding/iteration-7.webp": [1920, 937],
   "reimagining-onboarding/reg-step1.webp": [375, 779], "reimagining-onboarding/reg-step2.webp": [375, 1177],
-  "reimagining-onboarding/usability-session.webp": [2294, 1718],
+  "reimagining-onboarding/usability-session.webp": [1600, 1198],
 };
 function imgTag(src, alt) {
   const d = IMG_DIMS[src.split("/").slice(-2).join("/")];
