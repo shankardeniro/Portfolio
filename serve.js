@@ -34,6 +34,8 @@ http
   .createServer((req, res) => {
     let urlPath = decodeURIComponent(req.url.split("?")[0]);
     if (urlPath === "/") urlPath = "/index.html";
+    // mirror the production rewrite: case-study deep links serve the app shell
+    if (/^\/case-study\/[a-z0-9-]+\/?$/.test(urlPath)) urlPath = "/index.html";
 
     // Resolve within root, block path traversal.
     const filePath = path.join(root, urlPath);

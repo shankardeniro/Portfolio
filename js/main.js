@@ -1230,6 +1230,10 @@ function initCaseStudies() {
   const chapterLabel = document.querySelector("[data-case-chapter]");
   if (!overlay || !content) return;
   let current = null;
+  let lastFocus = null;      // element to return focus to when the dialog closes
+  let suppressURL = false;   // true while history itself drives open/close
+  const BASE_TITLE = document.title;
+  const CASE_PATH = /^\/case-study\/([a-z0-9-]+)\/?$/;
   // Reader-first: the case reads as a normal vertical document and the reader
   // owns the pace. Motion is limited to a one-time reveal as each block enters
   // view, a scroll-progress bar, and a live "which act am I in" chapter label.
@@ -1360,6 +1364,15 @@ function initCaseStudies() {
     buildRail();
     updateReading();
     bindNav();
+    // deep link: every case is a real URL (rewritten to index by the host)
+    if (!suppressURL) {
+      const path = "/case-study/" + slug;
+      if (location.pathname !== path) history.pushState({ case: slug }, "", path);
+    }
+    document.title = c.title + " — Shanky";
+    // a11y: focus moves into the dialog; Tab is trapped while it's open
+    lastFocus = lastFocus || document.activeElement;
+    closeBtn?.focus({ preventScroll: true });
   }
 
   function close() {
@@ -1371,6 +1384,10 @@ function initCaseStudies() {
     document.body.classList.remove("case-open");
     teardownReading();
     setTimeout(reset, 800);
+    if (!suppressURL && CASE_PATH.test(location.pathname)) history.pushState({}, "", "/");
+    document.title = BASE_TITLE;
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+    lastFocus = null;
   }
   function reset() {
     if (overlay.classList.contains("is-open")) return; // re-opened during the delay
@@ -1488,15 +1505,44 @@ function initCaseStudies() {
 
   // open from project links
   document.querySelectorAll("[data-case]").forEach((a) => {
-    a.addEventListener("click", (e) => { e.preventDefault(); unmaskOpen(a, a.dataset.case); });
+    a.addEventListener("click", (e) => { e.preventDefault(); lastFocus = a; unmaskOpen(a, a.dataset.case); });
   });
   // open from cross-references inside case content (links injected after boot)
   content.addEventListener("click", (e) => {
     const a = e.target.closest("[data-case]");
     if (a) { e.preventDefault(); open(a.dataset.case); }
   });
-  document.querySelector("[data-case-close]")?.addEventListener("click", close);
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && current) close(); });
+  const closeBtn = document.querySelector("[data-case-close]");
+  closeBtn?.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && current) { close(); return; }
+    // keep Tab inside the dialog while it's open
+    if (e.key === "Tab" && current) {
+      const els = [...overlay.querySelectorAll('a[href], button, [tabindex]:not([tabindex="-1"])')]
+        .filter((el) => el.offsetParent !== null);
+      if (!els.length) return;
+      const first = els[0], last = els[els.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      else if (!overlay.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    }
+  });
+  // back/forward moves between the homepage and open case studies
+  window.addEventListener("popstate", () => {
+    const m = location.pathname.match(CASE_PATH);
+    suppressURL = true;
+    if (m && CASES[m[1]]) { if (current !== m[1]) open(m[1]); }
+    else if (current) close();
+    suppressURL = false;
+  });
+  // landing directly on /case-study/<slug> opens that case
+  const deepLink = location.pathname.match(CASE_PATH);
+  if (deepLink && CASES[deepLink[1]]) {
+    history.replaceState({ case: deepLink[1] }, "", location.pathname);
+    suppressURL = true;
+    open(deepLink[1]);
+    suppressURL = false;
+  }
   // reading progress + chapter label follow the reader's own scroll
   scroll?.addEventListener("scroll", () => { if (current) updateReading(); }, { passive: true });
 }
