@@ -140,7 +140,7 @@ const doc = new Document({
         new Paragraph({
           spacing: { after: 60, line: LINE, lineRule: "auto" },
           children: [
-            new TextRun({ text: "Product designer and UX researcher with 5+ years turning ambiguous, high-stakes problems into measurable product outcomes. I frame the problem with research and ship the design, with no hand-off in between. I founded a user-research practice from 0→1, led the go-to-market design for a regulated Swedish launch (zero compliance violations) and lifted end-to-end onboarding conversion 11 points. With AI-native in my workflow, I compress the path from insight to shipped, evidence-based interface.", size: 21, color: INK, font: FONT }),
+            new TextRun({ text: "Product designer and UX researcher who runs the study and ships the screen, with no hand-off in between. Over five years I've launched a regulated Swedish casino with zero compliance violations, lifted end-to-end onboarding conversion 11 points, and built a research practice from zero that now steers the roadmap. I work with AI daily to move at the pace of a team.", size: 21, color: INK, font: FONT }),
           ],
         }),
 
