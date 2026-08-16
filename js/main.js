@@ -340,7 +340,7 @@ const CASES = {
     },
     sections: [
       { eyebrow: "Overview", h: "Launching where the rules are strict", p: [
-        "Sweden has one of the strictest, most mature gambling markets in Europe. Players know what they're doing, the big operators are already established, and you don't get a licence unless you can show the regulator you're safe and trustworthy from the first screen. We weren't inventing a casino. We were trying to earn the right to operate somewhere that doesn't give second chances.",
+        "Sweden has one of the strictest, most mature gambling markets in Europe. Players know what they're doing, the big operators are established, and Spelinspektionen can revoke a licence over a single violation. Before we could convince any player of anything, we had to convince the regulator we were safe.",
         "I led the design for the launch, and owned the research and the regulatory side too. It came down to three things: <em>get the licence</em>, <em>bet on being the fairest option</em>, then <em>turn that into actual players</em>." ] },
       { eyebrow: "The results, up front", metrics: [["0", "compliance violations in 6 months"], ["58%", "uplift in claimed bonuses"], ["86%", "deposit in the first minute"]] },
 
@@ -350,7 +350,7 @@ const CASES = {
       { eyebrow: "Turning regulation into UX",
         beat: {
           challenge: "Swedish law has dozens of player-safety rules, deposit limits, reality-checks, session reminders. If you bolt them on at the end, the whole experience buckles under them.",
-          move: "I went through every <b>Spelinspektionen</b> (the regulator) requirement and mapped each one to a specific UI pattern and the copy it needed, so compliance was <em>built in</em> from the first wireframe instead of patched on later." },
+          move: "I went through every <b>Spelinspektionen</b> (the regulator) requirement and mapped each one to a UI pattern and the copy it needed. By the first wireframe, compliance was already part of the design." },
         figure: { src: "images/winning-over-sweden/requirements-map.webp", zoom: true, caption: "The UX Requirements Map, regulation → UX pattern → design action. Tap to read in full." } },
       { eyebrow: "The heaviest flows",
         beat: {
@@ -376,7 +376,7 @@ const CASES = {
           { src: "images/winning-over-sweden/ds-game-card.webp", caption: "Game cards, the core lobby unit, with the Epic Pulse graph built in." }] },
       { eyebrow: "The screens that get us licensed",
         beat: {
-          challenge: "Engineering couldn't start on the architecture until the licensing-critical screens actually existed.",
+          challenge: "Engineering couldn't start on the architecture until the licensing-critical screens existed.",
           move: "So I took the responsible-gaming and account screens, deposit limits, account summary, reality-check, straight to high-fidelity so the team had something real to build against.",
           outcome: "Shipped the MVP the whole licence application was built on." },
         gallery: [
@@ -389,13 +389,13 @@ const CASES = {
       // ---------- GOAL 2 ----------
       { chapter: { no: "Goal 02", hud: "The bet", title: "Bet on being the fairest",
         blurb: "Stand out with the best payout rates in the market, but first check whether players actually care." } },
-      { quote: "To win in Sweden's mature market, we'd need data, not just intuition." },
+      { quote: "The whole plan rested on an assumption nobody had tested." },
       { eyebrow: "The bet",
         beat: {
           challengeLabel: "The idea, and the risk",
           challenge: "Compliance got us in the door but wouldn't make us stand out. The plan was to be the fairest casino around by having the best <em>Return-to-Player</em> (RTP) rates. But the whole idea rested on one thing we hadn't checked: <em>do players even understand or care about RTP?</em>",
           moveLabel: "The move",
-          move: "Instead of betting the brand on a hunch, I treated it as a question to test: a quick, no-budget sprint of kiosk interviews with real players, using prompt cards they could answer in seconds." },
+          move: "I treated it as a question to test. With no budget, I ran short kiosk interviews with real players, using prompt cards they could answer in seconds." },
         figrow: [
           { src: "images/winning-over-sweden/interview-guide.webp", caption: "The question guide, funnelling broad prompts down to whether players grasp RTP and let it steer game choice." },
           { src: "images/winning-over-sweden/prompt-cards.webp", caption: "The prompt cards, printed and used in the field at Svenska Spel and ATG kiosks across Stockholm." }] },
@@ -413,20 +413,20 @@ const CASES = {
       { eyebrow: "Reading the field",
         beat: {
           challenge: "If players misread RTP, leading on it could be a costly mistake. Was there still an opening worth taking?",
-          move: "I scored the top competitors against Nielsen's heuristics — how clearly they handled RTP, responsible gaming and onboarding — hunting for a gap no one had claimed.",
+          move: "I scored five competitors against Nielsen's heuristics on how clearly they handled RTP, responsible gaming and onboarding.",
           outcome: "There's a growing, valuable group who actively hunt for <b>Max-RTP</b> games, and no one had claimed that ground." },
         figure: { src: "images/winning-over-sweden/competitive-audit.webp", caption: "Competitive audit, five Swedish operators scored against Nielsen's heuristics." } },
-      { verdict: { label: "What we decided", text: "The bet mostly held, with a twist. The savvy <em>Max-RTP</em> hunters reward visible fairness — worth a little margin for their long-term loyalty. But most players misread the number, so we'd put it in <em>plain language</em> and lean on trust signals people already believe. That set up Goal 03." } },
+      { verdict: { label: "What we decided", text: "The bet mostly held, with a twist. Savvy players who hunt <em>Max-RTP</em> games reward visible fairness, and their loyalty is worth a little margin. Most players, though, misread the number. So the plan became: explain fairness in plain language, and reassure everyone else with the things they already trust — familiar payment methods and game providers." } },
 
       // ---------- GOAL 3 ----------
       { chapter: { no: "Goal 03", hud: "The journey", title: "Turn trust into players",
-        blurb: "Licence in hand, now make the fairness bet obvious in the product, cut the friction out of the journey, and use the trust cues players told us they look for." } },
+        blurb: "Licence in hand, now make the fairness bet obvious in the product, smooth out the journey, and show players the things they told us they look for." } },
       { eyebrow: "Making fairness legible", h: "Putting it in plain language",
         beat: {
           challengeLabel: "The problem to solve",
-          challenge: "Players read <em>“97% RTP”</em> as <b>“this game pays big right now”</b> — the opposite of what it means. A fairness bet only works if people can actually <em>read</em> the fairness.",
+          challenge: "Players read <em>“97% RTP”</em> as <b>“this game pays big right now”</b>, the opposite of what it means. A fairness bet only works if people can read the fairness.",
           moveLabel: "The move",
-          move: "I put fairness where people pick a game: every tile shows its RTP with a one-tap plain-language guide, and <b>Epic Pulse</b> plots each game's live payout numbers against the house average. Real figures in the open, not one number you have to trust.",
+          move: "I put fairness where people pick a game. Every tile shows its RTP with a one-tap plain-language guide, and <b>Epic Pulse</b> plots each game's live payout numbers against the house average, so a sceptical player can check the claim themselves.",
           outcome: "RTP went from a number people misread to a reason to pick a game." },
         gallery: [
           { src: "images/winning-over-sweden/rtp-lobby.webp", caption: "RTP surfaced on every game tile in the lobby, with a tap-through “Return to player (RTP): read guide” explainer." },
@@ -438,7 +438,7 @@ const CASES = {
         figure: { src: "images/winning-over-sweden/user-journey.webp", caption: "The complete end-to-end journey map." } },
       { eyebrow: "Watching for hesitation",
         beat: {
-          challenge: "A journey map shows the route, not where real people stumble.",
+          challenge: "A journey map shows the route. It doesn't show where real people stumble.",
           move: "So I ran moderated think-aloud sessions with <b>10 Swedish players</b>, first-timers and veterans, with stakeholders watching live. Seeing where they hesitated showed us exactly what to fix.",
           outcome: "19 distinct patterns, from critical blockers to positive signals." },
         figure: { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress — participants recruited through UserInterviews.com, €100 for 30 minutes." } },
@@ -454,7 +454,7 @@ const CASES = {
           ["High", "Live-casino entry — confusing screen-name bug", "1"] ] } },
       { eyebrow: "Finding 01 · Bonus claim",
         beat: {
-          challenge: "People struggled to claim the deposit bonus right after signing up, exactly the friction that was costing us conversions.",
+          challenge: "People struggled to claim the deposit bonus right after signing up, the moment we could least afford to lose them.",
           moveLabel: "The fix",
           move: "Redesigned the flow to keep people in context with a clear sense of progress, and folded the bonus into the deposit step instead of making it a separate one.",
           quote: "I would prefer to do it in one flow, like not have to go back and forth.",
@@ -485,24 +485,24 @@ const CASES = {
           quote: "BankID is number one. That's the first thing I look at.",
           cite: "Rolf, usability participant" },
         compare: { before: { src: "images/winning-over-sweden/trust-before.webp" }, after: { src: "images/winning-over-sweden/trust-after.webp" },
-          decision: "<b>Lead with the logos people already trust.</b> BankID, Swish and Trustly sit right where the decision happens, each with a plain reassurance, secure login, fast withdrawals. Goal 02 showed people read familiar payment methods as proof of safety, so the screen <em>borrows</em> trust from names they already believe instead of asking for it upfront." } },
+          decision: "<b>Lead with the logos people already trust.</b> BankID, Swish and Trustly sit right where the decision happens, each with a plain reassurance, secure login, fast withdrawals. Goal 02 showed people read familiar payment methods as proof of safety, so the screen <em>borrows</em> trust from names they already believe." } },
       { eyebrow: "The payoff", h: "A smoother, more trusted journey", p: [
-        "Cutting the friction and adding the right trust cues moved the numbers the whole project was judged on, the jump in claimed bonuses and first-minute deposits from the summary up top." ] },
+        "Fixing those three findings moved the numbers the project was judged on: the jump in claimed bonuses and first-minute deposits." ] },
 
       // ---------- CLOSE ----------
-      { verdict: { label: "The outcome", text: "Localising for Sweden wasn't about translation. It was about <em>trust, built in from the first screen.</em> Compliance got us the licence (zero violations), a tested bet on fairness gave the brand a reason to exist, and a smoother, more trustworthy journey turned that into players. We came into a crowded market as a credible option, and the numbers followed." } },
+      { verdict: { label: "The outcome", text: "Localising for Sweden was never about translation. Compliance got us the licence, the tested bet on fairness gave the brand its reason to exist, and the smoother journey turned that into players: zero violations in six months, 58% more claimed bonuses, and 86% of deposits landing inside the first minute." } },
 
       // ---------- LEARNINGS & TAKEAWAY ----------
       { eyebrow: "Learnings", h: "What I'd carry into the next launch",
         p: ["Three things stuck with me, the ones I'd reach for the next time a regulated market comes up."],
         cards: [
           { tone: "yes", label: "Design compliance in", items: [
-            "Mapping every <b>Spelinspektionen</b> rule to a UI pattern made safety part of the design, not a legal afterthought, and kept twenty-odd flows consistent under a deadline."] },
+            "Mapping every <b>Spelinspektionen</b> rule to a UI pattern made safety part of the design from the first wireframe, and kept twenty-odd flows consistent under a deadline."] },
           { tone: "aha", label: "Test the bet before you build it", items: [
             "A no-budget research sprint showed most players <b>misread RTP</b> before we'd bet the brand on it. Cheapest research I've run, and the most useful, it changed the whole strategy."] },
           { tone: "no", label: "Trust comes from familiar things", items: [
-            "Players ignored licence badges and treated <b>BankID, Swish</b> and familiar providers as the real proof of safety. Reassurance has to sit where people already look, not where the brand wants to put it."] }] },
-      { verdict: { label: "The takeaway", text: "In a mature, regulated market you don't win on features. You win on <em>trust, earned early and made easy to see.</em> Fast, honest research, compliance built in from the first screen, and credibility borrowed from signals people already believe, that's what I'd do again." } },
+            "Players ignored licence badges and treated <b>BankID, Swish</b> and familiar providers as the real proof of safety. Reassurance has to sit where people already look."] }] },
+      { verdict: { label: "The takeaway", text: "In a mature, regulated market, features didn't win us anything. Trust did, and it had to be visible early. Fast, honest research, compliance in the wireframes from day one, and credibility borrowed from names players already believe. That's what I'd do again." } },
     ],
   },
   "user-research-framework": {
