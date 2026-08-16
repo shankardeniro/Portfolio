@@ -1,8 +1,6 @@
 /* Interaction layer: loader, GSAP scroll reveals, counters, marquee,
    word-by-word statement, custom cursor, magnetic buttons. */
 
-import * as THREE from "three";
-
 const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const isTouch = window.matchMedia("(hover:none),(pointer:coarse)").matches;
 
@@ -1051,9 +1049,15 @@ function initFlow(root) {
   const full = fig.querySelector("[data-zoom-src]");
   if (full) { const op = () => ensureZoom().show(full.getAttribute("data-zoom-src")); full.addEventListener("click", op); cleanups.push(() => full.removeEventListener("click", op)); }
 
-  // three.js particle field behind the graph
+  // three.js particle field behind the graph — three loads on demand here,
+  // so the homepage never pays for the 1.2MB module
   if (!reduce) {
+    let gone = false;
+    cleanups.push(() => { gone = true; });
+    (async () => {
     try {
+      const THREE = await import("three");
+      if (gone) return;
       const canvas = fig.querySelector("[data-flow-bg]");
       const accent = ((getComputedStyle(fig).getPropertyValue("--ca") || "").trim()) || "#7aa2ff";
       const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
@@ -1077,6 +1081,7 @@ function initFlow(root) {
       ro.observe(fig);
       cleanups.push(() => { cancelAnimationFrame(raf); ro.disconnect(); fig.removeEventListener("pointermove", onMove); geo.dispose(); mat.dispose(); renderer.dispose(); });
     } catch (e) { /* no WebGL → static SVG remains */ }
+    })();
   }
 
   // GSAP choreography: draw connectors, pop nodes, then idle float
