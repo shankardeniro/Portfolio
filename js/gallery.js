@@ -13,56 +13,140 @@ const hintEl = document.getElementById("hint");
 const loaderEl = document.getElementById("loader");
 const loaderBar = document.getElementById("loaderbar");
 
-/* ----------------------------- content --------------------------------- */
+/* ----------------------------- content ---------------------------------
+   The three case studies, each fanned out across the sphere by its own
+   artefacts. Every shot carries the section it appears in (`sec`) and a
+   short excerpt of that section's story (`text`), both lifted from the
+   case-study copy in main.js. */
 const base = [
   {
     title: "Winning Over Sweden",
     titleItalic: "Sweden",
     tag: "Market launch",
-    desc: "Launching a compliant, user-centred casino tailored for Swedish player preferences.",
+    slug: "winning-over-sweden",
     color: "#d98bb0",
     panel: "#f0d9e6",
-    seed: "casino-stockholm",
-    stats: [["2.4×", "retention"], ["8", "markets"]],
+    stats: [["0", "violations in 6 months"], ["58%", "more claimed bonuses"]],
+    shots: [
+      { f: "hero.webp", cap: "A compliant, user-centred casino built for the Swedish market.",
+        sec: "Overview · Launching where the rules are strict",
+        text: "Sweden has one of the strictest, most mature gambling markets in Europe — Spelinspektionen can revoke a licence over a single violation. Before we could convince any player of anything, we had to convince the regulator we were safe." },
+      { f: "requirements-map.webp", cap: "The UX Requirements Map — regulation, to UI pattern, to design action.",
+        sec: "Goal 01 · Turning regulation into UX",
+        text: "I went through every Spelinspektionen requirement and mapped each one to a UI pattern and the copy it needed. By the first wireframe, compliance was already part of the design." },
+      { f: "rtp-lobby.webp", cap: "RTP surfaced on every game tile, with a tap-through explainer.",
+        sec: "Goal 03 · Making fairness legible",
+        text: "Players read “97% RTP” as “this game pays big right now” — the opposite of what it means. A fairness bet only works if people can read the fairness, so every tile shows its RTP with a one-tap plain-language guide." },
+      { f: "epic-pulse.webp", cap: "Epic Pulse — a game's live RTP trend against the house average.",
+        sec: "Goal 03 · Making fairness legible",
+        text: "Epic Pulse plots each game's live payout numbers against the ~96% house average, where a sceptical player can check the fairness claim themselves. RTP went from a number people misread to a reason to pick a game." },
+      { f: "competitive-audit.webp", cap: "Five Swedish operators scored against Nielsen's heuristics.",
+        sec: "Goal 02 · Reading the field",
+        text: "If players misread RTP, leading on it could be a costly mistake. Scoring five competitors showed a growing, valuable group who actively hunt Max-RTP games — and no one had claimed that ground." },
+      { f: "interview-guide.webp", cap: "The kiosk-interview guide, used in the field across Stockholm.",
+        sec: "Goal 02 · The bet",
+        text: "The whole plan hinged on one thing nobody had checked: do players even understand or care about RTP? With no budget, I ran short kiosk interviews with real players before we bet the brand on it." },
+      { f: "usability-session.webp", cap: "A moderated think-aloud session in progress.",
+        sec: "Goal 03 · Watching for hesitation",
+        text: "A journey map shows the route, not where real people stumble. Moderated think-aloud sessions with ten Swedish players surfaced 19 distinct patterns, from critical blockers to positive signals." },
+      { f: "user-journey.webp", cap: "The complete end-to-end journey map.",
+        sec: "Goal 03 · From BankID to gameplay",
+        text: "The end-to-end journey — BankID registration → first deposit → gameplay → responsible-gambling tools — is where a first-time player can quietly get lost. I mapped the whole thing to add reassurance before people needed to ask." },
+      { f: "lobby-desktop.webp", cap: "The launched lobby — Wunderino, Sweden, 2025.",
+        sec: "The launch",
+        text: "Getting a new casino licensed and launched in Sweden, one of the strictest gambling markets there is: get the licence, bet on being the fairest option, then turn that into actual players." },
+      { f: "ds-colors.webp", cap: "Primitives — the full brand, neutral and semantic colour ramps.",
+        sec: "Goal 01 · Built on tokens",
+        text: "Nothing points at a raw colour or size: primitives feed semantic tokens named for what they're for, and tokens feed the components. Change one token and it updates everywhere — twenty-odd flows in sync." },
+      { f: "ds-typography.webp", cap: "The type system: Bovine MVB for display, Noto Sans for the rest.",
+        sec: "Goal 01 · Built on tokens",
+        text: "Going straight to high-fidelity on a licensing deadline only works if you're not redrawing everything each time — so it all sat on a shared system, tokens and components defined once and reused everywhere." },
+      { f: "ds-game-card.webp", cap: "Game cards, the core lobby unit, with Epic Pulse built in.",
+        sec: "Goal 01 · Each one, fully specified",
+        text: "On top of the tokens sat the components — every variant, state and rule pinned down so engineering didn't have to guess." },
+      { f: "mvp-reality-check.webp", cap: "The reality-check interruption, a licence requirement made calm.",
+        sec: "Goal 01 · The screens that get us licensed",
+        text: "Engineering couldn't start until the licensing-critical screens existed, so the responsible-gaming and account screens went straight to high-fidelity — the MVP the whole licence application was built on." },
+      { f: "trust-after.webp", cap: "Trust signals, after the redesign.",
+        sec: "Goal 03 · Finding 03: Trust signals",
+        text: "Every participant scanned first for BankID, Swish and known provider logos as proof they could trust us — and read their absence as a red flag. So the redesign leads with the names people already believe." },
+    ],
   },
   {
     title: "Reimagining Onboarding",
     titleItalic: "Onboarding",
     tag: "Onboarding funnel",
-    desc: "Solving onboarding challenges for better conversion — phased tests, 53pt better variant.",
+    slug: "reimagining-onboarding",
     color: "#73c7bd",
     panel: "#d4ece8",
-    seed: "onboarding-flow",
-    stats: [["+53%", "conversion"], ["4", "test rounds"]],
+    stats: [["+11 pts", "end-to-end conversion"], ["75.2%", "cleared KYC, up from 67.1%"]],
+    shots: [
+      { f: "hero.webp", cap: "Rebuilding a regulated sign-up around where players stalled.",
+        sec: "The challenge",
+        text: "As a regulated financial institution we legally can't do one-tap sign-up: every player must pass a KYC check before they can play. A third of pre-checked users were walking away right before verification, and nobody knew why." },
+      { f: "affinity-cut.webp", cap: "The affinity map — survey and interview data in four themes.",
+        sec: "Act 01 · From scattered insight to clear themes",
+        text: "Everything from the surveys and interviews clustered into four themes: requests for assistance, technical and document issues, privacy and security, and motivation." },
+      { f: "usability-session.webp", cap: "A moderated session watched live by UX, KYC, BI and operations.",
+        sec: "Act 02 · Watching real users move through it",
+        text: "Ten participants tried to deposit and play across the KYC states they might land in, with the cross-functional team observing live. Low task-completion and high error rates made the verdict blunt: the flow had to change." },
+      { f: "iteration-6.webp", cap: "An early iteration of the registration → activation flow.",
+        sec: "Act 03 · From happy path to hi-fi",
+        text: "A tight timeline meant no designing the same screens twice: happy path first, fast Figma prototypes, then the design system to jump straight to high-fidelity — the time saved went into testing, not polishing throwaway screens." },
+      { f: "iteration-7.webp", cap: "Happy path, iteration 7, with regulatory requirements integrated.",
+        sec: "Act 03 · From happy path to hi-fi",
+        text: "Skipping mid-fi was a calculated bet: hi-fi was cheap on top of the design system, so iteration count could stay high right up to the regulatory-complete flow." },
+      { f: "reg-step1.webp", cap: "Step 1 — the bare minimum: country, email, password.",
+        sec: "Act 03 · Cut it to the essentials",
+        text: "Testing's clearest complaint was blunt: registration felt tedious. I stripped the form to only what we and the regulator need and collapsed the rest into a concise two-step flow — you're in before you can feel the friction." },
+      { f: "reg-step2.webp", cap: "Step 2 — identity details, fronted by a plain-language banner.",
+        sec: "Act 03 · Two steps, each earning its keep",
+        text: "Identity details are fronted by a plain-language banner — “enter your name and address as it appears on your identity document.” The “why am I giving this?” confusion, answered in context, right where users hesitated." },
+      { f: "ab-test.webp", cap: "The A/B comparison — test variant against the previous flow.",
+        sec: "Act 03 · Test it, and read the result honestly",
+        text: "The variant showed a 76.42% win probability but never reached significance on a 20% split. The phased rollout removed the doubt: end-to-end conversion climbed from 43.3% to 54.4%, most at the exact step we'd set out to fix." },
+    ],
   },
   {
-    title: "User Research Framework",
+    title: "Founding a Research Practice",
     titleItalic: "Research",
-    tag: "Systems & ops",
-    desc: "An org-wide framework that standardised how teams learn from their users.",
+    tag: "0 → 1 research",
+    slug: "user-research-framework",
     color: "#8f86c9",
     panel: "#ddd9f0",
-    seed: "research-team",
-    stats: [["12+", "teams"], ["1", "system"]],
-  },
-  {
-    title: "ReviewBuddy",
-    titleItalic: "Buddy",
-    tag: "0 → 1 product",
-    desc: "A mobile-first app to scout street food near you — a playful side project.",
-    color: "#e08f86",
-    panel: "#f4dcd8",
-    seed: "street-food",
-    stats: [["5", "usability tests"], ["0→1", "built"]],
+    stats: [["0 → 1", "built from nothing"], ["8 rounds", "of CSAT over ~3 years"]],
+    shots: [
+      { f: "hero.webp", cap: "Giving research a rhythm the whole team could plan around.",
+        sec: "Overview · There was no research when I joined",
+        text: "The team shipped on opinion: no users to talk to, no place to keep what we learned, no habit of asking before building. The real job was giving the team a way to keep learning after I stopped pushing." },
+      { f: "csat-trend.webp", cap: "CSAT average across eight rounds, Oct 2022 to Jun 2025.",
+        sec: "02 · I started tracking satisfaction properly",
+        text: "A CSAT survey every quarter, reported to leadership each time — every score with an open “why” and a 95% confidence interval, so we only reacted when a change was real." },
+      { f: "csat-ci.webp", cap: "Each round's ratings, with 95% confidence intervals.",
+        sec: "02 · I started tracking satisfaction properly",
+        text: "The method comes from Chapman & Rodden's Quantitative UX Research: confidence intervals on every round keep a noisy quarter from being mistaken for a trend." },
+    ],
   },
 ];
 
-/* fan the 4 base projects out into a fuller sphere */
-const COUNT = 32;
-const projects = Array.from({ length: COUNT }, (_, i) => {
-  const b = base[i % base.length];
-  return { ...b, index: i, seed: `${b.seed}-${i}` };
-});
+/* one card per artefact, round-robined so neighbouring cards on the sphere
+   come from different case studies */
+const projects = [];
+const deepest = Math.max(...base.map((b) => b.shots.length));
+for (let r = 0; r < deepest; r++) {
+  base.forEach((b) => {
+    const shot = b.shots[r];
+    if (!shot) return;
+    projects.push({
+      ...b,
+      index: projects.length,
+      image: `images/${b.slug}/${shot.f}`,
+      caption: shot.cap,
+      section: shot.sec,
+      sectionText: shot.text,
+    });
+  });
+}
 
 /* ----------------------------- three setup ----------------------------- */
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
@@ -70,11 +154,13 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(62, window.innerWidth / window.innerHeight, 0.1, 100);
+const camera = new THREE.PerspectiveCamera(68, window.innerWidth / window.innerHeight, 0.1, 100);
 camera.position.set(0, 0, 0);
 camera.rotation.order = "YXZ";
 
-const RADIUS = 6.2;
+/* tight radius relative to card size ≈ densely tiled inner surface —
+   neighbour spacing on the fibonacci sphere is ~sqrt(4π/N)·R */
+const RADIUS = 3.6;
 const CARD_W = 1.62;
 const CARD_H = CARD_W * 1.34; // matches 540 / 720 canvas aspect
 
@@ -134,15 +220,23 @@ function drawCard(ctx, p, img) {
   ctx.save();
   ctx.clip();
   if (img) {
-    // cover-fit
     const ar = img.width / img.height;
     const tar = mw / mh;
     let dw, dh, dx, dy;
-    if (ar > tar) { dh = mh; dw = mh * ar; dx = mx - (dw - mw) / 2; dy = my; }
-    else { dw = mw; dh = mw / ar; dx = mx; dy = my - (dh - mh) / 2; }
+    if (ar < 0.85) {
+      // portrait artefacts (phone screens) — letterbox them on the accent panel
+      // rather than cropping a meaningless slice out of the middle
+      ctx.fillStyle = p.panel;
+      ctx.fillRect(mx, my, mw, mh);
+      dh = mh; dw = mh * ar; dx = mx + (mw - dw) / 2; dy = my;
+    } else if (ar > tar) {
+      dh = mh; dw = mh * ar; dx = mx - (dw - mw) / 2; dy = my;
+    } else {
+      dw = mw; dh = mw / ar; dx = mx; dy = my - (dh - mh) / 2;
+    }
     ctx.drawImage(img, dx, dy, dw, dh);
-    // subtle tint to harmonise with accent
-    ctx.fillStyle = hexToRgba(p.color, 0.16);
+    // whisper of the accent so the sphere still reads as one set
+    ctx.fillStyle = hexToRgba(p.color, 0.07);
     ctx.fillRect(mx, my, mw, mh);
   } else {
     const g = ctx.createLinearGradient(mx, my, mx + mw, my + mh);
@@ -175,7 +269,7 @@ function drawCard(ctx, p, img) {
   // description
   ctx.fillStyle = "#6b675f";
   ctx.font = "400 22px 'Instrument Sans', system-ui, sans-serif";
-  wrapText(ctx, p.desc, pad, my + mh + 150, mw, 30, 3);
+  wrapText(ctx, p.caption, pad, my + mh + 150, mw, 30, 3);
 
   // index + view affordance row
   ctx.fillStyle = "#9a958c";
@@ -237,12 +331,11 @@ projects.forEach((p, i) => {
   cardGroup.add(mesh);
   cards.push(mesh);
 
-  // load real photo through a CORS-enabled proxy, then repaint
+  // load the case study's own artefact, then repaint the card
   const img = new Image();
-  img.crossOrigin = "anonymous";
   img.onload = () => { drawCard(ctx, p, img); texture.needsUpdate = true; bumpLoader(); };
   img.onerror = () => bumpLoader();
-  img.src = `https://images.weserv.nl/?url=picsum.photos/seed/${encodeURIComponent(p.seed)}/620/470`;
+  img.src = p.image;
 });
 
 /* ----------------------------- loader done ----------------------------- */
@@ -357,9 +450,13 @@ function openDetail(mesh, ox, oy) {
 
   document.getElementById("detailTag").textContent = p.tag || "Case study";
   document.getElementById("detailIndex").textContent = String(p.index + 1).padStart(2, "0");
-  document.getElementById("detailDesc").textContent = p.desc;
-  document.getElementById("detailImg").src =
-    `https://images.weserv.nl/?url=picsum.photos/seed/${encodeURIComponent(p.seed)}/900/1100`;
+  document.getElementById("detailSection").textContent = p.section;
+  document.getElementById("detailDesc").textContent = p.sectionText;
+  document.getElementById("detailCaption").textContent = p.caption;
+  document.getElementById("detailLink").href = `/case-study/${p.slug}`;
+  const dImg = document.getElementById("detailImg");
+  dImg.src = p.image;
+  dImg.alt = p.caption;
 
   // title with italic accent word
   const tEl = document.getElementById("detailTitle");

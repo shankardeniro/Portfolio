@@ -87,12 +87,18 @@
     .detail__title{ font-family:"Instrument Serif",Georgia,serif; font-weight:400; font-size:clamp(40px,6vw,82px);
       line-height:.96; margin-bottom:24px; }
     .detail__title em{ font-style:italic; }
-    .detail__desc{ font-size:17px; line-height:1.6; max-width:46ch; color:#34322c; margin-bottom:34px; }
+    .detail__section{ font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#5d5a52; margin-bottom:14px; }
+    .detail__desc{ font-size:16px; line-height:1.65; max-width:52ch; color:#34322c; margin-bottom:34px; }
     .detail__stats{ display:flex; gap:38px; }
     .detail__stat b{ display:block; font-family:"Instrument Serif",Georgia,serif; font-size:34px; font-weight:400; }
     .detail__stat span{ font-size:12.5px; color:#5d5a52; letter-spacing:.03em; }
-    .detail__media{ aspect-ratio:4/5; border-radius:18px; overflow:hidden; box-shadow:0 40px 90px -40px rgba(0,0,0,.5); }
-    .detail__media img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .detail__link{ display:inline-flex; align-items:center; gap:8px; margin-top:34px; font-size:13.5px; color:#15140f;
+      text-decoration:none; border-bottom:1px solid rgba(0,0,0,.28); padding-bottom:3px; transition:gap .25s ease, border-color .25s ease; }
+    .detail__link:hover{ gap:12px; border-color:rgba(0,0,0,.6); }
+    .detail__media{ display:flex; flex-direction:column; gap:14px; }
+    .detail__media img{ width:100%; aspect-ratio:4/5; object-fit:contain; display:block;
+      border-radius:18px; background:rgba(255,255,255,.42); box-shadow:0 40px 90px -40px rgba(0,0,0,.5); }
+    .detail__caption{ font-size:12.5px; line-height:1.5; color:#5d5a52; max-width:44ch; }
     .detail__top{ position:absolute; top:0; left:0; right:0; z-index:2; padding:26px 34px;
       display:flex; justify-content:space-between; align-items:center; }
     .back{ pointer-events:auto; cursor:pointer; background:none; border:1px solid rgba(0,0,0,.25); color:inherit;
@@ -103,7 +109,9 @@
     .detail__index{ font-family:"Instrument Serif",Georgia,serif; font-size:14px; }
     @media (max-width:860px){
       .detail__inner{ grid-template-columns:1fr; gap:30px; padding:100px 26px 50px; align-content:center; }
-      .detail__media{ order:-1; max-height:38vh; }
+      .detail__media{ order:-1; }
+      .detail__media img{ aspect-ratio:auto; max-height:34vh; }
+      .detail__link{ margin-top:24px; }
       .chrome--bottom .title-lg{ display:none; }
     }
   </style>
@@ -148,10 +156,15 @@
       <div class="detail__meta">
         <span class="tag" id="detailTag">Case study</span>
         <h2 class="detail__title" id="detailTitle">Title</h2>
+        <p class="detail__section" id="detailSection">Section</p>
         <p class="detail__desc" id="detailDesc">Description</p>
         <div class="detail__stats" id="detailStats"></div>
+        <a class="detail__link" id="detailLink" href="/">Read the case study <span>↗</span></a>
       </div>
-      <div class="detail__media"><img id="detailImg" alt="" /></div>
+      <figure class="detail__media">
+        <img id="detailImg" alt="" />
+        <figcaption class="detail__caption" id="detailCaption"></figcaption>
+      </figure>
     </div>
   </section>
 
@@ -159,6 +172,6 @@
   <script type="importmap">
     { "imports": { "three": "./vendor/three.module.js?v=2" } }
   </script>
-  <script type="module" src="js/gallery.js?v=1"></script>
+  <script type="module" src="js/gallery.js?v=3"></script>
 </body>
 </html>
