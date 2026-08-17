@@ -17,7 +17,7 @@
   /* Display type scale — exactly four tokens. Every serif display element
      points here; no one-off clamps. poster > title > numeral > heading */
   --fs-poster:clamp(4.5rem,16vw,14rem); --lh-poster:.95; --ls-poster:-.03em;
-  --fs-title:clamp(2.2rem,6.5vw,5.5rem); --lh-title:1.05; --ls-title:-.02em;
+  --fs-title:clamp(2.075rem,calc(6.5vw - 2px),5.375rem); --lh-title:1.05; --ls-title:-.02em;
   --fs-numeral:clamp(2.2rem,5.5vw,4.5rem); --lh-numeral:.9; --ls-numeral:-.02em;
   --fs-heading:clamp(1.375rem,calc(3.5vw - 2px),2.675rem); --lh-heading:1.05; --ls-heading:-.01em;
   /* Micro type scale — three tokens: label (uppercase overline), label-sm
