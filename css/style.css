@@ -55,10 +55,9 @@ li{list-style:none}
    TYPE & ACCENT SYSTEM (keep to this)
    - Serif (--serif): DISPLAY only — titles, headings, statement, big numbers.
      The `.italic` class is the serif-italic display device.
-   - Serif text (--serif-text): QUOTES only — pull-quotes and participant
-     voices, the italic "spoken" accents.
-   - Sans (--sans): all running text + UI — body, beats, challenge, verdict,
-     lists, cards, annotations.
+   - Sans (--sans): everything that is read — body, beats, challenge, verdicts,
+     quotes and participant voices (weight 500 carries the "spoken" register),
+     lists, cards, annotations, UI. (--serif-text/Newsreader is retired.)
    - Emphasis is TONAL, never coloured: body <em> = ink + 500 roman; <b> = ink 600.
      Inside a serif display line, emphasis = italic in the same ink.
    - Accent (--ca / --ca-ink) is for STRUCTURE only: eyebrows, labels, table
@@ -394,7 +393,7 @@ main{position:relative;z-index:2}
 .cs-beat__outcome b{color:var(--ink);font-weight:600}
 /* a real participant voice inside a beat, the "show" behind the "tell" */
 .cs-beat__quote{margin:0;padding-left:1.25rem;border-left:2px solid var(--ca-ink);
-  font-family:var(--serif-text);font-style:italic;font-size:clamp(1.05rem,1.7vw,1.3rem);line-height:1.5;color:var(--ink)}
+  font-family:var(--sans);font-weight:500;font-size:clamp(1.02rem,1.6vw,1.22rem);line-height:1.5;color:var(--ink)}
 .cs-beat__quote cite{display:block;margin-top:.55rem;font-style:normal;font-size:var(--fs-label);
   letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--ink-dim)}
 
@@ -458,8 +457,8 @@ main{position:relative;z-index:2}
   text-transform:uppercase;padding:.8rem 1rem;border-bottom:1px solid var(--line)}
 .cs-table td{padding:.9rem 1rem;border-bottom:1px solid var(--line);color:var(--ink-soft);line-height:1.45;vertical-align:top}
 .cs-table tr td:first-child{color:var(--ink)}
-.cs-quote{font-family:var(--serif-text);font-size:clamp(1.3rem,2.6vw,1.8rem);line-height:1.4;color:var(--ink);
-  border-left:2px solid var(--ca);padding-left:1.4rem;margin:2rem 0;max-width:34ch}
+.cs-quote{font-family:var(--sans);font-weight:500;font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.42;
+  letter-spacing:-.01em;color:var(--ink);border-left:2px solid var(--ca);padding-left:1.4rem;margin:2rem 0;max-width:36ch}
 
 /* per-act payoff card, closes a goal on its own result */
 .cs-result{display:flex;flex-direction:column;gap:.5rem;margin:1.5rem 0}
@@ -473,10 +472,10 @@ main{position:relative;z-index:2}
   margin:2.4rem 0;padding:.4rem 0}
 .cs-verdict__label{font-size:var(--fs-label);letter-spacing:var(--ls-label);text-transform:uppercase;
   color:var(--ca-ink);padding-top:.55rem;border-top:1px solid var(--ca-ink);height:fit-content}
-.cs-verdict__text{font-family:var(--serif);font-weight:400;font-size:clamp(1.25rem,2.1vw,1.55rem);
-  line-height:1.38;color:var(--ink)}
-.cs-verdict__text b{font-weight:400;color:var(--ca-ink)}
-.cs-verdict__text em{font-family:inherit;font-style:italic;font-weight:400;color:inherit}
+.cs-verdict__text{font-family:var(--sans);font-weight:500;font-size:clamp(1.12rem,1.9vw,1.38rem);
+  line-height:1.48;letter-spacing:-.01em;color:var(--ink)}
+.cs-verdict__text b{font-weight:500;color:var(--ca-ink)}
+.cs-verdict__text em{font-family:inherit;font-style:normal;font-weight:600;color:inherit}
 @media(max-width:640px){
   .cs-verdict{grid-template-columns:1fr;gap:.9rem}
   .cs-verdict__label{border-top:none;padding-top:0}

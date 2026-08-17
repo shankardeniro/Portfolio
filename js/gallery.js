@@ -144,6 +144,8 @@ for (let r = 0; r < deepest; r++) {
       caption: shot.cap,
       section: shot.sec,
       sectionText: shot.text,
+      // serif line on the card: the section name without its "Goal 01 ·" prefix
+      shotTitle: shot.sec.split("·").pop().trim(),
     });
   });
 }
@@ -202,83 +204,77 @@ function wrapText(ctx, text, x, y, maxW, lineH, maxLines) {
   ctx.fillText(line.trim(), x, y);
 }
 
+function ellipsize(ctx, text, maxW) {
+  if (ctx.measureText(text).width <= maxW) return text;
+  let t = text;
+  while (t.length && ctx.measureText(t + "…").width > maxW) t = t.slice(0, -1);
+  return t.trimEnd() + "…";
+}
+
+/* Full-bleed film card: the artefact is the whole card, a bottom grade holds
+   the label row, a serif title and a short caption. */
 function drawCard(ctx, p, img) {
   ctx.clearRect(0, 0, TEX_W, TEX_H);
-  const pad = 26;
-  const r = 30;
+  const pad = 30;
+  const r = 24;
 
-  // panel
   ctx.save();
   roundRect(ctx, 0, 0, TEX_W, TEX_H, r);
-  ctx.fillStyle = "#ece9e4";
-  ctx.fill();
   ctx.clip();
 
-  // media area
-  const mx = pad, my = pad, mw = TEX_W - pad * 2, mh = 392;
-  roundRect(ctx, mx, my, mw, mh, 20);
-  ctx.save();
-  ctx.clip();
+  // artefact, cover-fit edge to edge with a gentle film grade
   if (img) {
     const ar = img.width / img.height;
-    const tar = mw / mh;
+    const tar = TEX_W / TEX_H;
     let dw, dh, dx, dy;
-    if (ar < 0.85) {
-      // portrait artefacts (phone screens) — letterbox them on the accent panel
-      // rather than cropping a meaningless slice out of the middle
-      ctx.fillStyle = p.panel;
-      ctx.fillRect(mx, my, mw, mh);
-      dh = mh; dw = mh * ar; dx = mx + (mw - dw) / 2; dy = my;
-    } else if (ar > tar) {
-      dh = mh; dw = mh * ar; dx = mx - (dw - mw) / 2; dy = my;
-    } else {
-      dw = mw; dh = mw / ar; dx = mx; dy = my - (dh - mh) / 2;
-    }
+    if (ar > tar) { dh = TEX_H; dw = TEX_H * ar; dx = -(dw - TEX_W) / 2; dy = 0; }
+    else { dw = TEX_W; dh = TEX_W / ar; dx = 0; dy = -(dh - TEX_H) / 2; }
+    // pale UI shots crop from the top rather than the middle — the header of a
+    // screen reads better than an arbitrary mid-slice
+    if (ar < 0.9) dy = 0;
+    ctx.filter = "saturate(0.92) contrast(1.04)";
     ctx.drawImage(img, dx, dy, dw, dh);
-    // whisper of the accent so the sphere still reads as one set
-    ctx.fillStyle = hexToRgba(p.color, 0.07);
-    ctx.fillRect(mx, my, mw, mh);
+    ctx.filter = "none";
   } else {
-    const g = ctx.createLinearGradient(mx, my, mx + mw, my + mh);
-    g.addColorStop(0, p.color);
-    g.addColorStop(1, p.panel);
+    const g = ctx.createLinearGradient(0, 0, TEX_W, TEX_H);
+    g.addColorStop(0, "#1d1d22");
+    g.addColorStop(1, "#101014");
     ctx.fillStyle = g;
-    ctx.fillRect(mx, my, mw, mh);
-  }
-  ctx.restore();
-
-  // tag pill
-  if (p.tag) {
-    ctx.font = "500 21px 'Instrument Sans', system-ui, sans-serif";
-    const tw = ctx.measureText(p.tag).width;
-    const px = mx + 16, py = my + mh - 50, ph = 38, pw = tw + 34;
-    roundRect(ctx, px, py, pw, ph, ph / 2);
-    ctx.fillStyle = "rgba(20,19,17,0.86)";
-    ctx.fill();
-    ctx.fillStyle = "#fff";
-    ctx.textBaseline = "middle";
-    ctx.fillText(p.tag, px + 17, py + ph / 2 + 1);
-    ctx.textBaseline = "alphabetic";
+    ctx.fillRect(0, 0, TEX_W, TEX_H);
   }
 
-  // title (serif)
-  ctx.fillStyle = "#1b1a17";
-  ctx.font = "400 40px 'Instrument Serif', Georgia, serif";
-  wrapText(ctx, p.title, pad, my + mh + 64, mw, 44, 2);
+  // bottom grade so the type always holds
+  const grade = ctx.createLinearGradient(0, TEX_H, 0, TEX_H * 0.38);
+  grade.addColorStop(0, "rgba(10,10,12,0.86)");
+  grade.addColorStop(0.55, "rgba(10,10,12,0.38)");
+  grade.addColorStop(1, "rgba(10,10,12,0)");
+  ctx.fillStyle = grade;
+  ctx.fillRect(0, 0, TEX_W, TEX_H);
 
-  // description
-  ctx.fillStyle = "#6b675f";
-  ctx.font = "400 22px 'Instrument Sans', system-ui, sans-serif";
-  wrapText(ctx, p.caption, pad, my + mh + 150, mw, 30, 3);
-
-  // index + view affordance row
-  ctx.fillStyle = "#9a958c";
-  ctx.font = "500 19px 'Instrument Sans', system-ui, sans-serif";
-  ctx.fillText(String(p.index + 1).padStart(2, "0"), pad, TEX_H - 30);
+  // label row: project, and where this card sits in the set
+  ctx.font = "600 19px 'Inter', system-ui, sans-serif";
+  ctx.fillStyle = "rgba(244,243,238,0.66)";
+  const label = p.title.toUpperCase().split("").join(" "); // tracked-out caps
+  ctx.fillText(ellipsize(ctx, label, TEX_W - pad * 2 - 110), pad, TEX_H - 128);
   ctx.textAlign = "right";
-  ctx.fillStyle = "#1b1a17";
-  ctx.fillText("View  ↗", TEX_W - pad, TEX_H - 30);
+  ctx.fillText(`${String(p.index + 1).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}`, TEX_W - pad, TEX_H - 128);
   ctx.textAlign = "left";
+
+  // serif title: the section this artefact belongs to
+  ctx.fillStyle = "#f4f3ee";
+  ctx.font = "400 42px 'Instrument Serif', Georgia, serif";
+  ctx.fillText(ellipsize(ctx, p.shotTitle, TEX_W - pad * 2), pad, TEX_H - 78);
+
+  // caption
+  ctx.fillStyle = "rgba(244,243,238,0.72)";
+  ctx.font = "400 20px 'Inter', system-ui, sans-serif";
+  wrapText(ctx, p.caption, pad, TEX_H - 44, TEX_W - pad * 2, 26, 2);
+
+  // hairline inner border keeps card edges legible against bright artefacts
+  roundRect(ctx, 1, 1, TEX_W - 2, TEX_H - 2, r - 1);
+  ctx.strokeStyle = "rgba(244,243,238,0.12)";
+  ctx.lineWidth = 2;
+  ctx.stroke();
 
   ctx.restore();
 }
@@ -333,10 +329,24 @@ projects.forEach((p, i) => {
 
   // load the case study's own artefact, then repaint the card
   const img = new Image();
-  img.onload = () => { drawCard(ctx, p, img); texture.needsUpdate = true; bumpLoader(); };
+  img.onload = () => { mesh.userData.img = img; drawCard(ctx, p, img); texture.needsUpdate = true; bumpLoader(); };
   img.onerror = () => bumpLoader();
   img.src = p.image;
 });
+
+// the canvas cards use webfonts; canvas doesn't trigger CSS @font-face loading,
+// so request the exact faces and repaint every card once they're in
+Promise.all([
+  document.fonts.load("400 42px 'Instrument Serif'"),
+  document.fonts.load("600 19px 'Inter'"),
+  document.fonts.load("400 20px 'Inter'"),
+]).then(() => {
+  cards.forEach((m) => {
+    const u = m.userData;
+    drawCard(u.ctx, u.project, u.img || null);
+    u.texture.needsUpdate = true;
+  });
+}).catch(() => {});
 
 /* ----------------------------- loader done ----------------------------- */
 let loadFinished = false;
@@ -469,9 +479,11 @@ function openDetail(mesh, ox, oy) {
   statsEl.innerHTML = (p.stats || []).map(([b, s]) =>
     `<div class="detail__stat"><b>${b}</b><span>${s}</span></div>`).join("");
 
-  // page background tuned to the card's accent
+  // dark room backdrop with a glow of the card's accent — the glow layer is
+  // translucent, so it sits on an opaque dark base that seals off the sphere
   detailBg.style.background =
-    `radial-gradient(120% 120% at 75% 20%, ${hexToRgba(p.color, 0.5)} 0%, ${p.panel} 55%, #efece6 100%)`;
+    `radial-gradient(120% 120% at 75% 20%, ${hexToRgba(p.color, 0.26)} 0%, rgba(10,10,12,0) 60%),` +
+    `radial-gradient(120% 120% at 50% 40%, #17171c 0%, #0a0a0c 100%)`;
 
   detail.classList.add("open");
   detail.setAttribute("aria-hidden", "false");
