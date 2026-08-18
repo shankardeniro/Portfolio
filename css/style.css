@@ -354,8 +354,9 @@ main{position:relative;z-index:2}
     .cs-figrow,.cs-annot,.cs-donut,.cs-compare,.cs-decision,.cs-flow,.cs-funnel,
     .cs-metrics,.cs-cards,.cs-table-wrap,.cs-result,.cs-verdict,.cs-split){grid-column:1/-1}
 }
-/* the first paragraph after a heading reads as a lead, the rest as body */
-.cs-h+.cs-p{font-size:var(--fs-lead);line-height:var(--lh-lead);color:var(--ink);max-width:56ch}
+/* body paragraphs stay one size; the opener after a heading distinguishes
+   itself by ink alone */
+.cs-h+.cs-p{color:var(--ink)}
 
 .cs-eyebrow{font-size:var(--fs-label);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--ca-ink);margin-bottom:1rem}
 .cs-h{font-family:var(--serif);font-weight:400;font-size:var(--fs-heading);line-height:var(--lh-heading);letter-spacing:var(--ls-heading);
