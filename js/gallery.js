@@ -1,9 +1,10 @@
 import * as THREE from "three";
 
 /* =========================================================================
-   Spherical gallery — you sit at the centre of a sphere whose inner surface
-   is tiled with project cards. Left-click drag to look around (with inertial,
-   Lenis-style easing). Click a card to animate a detail page in.
+   Ring gallery — you sit at the centre of a horizontal ring of project
+   cards, all on one line at eye level. Drag to spin it (with inertial,
+   Lenis-style easing). Click a card and its section expands into a detail
+   page from the click point.
    ========================================================================= */
 
 const gsap = window.gsap;
@@ -160,11 +161,12 @@ const camera = new THREE.PerspectiveCamera(68, window.innerWidth / window.innerH
 camera.position.set(0, 0, 0);
 camera.rotation.order = "YXZ";
 
-/* tight radius relative to card size ≈ densely tiled inner surface —
-   neighbour spacing on the fibonacci sphere is ~sqrt(4π/N)·R */
-const RADIUS = 3.6;
 const CARD_W = 1.62;
 const CARD_H = CARD_W * 1.34; // matches 540 / 720 canvas aspect
+/* one horizontal ring around the viewer: the radius comes from how much
+   circumference the cards need, so spacing stays constant if cards change */
+const CARD_GAP = 0.34;
+const RADIUS = (projects.length * (CARD_W + CARD_GAP)) / (Math.PI * 2);
 
 /* ----------------------------- card texture ---------------------------- */
 const TEX_W = 540;
@@ -298,11 +300,9 @@ function bumpLoader() {
 }
 
 projects.forEach((p, i) => {
-  // even distribution on a sphere (fibonacci)
-  const y = 1 - (i / (projects.length - 1)) * 2; // 1 → -1
-  const radius = Math.sqrt(1 - y * y);
-  const theta = i * 2.399963229728653; // golden angle
-  const dir = new THREE.Vector3(Math.cos(theta) * radius, y, Math.sin(theta) * radius);
+  // all cards on one horizontal line: an evenly spaced ring at eye level
+  const theta = (i / projects.length) * Math.PI * 2;
+  const dir = new THREE.Vector3(Math.cos(theta), 0, Math.sin(theta));
 
   const canvas2 = document.createElement("canvas");
   canvas2.width = TEX_W;
@@ -367,7 +367,7 @@ const state = {
   targetYaw: 0, targetPitch: 0, // where we're easing toward
   velYaw: 0, velPitch: 0,  // momentum
 };
-const PITCH_LIMIT = 1.15;
+const PITCH_LIMIT = 0.16; // the ring reads as one line — allow only a gentle tilt
 
 let dragging = false;
 let moved = 0;
