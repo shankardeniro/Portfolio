@@ -419,7 +419,7 @@ const CASES = {
       { eyebrow: "Watching for hesitation",
         p: ["A journey map shows the route. It doesn't show where real people stumble. So I ran moderated think-aloud sessions with ten Swedish players, first-timers and veterans, with stakeholders watching live. Seeing where they hesitated showed us exactly what to fix."],
         beat: { outcome: "19 distinct patterns, from critical blockers to positive signals." },
-        figure: { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress — participants recruited through UserInterviews.com and compensated for their time." } },
+        figure: { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress. Participants were recruited through UserInterviews.com and compensated for their time." } },
       { eyebrow: "From signal to priorities", h: "19 patterns, triaged",
         p: ["Every pattern had a participant quote, a video frame from the exact moment it happened, and a severity score. I sorted by severity and impact, and shipped fixes for the three biggest ones (below)."],
         table: { head: ["Severity", "Pattern", "Participants"], rows: [
