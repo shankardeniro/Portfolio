@@ -243,9 +243,9 @@ main{position:relative;z-index:2}
 .tools{padding:clamp(5rem,10vh,9rem) var(--pad);text-align:center}
 .tools__label{font-size:var(--fs-label);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--ink-dim);margin-bottom:2.5rem}
 .tools__grid{display:flex;flex-wrap:wrap;justify-content:center;gap:.7rem;max-width:900px;margin:0 auto}
+/* static tags, not buttons — no hover state, so they don't promise a click */
 .tools__grid span{font-family:var(--serif);font-size:var(--fs-heading);line-height:var(--lh-heading);letter-spacing:var(--ls-heading);padding:.3rem 1.2rem;border:1px solid var(--line);
-  border-radius:100px;transition:background .35s,color .35s,border-color .35s}
-.tools__grid span:hover{background:var(--accent);color:#0a0a0c;border-color:var(--accent-ink)}
+  border-radius:100px}
 
 /* ============ CONTACT ============ */
 .contact{padding:clamp(7rem,16vh,15rem) var(--pad) clamp(3rem,6vh,5rem);text-align:center}
