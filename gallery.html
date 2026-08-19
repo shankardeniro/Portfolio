@@ -31,8 +31,22 @@
       -webkit-font-smoothing:antialiased;
     }
 
+    /* duotone drift: the two case accents as blurred orbs, slowly orbiting
+       opposite corners behind the card ring */
+    .orbs i{ position:fixed; display:block; border-radius:50%; pointer-events:none; z-index:0; }
+    .orb--a{ left:16%; top:22%; width:640px; height:640px; transform:translate(-50%,-50%);
+      background:radial-gradient(circle, rgba(217,139,176,.44) 0%, rgba(217,139,176,.13) 42%, transparent 70%);
+      filter:blur(80px); animation:driftA 16s ease-in-out infinite alternate; }
+    .orb--b{ left:84%; top:78%; width:720px; height:720px; transform:translate(-50%,-50%);
+      background:radial-gradient(circle, rgba(115,199,189,.42) 0%, rgba(115,199,189,.13) 42%, transparent 70%);
+      filter:blur(80px); animation:driftB 19s ease-in-out infinite alternate; }
+    @keyframes driftA{ from{ margin-left:-40px; margin-top:-20px; } to{ margin-left:60px; margin-top:30px; } }
+    @keyframes driftB{ from{ margin-left:50px; margin-top:20px; } to{ margin-left:-60px; margin-top:-30px; } }
+    @media (prefers-reduced-motion:reduce){ .orb--a,.orb--b{ animation:none; } }
+
     /* WebGL canvas */
     #gl{
+      z-index:1;
       position:fixed; inset:0; display:block;
       width:100%; height:100%;
       cursor:grab; touch-action:none;
@@ -117,6 +131,7 @@
   </style>
 </head>
 <body>
+  <div class="orbs" aria-hidden="true"><i class="orb--a"></i><i class="orb--b"></i></div>
   <canvas id="gl"></canvas>
   <div class="grain"></div>
 
