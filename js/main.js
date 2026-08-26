@@ -480,6 +480,7 @@ const CASES = {
     tagline: "There was no research when I joined. I gave the team a rhythm for it, then used AI to keep that rhythm going on my own.",
     meta: { Role: "Founding researcher + product designer", Scope: "0 → 1, greenfield", Duration: "3 months to stand up · 2+ years sustained", Year: "2022" },
     hero: "images/user-research-framework/hero.webp",
+    heroCap: "A practice, built from nothing",
     sections: [
       { eyebrow: "Overview", h: "There was no research when I joined", p: [
         "The team shipped on opinion. There were no users to talk to on any regular basis, no place to keep what we learned, and no habit of asking before building. I was the first researcher, so there was nothing to inherit.",
@@ -529,6 +530,7 @@ const CASES = {
     tagline: "Redesigning a heavy, regulated sign-up so fewer people quit before they finish verifying.",
     meta: { Role: "UX Designer / Researcher", Duration: "Sept 2023 – Jan 2024", Team: "Sole design & research · product · engineering · CRM", Year: "2024" },
     hero: "images/reimagining-onboarding/hero.webp",
+    heroCap: "The registration flow, in situ",
     sections: [
       { eyebrow: "The challenge", h: "When you can't take the easy sign-up", p: [
         "Most apps onboard you in a tap, Google, Apple, done. We legally can't. As a regulated <em>financial institution</em>, every player has to hand over full details and pass a KYC check, by bank transfer or government ID, before they can play.",
@@ -1185,7 +1187,7 @@ function renderCase(slug) {
         <div class="case__meta">${meta}</div>
       </div>
     </header>
-    ${c.heroStage ? heroStage(c) : c.hero ? `<figure class="cs-figure cs-hero"><div class="cs-stage">${framed(c.hero, c.title)}</div></figure>` : ""}`;
+    ${c.heroStage ? heroStage(c) : c.hero ? `<figure class="cs-hero"><div class="cs-stage"><div class="cs-plate">${imgTag(c.hero, c.title)}<div class="cs-plate__cap"><span>Case ${esc(c.num)} · ${esc(c.heroCap || c.title)}</span><i>Plate 01</i></div></div></div></figure>` : ""}`;
   return `
     ${head}
     ${body}
