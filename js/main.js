@@ -754,33 +754,22 @@ function figrowHTML(items) {
   }).join("");
   return `<div class="cs-figrow">${cells}</div>`;
 }
-// Donut chart for categorical findings: an SVG ring of proportional slices in the
-// case accent (largest share = most saturated, via fill-opacity so it blends over
-// either theme's background), paired with a labelled legend that carries the exact
-// values. Slices are separated by a small angular gap rather than a stroke.
+// Survey shares as one 100% strip: proportional segments in a single accent
+// ramp (largest share = most saturated, via opacity so it blends over either
+// theme's background) with a surface gap between them, paired with a ranked
+// legend that carries the exact values. The leading answer is emphasised.
 function donutHTML(d) {
   const items = d.items;
   const total = items.reduce((s, it) => s + it.value, 0) || 1;
-  const cx = 110, cy = 110, R = 100, r = 58, gap = 0.04;
-  const op = (i) => (1 - (i / items.length) * 0.72).toFixed(3);
-  let a = -Math.PI / 2;
-  const paths = items.map((it, i) => {
-    const sweep = (it.value / total) * Math.PI * 2;
-    const a0 = a + gap / 2, a1 = a + sweep - gap / 2;
-    a += sweep;
-    const big = (a1 - a0) > Math.PI ? 1 : 0;
-    const pt = (rad, ang) => `${(cx + rad * Math.cos(ang)).toFixed(2)} ${(cy + rad * Math.sin(ang)).toFixed(2)}`;
-    const dd = `M${pt(R, a0)} A${R} ${R} 0 ${big} 1 ${pt(R, a1)} L${pt(r, a1)} A${r} ${r} 0 ${big} 0 ${pt(r, a0)} Z`;
-    return `<path d="${dd}" style="fill:var(--ca);fill-opacity:${op(i)}"></path>`;
-  }).join("");
+  const op = (i) => (1 - (i / Math.max(items.length - 1, 1)) * 0.85).toFixed(3);
+  const segs = items.map((it, i) =>
+    `<i style="flex-basis:${(it.value / total * 100).toFixed(2)}%;opacity:${op(i)}"></i>`).join("");
   const legend = items.map((it, i) =>
-    `<li class="cs-donut__row"><span class="cs-donut__sw" style="background:var(--ca);opacity:${op(i)}"></span><span class="cs-donut__lbl">${esc(it.label)}</span><b class="cs-donut__val">${(it.value / total * 100).toFixed(1)}%</b></li>`).join("");
-  return `<figure class="cs-donut">
-    <div class="cs-donut__body">
-      <div class="cs-donut__chart"><svg viewBox="0 0 220 220" role="img" aria-label="${esc(d.caption || "Survey results")}">${paths}</svg></div>
-      <ol class="cs-donut__legend">${legend}</ol>
-    </div>
-    ${d.caption ? `<figcaption class="cs-donut__cap">${esc(d.caption)}</figcaption>` : ""}
+    `<li class="cs-strip__row${i === 0 ? " cs-strip__row--top" : ""}"><span class="cs-strip__sw" style="opacity:${op(i)}"></span><span class="cs-strip__lbl">${esc(it.label)}</span><b class="cs-strip__val">${(it.value / total * 100).toFixed(1)}%</b></li>`).join("");
+  return `<figure class="cs-strip" role="img" aria-label="${esc(d.caption || "Survey results")}">
+    <div class="cs-strip__bar" aria-hidden="true">${segs}</div>
+    <ol class="cs-strip__legend">${legend}</ol>
+    ${d.caption ? `<figcaption class="cs-cap">${esc(d.caption)}</figcaption>` : ""}
   </figure>`;
 }
 // Singleton zoom lightbox shared by every carousel. Built once, reused.
