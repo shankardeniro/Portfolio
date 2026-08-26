@@ -642,14 +642,14 @@ const CASES = {
         "The controlled A/B never reached significance, but the full rollout removed the doubt. Once the leaner registration and <b>Sonio</b> reached every user, the live funnel moved, most at the exact step we'd set out to fix." ],
         metrics: [["54.4%", "end-to-end conversion, up from 43.3%"], ["75.2%", "cleared the KYC step, up from 67.1%"], ["25%", "drop-off before KYC, down from 33%"]] },
       { eyebrow: "Before / after", h: "The funnel, re-measured", p: [
-        "Cumulative conversion at every step, the original flow against the redesigned one." ],
-        table: { head: ["Step", "Before", "After"], rows: [
-          ["Registered", "100%", "100%"],
-          ["Activated", "98.1%", "98.6%"],
-          ["Pre-checked", "83.3%", "84.6%"],
-          ["Attempted verification", "55.8%", "63.6%"],
-          ["Verified", "49.8%", "58.4%"],
-          ["Verified depositors", "43.3%", "54.4%"] ] } },
+        "Cumulative conversion at every step, the original flow against the redesigned one. The bridge between the dots is the share of users each step now keeps." ],
+        dumbbell: { min: 40, max: 100, rows: [
+          { label: "Registered", before: 100, after: 100 },
+          { label: "Activated", before: 98.1, after: 98.6 },
+          { label: "Pre-checked", before: 83.3, after: 84.6 },
+          { label: "Attempted verification", before: 55.8, after: 63.6, big: true },
+          { label: "Verified", before: 49.8, after: 58.4 },
+          { label: "Verified depositors", before: 43.3, after: 54.4, big: true } ] } },
       { result: { n: "+11 pts", label: "end-to-end onboarding conversion",
         note: "Registered → verified depositor climbed from 43.3% to 54.4% once the leaner flow and Sonio reached every user." } },
       { verdict: { label: "The business case", text: "The redesign paid off beyond conversion. Bringing registration in-house and moving KYC to <b>Sonio</b> cut onboarding costs and ended our dependence on a single partner. Verified users moved measurably closer to registered, which was the goal. Privacy and motivation are the next things to tackle." } },
@@ -1113,6 +1113,22 @@ function renderCase(slug) {
     // labelled synthesis cards, e.g. what we got right / wrong / didn't expect
     if (s.cards) txt += `<div class="cs-cards" style="--cols:${s.cards.length}">${s.cards.map((c) => `<div class="cs-card cs-card--${c.tone || "neutral"}"><span class="cs-card__label">${esc(c.label)}</span><ul>${c.items.map((i) => `<li>${i}</li>`).join("")}</ul></div>`).join("")}</div>`;
     if (s.table) txt += `<div class="cs-table-wrap"><table class="cs-table"><thead><tr>${s.table.head.map((x) => `<th>${esc(x)}</th>`).join("")}</tr></thead><tbody>${s.table.rows.map((r) => `<tr>${r.map((x) => `<td>${esc(x)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+    // paired before/after per step: two dots on a shared scale, the accent
+    // bridge between them is the gain
+    if (s.dumbbell) {
+      const d = s.dumbbell, lo = d.min ?? 0, hi = d.max ?? 100;
+      const x = (v) => ((v - lo) / (hi - lo) * 100).toFixed(2);
+      const ticks = [0, 1, 2, 3].map((i) => `<span>${Math.round(lo + (hi - lo) * i / 3)}%</span>`).join("");
+      const dbRows = d.rows.map((r) => {
+        const delta = r.after - r.before;
+        const dTxt = delta > 0 ? `+${(Math.round(delta * 10) / 10)}` : "·";
+        return `<div class="cs-db__row${r.big ? " cs-db__row--big" : ""}"><span class="cs-db__lbl">${esc(r.label)}</span><span class="cs-db__plot"><span class="cs-db__link" style="left:${x(r.before)}%;width:${(x(r.after) - x(r.before)).toFixed(2)}%"></span><span class="cs-db__b" style="left:${x(r.before)}%"></span><span class="cs-db__a" style="left:${x(r.after)}%"></span></span><span class="cs-db__d">${dTxt}</span></div>`;
+      }).join("");
+      const endB = d.rows[d.rows.length - 1];
+      txt += `<div class="cs-db" role="img" aria-label="Before and after the redesign, cumulative conversion per step. End to end: ${endB.before}% before, ${endB.after}% after, a gain of ${(Math.round((endB.after - endB.before) * 10) / 10)} points; the largest single gain is at attempted verification.">
+        <div class="cs-db__legend"><span><i class="cs-db__b"></i>Before</span><span><i class="cs-db__a"></i>After</span></div>
+        <div class="cs-db__scale">${ticks}</div>${dbRows}</div>`;
+    }
     if (s.funnel) {
       // waterfall: the surviving cohort as grey bookends, each loss its own bar
       // hanging from the running level, the flagged one in full accent
