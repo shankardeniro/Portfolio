@@ -351,7 +351,7 @@ main{position:relative;z-index:2}
   .cs-section:not(.cs-chapter) .cs-stage>.cs-eyebrow{grid-column:1/-1;margin-bottom:1.4rem}
   .cs-section:not(.cs-chapter) .cs-stage>.cs-h{grid-column:1;max-width:14ch}
   .cs-section:not(.cs-chapter) .cs-stage>:is(.cs-figure,.cs-gallery,.cs-car,
-    .cs-figrow,.cs-annot,.cs-donut,.cs-compare,.cs-decision,.cs-flow,.cs-funnel,
+    .cs-figrow,.cs-annot,.cs-donut,.cs-compare,.cs-decision,.cs-flow,.cs-wf-wrap,
     .cs-metrics,.cs-cards,.cs-table-wrap,.cs-result,.cs-verdict,.cs-split){grid-column:1/-1}
 }
 /* body paragraphs stay one size; the opener after a heading distinguishes
@@ -428,19 +428,27 @@ main{position:relative;z-index:2}
 .cs-table{width:100%;border-collapse:collapse;font-size:var(--fs-body-sm)}
 .cs-table-wrap .cs-table{margin:0}
 
-/* scroll-scrubbed funnel: bars fill to their share of the top count as the
-   reader scrolls, the count ticks up with them, biggest drop flagged */
-.cs-funnel{margin:2.2rem 0;display:flex;flex-direction:column;gap:1.35rem;max-width:60ch}
-.cs-funnel__head{display:flex;align-items:baseline;gap:.75rem;margin-bottom:.5rem}
-.cs-funnel__label{font-size:var(--fs-body);color:var(--ink)}
-.cs-funnel__num{margin-left:auto;font-variant-numeric:tabular-nums;font-weight:600;font-size:1.05rem;color:var(--ink)}
-.cs-funnel__track{position:relative;height:12px;border-radius:7px;overflow:hidden;
-  background:color-mix(in srgb,var(--ink) 9%,transparent)}
-.cs-funnel__fill{position:absolute;inset:0;transform-origin:left center;transform:scaleX(0);
-  background:var(--ca);border-radius:7px;transition:transform .12s ease-out}
-.cs-funnel__drop{display:inline-block;margin-top:.5rem;font-size:var(--fs-caption);letter-spacing:var(--ls-caption);color:var(--ink-dim)}
-.cs-funnel__row--big .cs-funnel__num{color:#e0533f}
-.cs-funnel__row--big .cs-funnel__drop{color:#e0533f;font-weight:600}
+/* scroll-driven waterfall: grey cohort bookends, each loss its own bar hanging
+   from the running level, the flagged leak in full accent. Wide, so it scrolls
+   horizontally in its own container on narrow screens (like tables). */
+.cs-wf-wrap{margin:2.2rem 0;overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.cs-wf{display:flex;min-width:640px;height:340px}
+.cs-wf__col{flex:1;display:flex;flex-direction:column;min-width:0}
+.cs-wf__plot{position:relative;flex:1;border-bottom:1px solid var(--line)}
+.cs-wf__bar{position:absolute;left:9%;right:9%;border-radius:6px}
+.cs-wf__bar--book{background:color-mix(in srgb,var(--ink) 15%,transparent);transform-origin:bottom center}
+.cs-wf__bar--end{background:color-mix(in srgb,var(--ink) 80%,transparent);transform-origin:bottom center}
+.cs-wf__bar--drop{background:color-mix(in srgb,var(--ca) 55%,transparent);transform-origin:top center}
+.cs-wf__bar--big{background:var(--ca);border:2px solid var(--ca-ink)}
+.cs-wf__num{position:absolute;left:9%;right:9%;text-align:center;font-family:var(--serif);
+  font-size:1.15rem;color:var(--ink);font-variant-numeric:tabular-nums}
+.cs-wf__num--end{color:var(--bg)}
+.cs-wf__drop{position:absolute;left:2%;right:2%;text-align:center;font-size:.72rem;
+  font-weight:600;color:var(--ca-ink);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.cs-wf__drop--big{font-size:.8rem}
+.cs-wf__stage{height:2.2rem;display:flex;align-items:flex-end;justify-content:center;text-align:center;
+  font-size:var(--fs-label-sm);letter-spacing:var(--ls-label-sm);text-transform:uppercase;color:var(--ink-dim)}
+.cs-wf__stage--big{color:var(--ca-ink);font-weight:700}
 
 /* donut chart: proportional slices in the case accent + labelled legend */
 .cs-donut{margin:1.8rem 0}

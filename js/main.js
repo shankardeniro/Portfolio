@@ -535,13 +535,13 @@ const CASES = {
         "And that flow is where the money is made: getting through onboarding and making a first deposit is one of the numbers the business lives on. A third of pre-checked users were walking away right before verification, and nobody knew why." ] },
       { eyebrow: "The funnel", h: "Following the drop-off", p: [
         "I started with the data: every user tracked from sign-up through to verified, depositing player, step by step. One step leaked far more than the rest." ],
-        funnel: { caption: "Every user from sign-up to depositing player, each bar as a share of everyone who registered. Scroll and watch it narrow.", rows: [
+        funnel: { caption: "Every user from sign-up to depositing player. The grey bookends are the cohort at either end; each orange bar is what a step cost, and the outlined one is the leak the redesign went after.", rows: [
           { label: "Registered", count: 79602 },
-          { label: "Activated", count: 78085, drop: "1,517" },
-          { label: "Pre-checked", count: 66294, drop: "11,791" },
-          { label: "Attempted verification", count: 44452, drop: "21,842", big: true },
-          { label: "Verified", count: 39609, drop: "4,843" },
-          { label: "Verified depositors", count: 34462, drop: "5,147" } ] } },
+          { label: "Activated", count: 78085, drop: "1,517", at: "activation" },
+          { label: "Pre-checked", count: 66294, drop: "11,791", at: "pre-check" },
+          { label: "Attempted verification", count: 44452, drop: "21,842", at: "KYC attempt", big: true },
+          { label: "Verified", count: 39609, drop: "4,843", at: "verification" },
+          { label: "Verified depositors", count: 34462, drop: "5,147", at: "first deposit" } ] } },
       { verdict: { label: "The biggest leak", text: "<b>21,842 users</b>, a full third of everyone who'd been pre-checked, vanished between <em>pre-checked</em> and <em>attempted verification</em>, right where they were meant to start KYC. Closing that gap became the goal: get the number of <em>verified</em> users as close as possible to the number who <em>registered</em>." } },
       { eyebrow: "Problem statement", h: "The question we set out to answer", p: [
         "<em>How do we guide users through sign-up and KYC verification so more of them make it out the other side?</em>",
@@ -947,11 +947,11 @@ function flowHTML() {
     <figcaption>${esc(F.caption)} <button class="cs-flow__full" data-zoom-src="${F.full}">See the original map ↗</button></figcaption>
   </figure>`;
 }
-// Scroll-scrubbed funnel: each bar fills to its share of the top-of-funnel count
-// and the number ticks up, all driven by the case reader's own scroll position,
-// so scrolling down literally walks the drop-off. A high-water mark keeps a bar
-// filled once reached (it never un-fills on scroll-up), and reduced-motion just
-// paints the final state.
+// Scroll-driven waterfall: one progress value from the figure's position in the
+// reader viewport, staggered across the columns so the losses land left to
+// right as you scroll. Bookends grow from the baseline, losses drop from the
+// running level, numbers tick up. A high-water mark keeps columns painted on
+// scroll-up, and reduced-motion just paints the final state.
 let _funnelCleanup = null;
 function initFunnel(root) {
   if (_funnelCleanup) { _funnelCleanup(); _funnelCleanup = null; }
@@ -959,24 +959,31 @@ function initFunnel(root) {
   if (!fig) return;
   const scroll = root.closest("[data-case-scroll]") || document.querySelector("[data-case-scroll]");
   if (!scroll) return;
-  const rows = [...fig.querySelectorAll(".cs-funnel__row")].map((r) => ({
-    el: r, w: parseFloat(r.dataset.w) || 100, count: parseInt(r.dataset.count, 10) || 0, max: 0,
-    fill: r.querySelector(".cs-funnel__fill"), num: r.querySelector(".cs-funnel__num"),
+  const cols = [...fig.querySelectorAll("[data-wf-col]")].map((el, i) => ({
+    i, max: 0,
+    bar: el.querySelector(".cs-wf__bar"),
+    txts: [...el.querySelectorAll(".cs-wf__num,.cs-wf__drop")],
   }));
-  const paint = (r, p) => {
-    if (r.fill) r.fill.style.transform = `scaleX(${(p * r.w / 100).toFixed(4)})`;
-    if (r.num) r.num.textContent = Math.round(p * r.count).toLocaleString("en-US");
-    r.el.classList.toggle("is-on", p > 0.02);
+  const n = cols.length;
+  const STEP = 0.35; // how much of the cascade separates neighbouring columns
+  const paint = (c, q) => {
+    if (c.bar) c.bar.style.transform = `scaleY(${q.toFixed(4)})`;
+    c.txts.forEach((t) => {
+      t.style.opacity = q.toFixed(3);
+      if (t.dataset.count) t.textContent = Math.round(q * parseInt(t.dataset.count, 10)).toLocaleString("en-US");
+    });
   };
-  if (reduce) { rows.forEach((r) => paint(r, 1)); return; }
+  if (reduce) { cols.forEach((c) => paint(c, 1)); return; }
   const update = () => {
     const vh = scroll.clientHeight, top = scroll.getBoundingClientRect().top;
-    rows.forEach((r) => {
-      const y = r.el.getBoundingClientRect().top - top;   // row position within the reader viewport
-      let p = (vh * 0.88 - y) / (vh * 0.33);              // 0 as it enters low, 1 by ~mid-screen
-      p = Math.max(0, Math.min(1, p));
-      if (p > r.max) r.max = p;                            // high-water mark: fill, don't un-fill
-      paint(r, r.max);
+    const y = fig.getBoundingClientRect().top - top;
+    let p = (vh * 0.9 - y) / (vh * 0.55);
+    p = Math.max(0, Math.min(1, p));
+    cols.forEach((c) => {
+      let q = p * (1 + (n - 1) * STEP) - c.i * STEP;
+      q = Math.max(0, Math.min(1, q));
+      if (q > c.max) c.max = q;
+      paint(c, c.max);
     });
   };
   update();
@@ -1116,12 +1123,32 @@ function renderCase(slug) {
     if (s.cards) txt += `<div class="cs-cards" style="--cols:${s.cards.length}">${s.cards.map((c) => `<div class="cs-card cs-card--${c.tone || "neutral"}"><span class="cs-card__label">${esc(c.label)}</span><ul>${c.items.map((i) => `<li>${i}</li>`).join("")}</ul></div>`).join("")}</div>`;
     if (s.table) txt += `<div class="cs-table-wrap"><table class="cs-table"><thead><tr>${s.table.head.map((x) => `<th>${esc(x)}</th>`).join("")}</tr></thead><tbody>${s.table.rows.map((r) => `<tr>${r.map((x) => `<td>${esc(x)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
     if (s.funnel) {
-      const fmax = s.funnel.rows[0].count;
-      const frows = s.funnel.rows.map((r) => {
-        const w = (r.count / fmax * 100).toFixed(2);
-        return `<div class="cs-funnel__row${r.big ? " cs-funnel__row--big" : ""}" data-w="${w}" data-count="${r.count}"><div class="cs-funnel__head"><span class="cs-funnel__label">${esc(r.label)}</span><span class="cs-funnel__num" aria-hidden="true">0</span></div><div class="cs-funnel__track"><span class="cs-funnel__fill"></span></div>${r.drop ? `<span class="cs-funnel__drop">&minus;${esc(r.drop)} dropped</span>` : ""}</div>`;
-      }).join("");
-      txt += `<figure class="cs-funnel" data-funnel role="img" aria-label="Onboarding funnel: from 79,602 registered (100%) down to 34,462 verified depositors (43%). The biggest single drop is 21,842 users at attempted verification.">${frows}${s.funnel.caption ? `<figcaption class="cs-cap">${esc(s.funnel.caption)}</figcaption>` : ""}</figure>`;
+      // waterfall: the surviving cohort as grey bookends, each loss its own bar
+      // hanging from the running level, the flagged one in full accent
+      const rows = s.funnel.rows;
+      const fmax = rows[0].count;
+      const flast = rows[rows.length - 1];
+      const pct = (n) => (n / fmax) * 100;
+      let ci = 0;
+      const wfCol = (inner, stage, big) =>
+        `<div class="cs-wf__col" data-wf-col="${ci++}"><div class="cs-wf__plot">${inner}</div><span class="cs-wf__stage${big ? " cs-wf__stage--big" : ""}">${esc(stage)}</span></div>`;
+      let run = fmax;
+      let wf = wfCol(
+        `<span class="cs-wf__bar cs-wf__bar--book" style="top:0;height:100%"></span>` +
+        `<span class="cs-wf__num" style="top:12px" data-count="${fmax}">0</span>`, rows[0].label);
+      rows.slice(1).forEach((r) => {
+        const top = pct(fmax - run);
+        const h = Math.max(pct(run - r.count), 1.6);
+        wf += wfCol(
+          `<span class="cs-wf__bar cs-wf__bar--drop${r.big ? " cs-wf__bar--big" : ""}" style="top:${top.toFixed(2)}%;height:${h.toFixed(2)}%"></span>` +
+          `<span class="cs-wf__drop${r.big ? " cs-wf__drop--big" : ""}" style="top:calc(${(top + h).toFixed(2)}% + 8px)">&minus;${esc(r.drop)}${r.big ? " · the leak" : ""}</span>`,
+          r.at || r.label, r.big);
+        run = r.count;
+      });
+      wf += wfCol(
+        `<span class="cs-wf__bar cs-wf__bar--end" style="top:${pct(fmax - flast.count).toFixed(2)}%;height:${pct(flast.count).toFixed(2)}%"></span>` +
+        `<span class="cs-wf__num cs-wf__num--end" style="top:calc(${pct(fmax - flast.count).toFixed(2)}% + 12px)" data-count="${flast.count}">0</span>`, flast.label);
+      txt += `<figure class="cs-wf-wrap" data-funnel role="img" aria-label="Onboarding waterfall: 79,602 registered; losses of 1,517 at activation, 11,791 at pre-check, 21,842 at the KYC attempt (the biggest single leak), 4,843 at verification and 5,147 before a first deposit leave 34,462 verified depositors (43%)."><div class="cs-wf">${wf}</div>${s.funnel.caption ? `<figcaption class="cs-cap">${esc(s.funnel.caption)}</figcaption>` : ""}</figure>`;
     }
     if (s.metrics) txt += `<div class="cs-metrics">${s.metrics.map((m) => `<div class="cs-metric"><b>${esc(m[0])}</b><span>${esc(m[1])}</span></div>`).join("")}</div>`;
     if (s.result) txt += `<div class="cs-result"><span class="cs-result__n">${esc(s.result.n)}</span><span class="cs-result__label">${esc(s.result.label)}</span>${s.result.note ? `<p class="cs-result__note">${s.result.note}</p>` : ""}</div>`;
