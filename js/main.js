@@ -354,7 +354,7 @@ const CASES = {
       { eyebrow: "The design system", h: "One system behind every screen",
         p: ["Going straight to high-fidelity on a deadline only works if you're not redrawing everything each time. So it all sat on a shared system, tokens and components defined once and reused everywhere. That's what the licensing-critical screens were built from."] },
       { eyebrow: "Foundations", h: "Built on tokens",
-        p: ["Nothing points at a raw colour or size: primitives feed <b>semantic tokens</b> named for what they're for (<code>Surface · Brand · Default</code>), and tokens feed the components. Change one token and it updates everywhere — dark mode, retheming, twenty-odd flows in sync. <em>Swipe through the foundations, tap any sheet to enlarge.</em>"],
+        p: ["No screen uses a raw colour or size directly. Base values feed <b>semantic tokens</b>, each named for its job (<code>Surface · Brand · Default</code>), and the tokens feed the components. Change one token and every screen follows: dark mode, new themes, twenty-odd flows staying in sync. <em>Swipe through the foundations, tap any sheet to enlarge.</em>"],
         carousel: [
           { src: "images/winning-over-sweden/ds-token-structure.webp", caption: "Token architecture, named by UI element, colour role and modifier, so meaning travels with the value." },
           { src: "images/winning-over-sweden/ds-colors.webp", caption: "Primitives, the full brand, neutral and semantic colour ramps." },
