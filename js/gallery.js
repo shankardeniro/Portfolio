@@ -109,7 +109,7 @@ const base = [
     ],
   },
   {
-    title: "Founding a Research Practice",
+    title: "Building a Research Practice",
     titleItalic: "Research",
     tag: "0 → 1 research",
     slug: "user-research-framework",

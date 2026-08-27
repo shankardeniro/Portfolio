@@ -477,7 +477,7 @@ const CASES = {
   },
   "user-research-framework": {
     accent: "#7aa2ff", num: "03",
-    title: "Founding a Research Practice",
+    title: "Building a Research Practice",
     tagline: "There was no research when I joined. I built a routine for it, then used AI to keep that routine running on my own.",
     meta: { Role: "Founding researcher + product designer", Scope: "0 → 1, from scratch", Duration: "3 months to stand up · 2+ years sustained", Year: "2022" },
     hero: "images/user-research-framework/hero.webp",
