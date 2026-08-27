@@ -403,7 +403,7 @@ const CASES = {
         p: ["If players misread RTP, leading on it could be a costly mistake. To see whether an opening was still there, I scored five competitors against Nielsen's heuristics on how clearly they handled RTP, responsible gaming and onboarding."],
         beat: { outcome: "There's a growing, valuable group who actively hunt for <b>Max-RTP</b> games, and no one had claimed that ground." },
         figure: { src: "images/winning-over-sweden/competitive-audit.webp", caption: "Competitive audit, five Swedish operators scored against Nielsen's heuristics." } },
-      { verdict: { label: "What we decided", text: "The bet mostly held, with a twist. Savvy players who hunt <em>Max-RTP</em> games reward visible fairness, and their loyalty is worth a little margin. Most players, though, misread the number. So the plan became: explain fairness in plain language, and reassure everyone else with the things they already trust — familiar payment methods and game providers." } },
+      { verdict: { label: "What we decided", text: "The bet mostly held, with a twist. Savvy players who hunt <em>Max-RTP</em> games reward visible fairness, and their loyalty is worth a little margin. Most players, though, misread the number. So the plan became: explain fairness in plain language, and reassure everyone else with the things they already trust: familiar payment methods and game providers." } },
 
       // ---------- GOAL 3 ----------
       { chapter: { no: "Goal 03", hud: "The journey", title: "Turn trust into players",
@@ -560,7 +560,7 @@ const CASES = {
         "Talking to the users who'd dropped off was the obvious place to start. I ran a mixed-methods study, a screener survey feeding in-depth interviews, then moderated usability testing with screen-recording and behavioural analysis, so I could check what users <em>said</em> against what they <em>did</em>." ] },
       { eyebrow: "Screener survey", h: "Start with the people who left", p: [
         "I surveyed the drop-offs directly, cognitive-testing the questionnaire first and working with CRM to reach the right customers. Asked why they hadn't completed verification, they said:" ],
-        donut: { caption: "Survey — reasons for not completing the verification process.", items: [
+        donut: { caption: "Survey: the reasons users gave for not completing verification.", items: [
           { label: "I tried to verify myself, but without success", value: 28.2 },
           { label: "I assumed the process might be too time-consuming", value: 17.9 },
           { label: "I have privacy and security concerns", value: 15.4 },
@@ -865,7 +865,7 @@ function initZoomables(root) {
 }
 function heroStage(c) {
   const s = c.heroStage;
-  return `<figure class="cs-scanhero" data-reel aria-label="${esc(c.title + " — product walkthrough")}">
+  return `<figure class="cs-scanhero" data-reel aria-label="${esc(c.title + ": product walkthrough")}">
     <div class="reel__shot reel__shot--desk">${imgTag(s.desktop, c.title + " lobby")}</div>
   </figure>`;
 }
@@ -1107,7 +1107,7 @@ function renderCase(slug) {
       if (b.challenge) txt += `<div class="cs-beat__block cs-beat__block--challenge"><span class="cs-beat__tag">${esc(b.challengeLabel || "The challenge")}</span><p class="cs-beat__challenge">${b.challenge}</p></div>`;
       if (b.move) txt += `<div class="cs-beat__block cs-beat__block--move"><span class="cs-beat__tag">${esc(b.moveLabel || "What I did")}</span>${(Array.isArray(b.move) ? b.move : [b.move]).map((m) => `<p class="cs-beat__move">${m}</p>`).join("")}</div>`;
       if (b.outcome) txt += `<div class="cs-beat__block cs-beat__block--outcome"><span class="cs-beat__tag">${esc(b.outcomeLabel || "Outcome")}</span><p class="cs-beat__outcome">${b.outcome}</p></div>`;
-      if (b.quote) txt += `<blockquote class="cs-beat__quote">“${b.quote}”${b.cite ? `<cite>— ${esc(b.cite)}</cite>` : ""}</blockquote>`;
+      if (b.quote) txt += `<blockquote class="cs-beat__quote">“${b.quote}”${b.cite ? `<cite>${esc(b.cite)}</cite>` : ""}</blockquote>`;
       txt += `</div>`;
     }
     if (s.list) txt += `<ul class="cs-list">${s.list.map((li) => `<li>${li}</li>`).join("")}</ul>`;
