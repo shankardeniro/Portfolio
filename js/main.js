@@ -478,31 +478,31 @@ const CASES = {
   "user-research-framework": {
     accent: "#7aa2ff", num: "03",
     title: "Founding a Research Practice",
-    tagline: "There was no research when I joined. I gave the team a rhythm for it, then used AI to keep that rhythm going on my own.",
-    meta: { Role: "Founding researcher + product designer", Scope: "0 → 1, greenfield", Duration: "3 months to stand up · 2+ years sustained", Year: "2022" },
+    tagline: "There was no research when I joined. I built a routine for it, then used AI to keep that routine running on my own.",
+    meta: { Role: "Founding researcher + product designer", Scope: "0 → 1, from scratch", Duration: "3 months to stand up · 2+ years sustained", Year: "2022" },
     hero: "images/user-research-framework/hero.webp",
     heroCap: "A practice, built from nothing",
     sections: [
       { eyebrow: "Overview", h: "There was no research when I joined", p: [
-        "The team shipped on opinion. There were no users to talk to on any regular basis, no place to keep what we learned, and no habit of asking before building. I was the first researcher, so there was nothing to inherit.",
-        "I'm a designer too, so I could run the research and design the fix myself. But the real job was bigger than any single study: giving the team a way to keep learning after I stopped pushing." ] },
-      { eyebrow: "Where it went", metrics: [["0 → 1", "research, built from nothing"], ["On a schedule", "runs every month and quarter"], ["8 rounds", "of CSAT over ~3 years"]] },
+        "The team built things based on opinion. There were no users to talk to, no place to keep what we learned, and no habit of asking questions before building. I was the first researcher, so I was starting from zero.",
+        "I'm also a designer, so I could run the research and design the fix myself. But the real job was bigger than any single study: the team needed a way to keep learning even when I wasn't pushing." ] },
+      { eyebrow: "Where it went", metrics: [["0 → 1", "research, built from nothing"], ["On a schedule", "runs every month and quarter"], ["8 rounds", "of satisfaction tracking in 3 years"]] },
 
       { chapter: { no: "01", hud: "Before", title: "No research, at all",
         blurb: "No users to talk to, no notes, no habit of asking. People said “we should talk to users,” then didn't." } },
       { eyebrow: "The starting point", h: "What that meant day to day", p: [
         "When I arrived, this is what having no research looked like:" ],
         list: [
-          "Product decisions ran on gut feel and meeting-room consensus.",
+          "Decisions were made on gut feel and meeting-room agreement.",
           "There was no reliable way to reach real users.",
-          "The odd study happened, then got lost in someone's drive.",
+          "A study happened now and then, then got lost in someone's drive.",
           "With no shared place for findings, we kept asking the same questions.",
           "And it wasn't anyone's job to fix that." ] },
 
       { chapter: { no: "02", hud: "The rhythm", title: "I put research on a schedule",
-        blurb: "Left to requests, research never happened. So I gave it a regular beat." } },
-      { eyebrow: "The rhythm", h: "A regular beat", p: [
-        "I put research on the calendar and matched the method to what we needed to learn. It ran whether or not anyone remembered to ask." ],
+        blurb: "When research only happened on request, it never happened. So I gave it a fixed schedule." } },
+      { eyebrow: "The schedule", h: "Same time, every time", p: [
+        "I put research on the calendar and picked each method for what we needed to learn. It ran whether or not anyone asked for it." ],
         table: { head: ["How often", "What I ran", "To learn"], rows: [
           ["Every month", "User interviews", "Why people do what they do"],
           ["Every quarter", "Surveys", "How common those things are"],
@@ -510,9 +510,9 @@ const CASES = {
           ["Always on", "Behavioural data", "What people actually do in the product"] ] },
         cap: "A full usability round, start to readout, is in <a data-case=\"winning-over-sweden\" data-cursor-hover>Winning Over Sweden →</a>." },
       { eyebrow: "Getting people to use it", h: "A schedule only works if people show up", p: [
-        "A calendar entry changes nothing on its own. I got product, design and engineering, plus data, CRM and marketing, using the same simple steps and one shared folder for findings. The readout turned into a regular meeting people came to, and after a while research was simply something the team expected." ] },
+        "A calendar entry changes nothing on its own. I got product, design, engineering, data, CRM and marketing all using the same simple steps and one shared folder for findings. The readout became a regular meeting people actually came to, and after a while the team simply expected research to happen." ] },
       { eyebrow: "Measuring it", h: "I started tracking satisfaction properly", p: [
-        "I ran a CSAT survey every quarter and reported it to leadership each time. Every score came with an open “why” and a 95% confidence interval, so we only reacted when a change was real. The method comes from Chapman &amp; Rodden's <a href=\"https://quantuxbook.com/\" target=\"_blank\" rel=\"noopener\" data-cursor-hover>Quantitative UX Research ↗</a>." ],
+        "Every quarter I ran a customer-satisfaction (CSAT) survey and reported the results to leadership. Every score came with an open “why” question and a 95% confidence interval, so we only reacted when a change was real, not noise. The method comes from Chapman &amp; Rodden's <a href=\"https://quantuxbook.com/\" target=\"_blank\" rel=\"noopener\" data-cursor-hover>Quantitative UX Research ↗</a>." ],
         figures: [
           { src: "images/user-research-framework/csat-trend.webp", caption: "CSAT average across eight rounds, Oct 2022 to Jun 2025." },
           { src: "images/user-research-framework/csat-ci.webp", caption: "Each round's ratings, with 95% confidence intervals." } ] },
@@ -520,9 +520,9 @@ const CASES = {
       { chapter: { no: "03", hud: "With AI", title: "Then I used AI to keep up",
         blurb: "One person can't run a team's worth of research by hand, so I used AI to close the gap." } },
       { eyebrow: "Where AI fits", h: "It does the slow part", p: [
-        "The slow part of research is going through everything afterwards. I use AI (Claude) to transcribe sessions, take a first pass at grouping what people said, and spot patterns across interviews and open survey answers. I still make the calls, but it means one person can keep the whole schedule running, and it's how I'd set research up inside an AI product from the start." ] },
+        "The slow part of research is working through everything afterwards. I use AI (Claude) to transcribe sessions, do a first pass at grouping what people said, and spot patterns across interviews and open survey answers. I still make the calls. But it means one person can keep the whole schedule running, and it's how I'd set up research inside an AI product from day one." ] },
 
-      { verdict: { label: "Where it ended up", text: "When I joined there was no research. Now the team plans around it. I did most of it on my own by giving research a rhythm and letting AI take the grind, and the studies it produced fed <a data-case=\"reimagining-onboarding\" data-cursor-hover>Reimagining Onboarding →</a> (conversion up 11 points) and <a data-case=\"winning-over-sweden\" data-cursor-hover>Winning Over Sweden →</a>." } },
+      { verdict: { label: "Where it ended up", text: "When I joined there was no research. Now the team plans around it. I did most of it alone, by giving research a schedule and letting AI handle the slow work. The studies it produced fed <a data-case=\"reimagining-onboarding\" data-cursor-hover>Reimagining Onboarding →</a> (conversion up 11 points) and <a data-case=\"winning-over-sweden\" data-cursor-hover>Winning Over Sweden →</a>." } },
     ],
   },
   "reimagining-onboarding": {
