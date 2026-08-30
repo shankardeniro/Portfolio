@@ -414,11 +414,8 @@ const CASES = {
       // ---------- GOAL 3 ----------
       { chapter: { no: "Goal 03", hud: "The journey", title: "Turn trust into players",
         blurb: "Smooth out the journey, and lead with the signals players said they trust." } },
-      { eyebrow: "From BankID to gameplay",
-        p: ["The end-to-end journey, BankID registration → first deposit → gameplay → responsible-gambling tools, is where a first-time player can quietly get lost. I mapped the whole thing to find where to make steps clearer and add reassurance before people needed to ask, so no one gets stranded partway through."],
-        figure: { src: "images/winning-over-sweden/user-journey.webp", caption: "The complete end-to-end journey map." } },
       { eyebrow: "Watching for hesitation",
-        p: ["A journey map shows the route. It doesn't show where real people stumble. So I ran moderated think-aloud sessions with ten Swedish players, first-timers and veterans, with stakeholders watching live. Seeing where they hesitated showed us exactly what to fix."],
+        p: ["I ran moderated think-aloud sessions with ten Swedish players, first-timers and veterans, with stakeholders watching live. Seeing where they hesitated showed us exactly what to fix."],
         beat: { outcome: "19 distinct patterns, from critical blockers to positive signals." },
         figure: { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress. Participants were recruited through UserInterviews.com and compensated for their time." } },
       { eyebrow: "From signal to priorities", h: "19 patterns, triaged",
