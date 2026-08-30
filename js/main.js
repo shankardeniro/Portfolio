@@ -328,7 +328,7 @@ const CASES = {
     accent: "#c6f24e", num: "01",
     title: "Winning Over Sweden",
     tagline: "Getting a new casino licensed and launched in Sweden, one of the strictest gambling markets.",
-    meta: { Role: "Research, Regulatory & Design Strategy", Duration: "6 months", Team: "Sole designer · PM · 8 engineers", Year: "2025" },
+    meta: { Role: "Research, Regulatory & Design Strategy", Duration: "6 months", Team: "PM · 8 engineers", Year: "2025" },
     hero: "images/winning-over-sweden/hero.webp",
     heroStage: {
       desktop: "images/winning-over-sweden/lobby-desktop.webp",
@@ -464,6 +464,14 @@ const CASES = {
       { eyebrow: "The outcome", h: "A smoother, more trusted journey",
         p: ["The localisation strategy helped us enter the Swedish market in a way that felt relevant and credible from the start. We built around local regulations, listened closely to players, and used familiar signals such as BankID and Swish to create confidence throughout the experience. Early adoption reinforced something I'd take into any future launch: understand what people already trust, design safety in from the beginning, and build from there."] },
       { verdict: { label: "The takeaway", text: "The biggest lesson was that launching in a regulated market isn't just a localisation exercise. I now start by systematising the constraints, testing the most consequential assumption early, and understanding what trust looks like in that particular market." } },
+      { eyebrow: "Who did what",
+        table: {
+          head: ["I personally led", "I shaped with others", "Others owned"],
+          rows: [
+            ["Research plan and facilitation", "Problem framing and prioritisation with PM", "Technical architecture"],
+            ["Synthesis and design direction", "Feasibility and sequencing with Engineering", "Implementation"],
+            ["Prototypes and usability testing", "Compliance interpretation", "Final commercial decision"],
+            ["Design handoff and iteration", "Measurement plan with Data/BI", "Legal approval"]] } },
     ],
   },
   "user-research-framework": {
