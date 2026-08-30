@@ -534,10 +534,11 @@ const CASES = {
     sections: [
       { eyebrow: "The challenge", h: "When you can't take the easy sign-up", p: [
         "Most apps onboard you in a tap, Google, Apple, done. We legally can't. As a regulated <em>financial institution</em>, every player has to hand over full details and pass a KYC check, by bank transfer or government ID, before they can play.",
-        "And that flow is where the money is made: getting through onboarding and making a first deposit is one of the numbers the business lives on. A third of pre-checked users were walking away right before verification, and nobody knew why." ] },
+        "Getting through onboarding and making a first deposit is one of the numbers the business lives on.",
+        "A third of pre-checked users were walking away right before verification, and nobody knew why." ] },
       { eyebrow: "The funnel", h: "Following the drop-off", p: [
         "I started with the data: every user tracked from sign-up through to verified, depositing player, step by step. One step leaked far more than the rest." ],
-        funnel: { caption: "Every user from sign-up to depositing player. The grey bookends are the cohort at either end; each orange bar is what a step cost, and the outlined one is the leak the redesign went after.", rows: [
+        funnel: { caption: "The chart shows the progression of users through each step of the onboarding process, from registration to becoming a verified, depositing player. The orange bars show the drop-off at each step, indicating where the most significant losses occur; the outlined one is the leak the redesign went after.", rows: [
           { label: "Registered", count: 79602 },
           { label: "Activated", count: 78085, drop: "1,517", at: "activation" },
           { label: "Pre-checked", count: 66294, drop: "11,791", at: "pre-check" },
