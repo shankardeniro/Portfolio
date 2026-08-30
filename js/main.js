@@ -368,7 +368,7 @@ const CASES = {
           { src: "images/winning-over-sweden/ds-header-nav.webp", caption: "Header navigation, logged-out and logged-in variants." },
           { src: "images/winning-over-sweden/ds-section-heading.webp", caption: "Section headings, the pre-heading, headline, sub-heading and icon anatomy." },
           { src: "images/winning-over-sweden/ds-game-card.webp", caption: "Game cards, the core lobby unit, with the Epic Pulse graph built in." }] },
-      { eyebrow: "The screens that get us licensed", flush: true,
+      { eyebrow: "The screens that get us licensed",
         p: ["Engineering couldn't start on the architecture until the licensing-critical screens existed. So I took the responsible-gaming and account screens, deposit limits, account summary, reality check, straight to high-fidelity, and the team had something real to build against."],
         beat: { outcome: "Shipped the MVP the whole licence application was built on." },
         gallery: [
