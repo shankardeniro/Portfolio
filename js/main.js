@@ -388,7 +388,7 @@ const CASES = {
           { src: "images/winning-over-sweden/interview-guide.webp", caption: "The question guide, funnelling broad prompts down to whether players grasp RTP and let it steer game choice." },
           { src: "images/winning-over-sweden/prompt-cards.webp", caption: "The prompt cards, printed and used in the field at Svenska Spel and ATG kiosks across Stockholm." }] },
       { eyebrow: "Synthesis", h: "What we got right, and wrong",
-        p: ["I grouped the interviews into an affinity map and checked them honestly against what we'd assumed. The very first theme went straight against our bet:"],
+        p: ["I grouped the interview responses into an affinity map and checked them honestly against what we'd assumed. The very first theme went straight against our bet:"],
         cards: [
           { tone: "yes", label: "What we got right", items: [
             "The savvy players really do care about RTP, they compare sites for the best odds.",
