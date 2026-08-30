@@ -414,8 +414,7 @@ const CASES = {
       // ---------- GOAL 3 ----------
       { chapter: { no: "Goal 03", hud: "The journey", title: "Turn trust into players",
         blurb: "Smooth out the journey, and lead with the signals players said they trust." } },
-      { eyebrow: "Watching for hesitation",
-        p: ["I ran seven moderated think-aloud sessions over screen share, with players ranging from recreational to industry insiders, and stakeholders watching live. Seeing where people hesitated showed us exactly what to fix."],
+      { p: ["I ran seven moderated think-aloud sessions over screen share, with players ranging from recreational to industry insiders, and stakeholders watching live. Seeing where people hesitated showed us exactly what to fix."],
         beat: { outcome: "A dozen recurring patterns, from feature comprehension to money decisions." },
         figure: { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress. Participants were recruited through UserInterviews.com and compensated for their time." } },
       { eyebrow: "From signal to priorities", h: "Excellent overall. Specific frictions.",
@@ -440,7 +439,7 @@ const CASES = {
         beat: { quote: "I would prefer to do it in one flow, like not have to go back and forth.",
           cite: "Rolf, usability participant" },
         compare: { stacked: true, before: { src: "images/winning-over-sweden/bonus-before.webp" }, after: { src: "images/winning-over-sweden/bonus-after.webp" } } },
-      { eyebrow: "Craft, up close", h: "Why the redesign works",
+      { h: "Why the redesign works",
         p: ["The before/after shows <em>what</em> changed. Here's <em>why</em>, four decisions on the redesigned bonus screen. <em>Hover or tap a marker.</em>"],
         annotate: {
           src: "images/winning-over-sweden/craft-welcome-bonus.webp",
