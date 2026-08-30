@@ -1204,7 +1204,7 @@ function renderCase(slug) {
         <div class="case__meta">${meta}</div>
       </div>
     </header>
-    ${c.heroStage ? heroStage(c) : c.hero ? `<figure class="cs-hero"><div class="cs-stage"><div class="cs-plate">${imgTag(c.hero, c.title)}<div class="cs-plate__cap"><span>Case ${esc(c.num)} · ${esc(c.heroCap || c.title)}</span><i>Plate 01</i></div></div></div></figure>` : ""}`;
+    ${c.heroStage ? heroStage(c) : c.hero ? `<figure class="cs-hero"><div class="cs-stage"><div class="cs-plate">${imgTag(c.hero, c.title)}<div class="cs-plate__cap"><span>Case ${esc(c.num)} · ${esc(c.heroCap || c.title)}</span></div></div></div></figure>` : ""}`;
   return `
     ${head}
     ${body}
