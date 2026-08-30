@@ -400,7 +400,6 @@ const CASES = {
             "Which games a casino had, and how well they were <b>curated</b>, mattered far more to people's choice than we'd assumed."] }] },
       { eyebrow: "Reading the field",
         p: ["If players misread RTP, leading on it could be a costly mistake. To see whether an opening was still there, I audited five competitors on criteria adapted from Nielsen's heuristics: how clearly they handled RTP, responsible gaming and onboarding."],
-        beat: { outcome: "There's a growing, valuable group who actively hunt for <b>Max-RTP</b> games, and no one had claimed that ground." },
         figure: { src: "images/winning-over-sweden/competitive-audit.webp", zoom: true, side: true, caption: "Competitive audit: five operators scored on criteria adapted from Nielsen's heuristics. Tap to read in full." } },
       { verdict: { label: "What we decided", text: "The bet mostly held, with a twist. Savvy players who hunt <em>Max-RTP</em> games reward visible fairness, and their loyalty is worth a little margin. Most players, though, misread the number. So the plan became: explain fairness in plain language, and reassure everyone else with the things they already trust: familiar payment methods and game providers." } },
 
@@ -414,12 +413,14 @@ const CASES = {
         blurb: "Smooth out the journey, and lead with the signals players said they trust." } },
       { p: ["I ran seven moderated think-aloud sessions over screen share, with players ranging from recreational to industry insiders. Participants came through UserInterviews.com, matched to our profile by a screener survey, and every session was recorded with consent and streamed live to stakeholders.",
         "The focus was where the money moves: onboarding, the bonus journey and payments, watching for hesitation, confusion or drop-off. Seeing where people stalled showed us exactly what to fix."],
-        figure: { src: "images/winning-over-sweden/research-plan.webp", zoom: true, side: true, caption: "The research plan: objectives, tasks and the SUS questionnaire. Screens blurred; planned for ten sessions, seven ran. Tap to read in full." },
+        beat: { outcomeLabel: "AI in the loop", outcome: "I used AI to generate alternative wordings for the interview guide and screener questions, then reviewed them for leading questions before anything reached a participant." },
+        figure: { src: "images/winning-over-sweden/research-plan.webp", zoom: true, side: true, caption: "The research plan: objectives, tasks and the SUS questionnaire. Planned for ten sessions, seven ran. Tap to read in full." },
         figures: [
           { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress." } ] },
       { h: "Excellent overall. Specific frictions.",
         sus: { score: "83.2", benchmark: 68, caption: "System Usability Scale across the seven sessions: “excellent”, an A grade, well above the industry benchmark of 68." },
         p: ["A high score doesn't mean nothing is wrong; it means the problems are specific. The recordings surfaced a dozen recurring patterns, each backed by a participant quote and the moment it happened, and they clustered into three stories."],
+        beat: { outcomeLabel: "AI in the loop", outcome: "AI accelerated synthesis and exploration; it did not replace participant evidence or design judgment. I checked every generated theme against the underlying notes and recordings." },
         cards: [
           { label: "Reading the features", items: [
             "<b>Epic Pulse</b> wasn't understood at first glance, and its “read more” guide sat hidden in plain sight.",
@@ -461,15 +462,8 @@ const CASES = {
           decision: "<b>Lead with the logos people already trust.</b> BankID, Swish and Trustly sit right where the decision happens, each with a plain reassurance, secure login, fast withdrawals. Goal 02 showed people read familiar payment methods as proof of safety, so the screen <em>borrows</em> trust from names they already believe." } },
       // ---------- CLOSE: outcome + learnings in one section ----------
       { eyebrow: "The outcome", h: "A smoother, more trusted journey",
-        p: ["Fixing those three findings moved the numbers the project was judged on. Localising for Sweden was never about translation: compliance got us the licence, the tested bet on fairness gave the brand its reason to exist, and the smoother journey turned that into players, zero violations in six months, 58% more claimed bonuses, and 86% of deposits landing inside the first minute.",
-        "Three things stuck with me, the ones I'd reach for the next time a regulated market comes up."],
-        cards: [
-          { tone: "yes", label: "Design compliance in", items: [
-            "Mapping every <b>Spelinspektionen</b> rule to a UI pattern made safety part of the design from the first wireframe, and kept twenty-odd flows consistent under a deadline."] },
-          { tone: "aha", label: "Test the bet before you build it", items: [
-            "A no-budget research sprint showed most players <b>misread RTP</b> before we'd bet the brand on it. Cheapest research I've run, and the most useful, it changed the whole strategy."] },
-          { tone: "no", label: "Trust comes from familiar things", items: [
-            "Players ignored licence badges and treated <b>BankID, Swish</b> and familiar providers as the real proof of safety. Reassurance has to sit where people already look."] }] },
+        p: ["The localisation strategy helped us enter the Swedish market in a way that felt relevant and credible from the start. We built around local regulations, listened closely to players, and used familiar signals such as BankID and Swish to create confidence throughout the experience. Early adoption reinforced something I'd take into any future launch: understand what people already trust, design safety in from the beginning, and build from there."] },
+      { verdict: { label: "The takeaway", text: "The biggest lesson was that launching in a regulated market isn't just a localisation exercise. I now start by systematising the constraints, testing the most consequential assumption early, and understanding what trust looks like in that particular market." } },
     ],
   },
   "user-research-framework": {
