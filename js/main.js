@@ -413,9 +413,10 @@ const CASES = {
       // ---------- GOAL 3 ----------
       { chapter: { no: "Goal 03", hud: "The journey", title: "Turn trust into players",
         blurb: "Smooth out the journey, and lead with the signals players said they trust." } },
-      { p: ["I ran seven moderated think-aloud sessions over screen share, with players ranging from recreational to industry insiders, and stakeholders watching live. Seeing where people hesitated showed us exactly what to fix."],
+      { p: ["I ran seven moderated think-aloud sessions over screen share, with players ranging from recreational to industry insiders. Participants came through UserInterviews.com, matched to our profile by a screener survey, and every session was recorded with consent and streamed live to stakeholders.",
+        "The focus was where the money moves: onboarding, the bonus journey and payments, watching for hesitation, confusion or drop-off. Seeing where people stalled showed us exactly what to fix."],
         beat: { outcome: "A dozen recurring patterns, from feature comprehension to money decisions." },
-        figure: { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress. Participants were recruited through UserInterviews.com and compensated for their time." } },
+        figure: { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress." } },
       { h: "Excellent overall. Specific frictions.",
         sus: { score: "83.2", benchmark: 68, caption: "System Usability Scale across the seven sessions: “excellent”, an A grade, well above the industry benchmark of 68." },
         p: ["A high score doesn't mean nothing is wrong; it means the problems are specific. The recordings surfaced a dozen recurring patterns, each backed by a participant quote and the moment it happened, and they clustered into three stories."],
