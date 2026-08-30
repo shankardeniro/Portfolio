@@ -502,11 +502,6 @@ const CASES = {
         blurb: "When research only happened on request, it never happened. So I gave it a fixed schedule." } },
       { eyebrow: "The schedule", h: "Same time, every time", p: [
         "I put research on the calendar and picked each method for what we needed to learn. It ran whether or not anyone asked for it." ],
-        table: { head: ["How often", "What I ran", "To learn"], rows: [
-          ["Every month", "User interviews", "Why people do what they do"],
-          ["Every quarter", "Surveys", "How common those things are"],
-          ["Per feature", "Usability tests", "Whether a design works before we build it"],
-          ["Always on", "Behavioural data", "What people actually do in the product"] ] },
         cap: "A full usability round, start to readout, is in <a data-case=\"winning-over-sweden\" data-cursor-hover>Winning Over Sweden →</a>." },
       { eyebrow: "Getting people to use it", h: "Getting the team to show up", p: [
         "A calendar entry changes nothing on its own. I got product, design, engineering, data, CRM and marketing all using the same simple steps and one shared folder for findings. The readout became a regular meeting people actually came to, and after a while the team simply expected research to happen." ] },
@@ -516,12 +511,12 @@ const CASES = {
           { src: "images/user-research-framework/csat-trend.webp", caption: "CSAT average across eight rounds, Oct 2022 to Jun 2025." },
           { src: "images/user-research-framework/csat-ci.webp", caption: "Each round's ratings, with 95% confidence intervals." } ] },
 
-      { chapter: { no: "03", hud: "With AI", title: "Using AI to keep up",
-        blurb: "One person can't run a team's worth of research by hand, so I used AI to close the gap." } },
-      { eyebrow: "Where AI fits", h: "AI does the slow part", p: [
-        "The slow part of research is working through everything afterwards. I use AI (Claude) to transcribe sessions, do a first pass at grouping what people said, and spot patterns across interviews and open survey answers. I still make the calls. But it means one person can keep the whole schedule running, and it's how I'd set up research inside an AI product from day one." ] },
+      { chapter: { no: "03", hud: "With AI", title: "AI in my workflow",
+        blurb: "It's shortened the distance between research, an idea and something I can test." } },
+      { eyebrow: "Where AI fits", h: "AI accelerates the loop. I still own the judgement.", p: [
+        "As the research practice grew, so did the amount of material I had to work through. Interview notes, survey responses, usability sessions and different sources of feedback could quickly become a lot to hold in my head.",
+        "Figma is where I design. Claude helps me think through the messy bits and challenge my thinking. More recently, I have taken that further with Claude Code, turning some of my designs into working prototypes myself." ] },
 
-      { verdict: { label: "Where it ended up", text: "When I joined there was no research. Now the team plans around it. I did most of it alone, by giving research a schedule and letting AI handle the slow work. The studies it produced fed <a data-case=\"reimagining-onboarding\" data-cursor-hover>Reimagining Onboarding →</a> (conversion up 11 points) and <a data-case=\"winning-over-sweden\" data-cursor-hover>Winning Over Sweden →</a>." } },
     ],
   },
   "reimagining-onboarding": {
