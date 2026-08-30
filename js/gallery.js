@@ -49,7 +49,7 @@ const base = [
         text: "The whole plan hinged on one thing nobody had checked: do players even understand or care about RTP? With no budget, I ran short kiosk interviews with real players before we bet the brand on it." },
       { f: "usability-session.webp", cap: "A moderated think-aloud session in progress.",
         sec: "Goal 03 · Watching for hesitation",
-        text: "A journey map shows the route, not where real people stumble. Moderated think-aloud sessions with ten Swedish players surfaced 19 distinct patterns, from critical blockers to positive signals." },
+        text: "Seven moderated think-aloud sessions, with players ranging from recreational to industry insiders, surfaced a dozen recurring patterns and an 83.2 System Usability Scale score." },
       { f: "lobby-desktop.webp", cap: "The launched lobby: Wunderino, Sweden, 2025.",
         sec: "The launch",
         text: "Getting a new casino licensed and launched in Sweden, one of the strictest gambling markets: get the licence, bet on being the fairest option, then turn that into actual players." },

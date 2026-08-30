@@ -354,7 +354,7 @@ main{position:relative;z-index:2}
   .cs-section:not(.cs-chapter) .cs-stage>.cs-h{grid-column:1;max-width:14ch}
   .cs-section:not(.cs-chapter) .cs-stage>:is(.cs-figure,.cs-gallery,.cs-car,
     .cs-figrow,.cs-annot,.cs-strip,.cs-db,.cs-compare,.cs-decision,.cs-flow,.cs-wf-wrap,
-    .cs-metrics,.cs-cards,.cs-table-wrap,.cs-result,.cs-verdict,.cs-split){grid-column:1/-1}
+    .cs-metrics,.cs-cards,.cs-table-wrap,.cs-result,.cs-verdict,.cs-split,.cs-sus){grid-column:1/-1}
 }
 /* body paragraphs stay one size; the opener after a heading distinguishes
    itself by ink alone */
@@ -488,6 +488,19 @@ main{position:relative;z-index:2}
   .cs-db__lbl{grid-column:1/-1;padding:0 0 .45rem}
   .cs-db__scale{padding-left:0}
 }
+
+/* headline usability score on a benchmark bar */
+.cs-sus{margin:1.6rem 0 2rem;max-width:680px}
+.cs-sus__head{display:flex;gap:2rem;align-items:baseline;margin-bottom:1.5rem}
+.cs-sus__head b{font-family:var(--serif);font-weight:400;font-size:var(--fs-numeral);line-height:var(--lh-numeral);letter-spacing:var(--ls-numeral);color:var(--ca-ink)}
+.cs-sus__head p{font-size:var(--fs-body-sm);line-height:var(--lh-body-sm);color:var(--ink-soft);max-width:36ch}
+.cs-sus__bar{position:relative;height:10px;border-radius:5px;background:color-mix(in srgb,var(--ink) 8%,transparent);margin:0 0 1.6rem}
+.cs-sus__fill{position:absolute;left:0;top:0;bottom:0;border-radius:5px;background:var(--ca)}
+.cs-sus__bench{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--ink-dim)}
+.cs-sus__bl{position:absolute;top:16px;transform:translateX(-50%);font-size:.7rem;color:var(--ink-dim);white-space:nowrap}
+.cs-sus__vl{position:absolute;top:-24px;transform:translateX(-50%);font-size:.75rem;font-weight:600;color:var(--ca-ink)}
+/* neutral synthesis cards carry accent labels like the toned ones */
+.cs-card--neutral .cs-card__label{color:var(--ca-ink)}
 .cs-table th{text-align:left;font-weight:500;color:var(--ca-ink);font-size:var(--fs-label);letter-spacing:var(--ls-label);
   text-transform:uppercase;padding:.8rem 1rem;border-bottom:1px solid var(--line)}
 .cs-table td{padding:.9rem 1rem;border-bottom:1px solid var(--line);color:var(--ink-soft);line-height:1.45;vertical-align:top}

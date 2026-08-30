@@ -415,19 +415,26 @@ const CASES = {
       { chapter: { no: "Goal 03", hud: "The journey", title: "Turn trust into players",
         blurb: "Smooth out the journey, and lead with the signals players said they trust." } },
       { eyebrow: "Watching for hesitation",
-        p: ["I ran moderated think-aloud sessions with ten Swedish players, first-timers and veterans, with stakeholders watching live. Seeing where they hesitated showed us exactly what to fix."],
-        beat: { outcome: "19 distinct patterns, from critical blockers to positive signals." },
+        p: ["I ran seven moderated think-aloud sessions over screen share, with players ranging from recreational to industry insiders, and stakeholders watching live. Seeing where people hesitated showed us exactly what to fix."],
+        beat: { outcome: "A dozen recurring patterns, from feature comprehension to money decisions." },
         figure: { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress. Participants were recruited through UserInterviews.com and compensated for their time." } },
-      { eyebrow: "From signal to priorities", h: "19 patterns, triaged",
-        p: ["Every pattern had a participant quote, a video frame from the exact moment it happened, and a severity score. I sorted by severity and impact, and shipped fixes for the three biggest ones (below)."],
-        table: { head: ["Severity", "Pattern", "Participants"], rows: [
-          ["Critical", "Withdrawal flow: buried, broken & inconsistent", "4"],
-          ["Critical", "Spelpaus self-exclusion silently blocked registration", "2"],
-          ["High", "No in-game deposit: players forced back to the lobby", "3"],
-          ["High", "Welcome-bonus opt-in appears too late in the flow", "3"],
-          ["High", "Mandatory deposit-limits screen dismissed as a hurdle", "3"],
-          ["High", "Game viewport bug: desktop layout rendered on mobile", "1"],
-          ["High", "Live-casino entry: confusing screen-name bug", "1"] ] } },
+      { eyebrow: "From signal to priorities", h: "Excellent overall. Specific frictions.",
+        sus: { score: "83.2", benchmark: 68, caption: "System Usability Scale across the seven sessions: “excellent”, an A grade, well above the industry benchmark of 68." },
+        p: ["A high score doesn't mean nothing is wrong; it means the problems are specific. The recordings surfaced a dozen recurring patterns, each backed by a participant quote and the moment it happened, and they clustered into three stories."],
+        cards: [
+          { label: "Reading the features", items: [
+            "<b>Epic Pulse</b> wasn't understood at first glance, and its “read more” guide sat hidden in plain sight.",
+            "<b>RTP</b> text was too low-contrast to spot on the game tile.",
+            "The <b>winners ticker</b> read as promotion, not proof. It influenced no game choice in any session."] },
+          { label: "Finding the way", items: [
+            "<b>Live Casino</b> took real effort to find, slower still on mobile, and barely reads as separate from Casino.",
+            "Inside a game there was <b>no path to the next one</b>, so players closed out to the lobby and broke their own flow.",
+            "Desktop <b>search</b> was hard to discover and didn't focus itself."] },
+          { label: "Money decisions", items: [
+            "The <b>bonus opt-in</b> arrived only at the deposit step, after the amount was chosen. All seven hit it, and the bonus multiplies the deposit.",
+            "Veterans caught <b>gaps in the terms</b>: 35× wagering with no minimum bet listed.",
+            "<b>Trust logos</b>, BankID, Swish and known providers, were what players looked for before any deposit."] }],
+        cap: "The three with the strongest signal, bonus timing, Live Casino wayfinding and trust signals, became the fixes below." },
       { eyebrow: "Finding 01 · Bonus claim",
         p: ["People struggled to claim the deposit bonus right after signing up, the moment we could least afford to lose them. I redesigned the flow to keep people in context with a clear sense of progress, and folded the bonus claim into the deposit step."],
         beat: { quote: "I would prefer to do it in one flow, like not have to go back and forth.",
@@ -1096,6 +1103,15 @@ function renderCase(slug) {
     let txt = "", media = "";
     if (s.eyebrow) txt += `<p class="cs-eyebrow">${s.eyebrow}</p>`;
     if (s.h) txt += `<h3 class="cs-h">${s.h}</h3>`;
+    // headline usability score on a benchmark bar (e.g. SUS)
+    if (s.sus) {
+      const su = s.sus, mx = su.max || 100;
+      const pc = (v) => (v / mx * 100).toFixed(1);
+      txt += `<div class="cs-sus" role="img" aria-label="System Usability Scale score ${su.score} of ${mx}, against a benchmark of ${su.benchmark}.">
+        <div class="cs-sus__head"><b>${esc(String(su.score))}</b><p>${su.caption || ""}</p></div>
+        <div class="cs-sus__bar"><span class="cs-sus__fill" style="width:${pc(su.score)}%"></span><span class="cs-sus__bench" style="left:${pc(su.benchmark)}%"></span><span class="cs-sus__bl" style="left:${pc(su.benchmark)}%">benchmark ${esc(String(su.benchmark))}</span><span class="cs-sus__vl" style="left:${pc(su.score)}%">${esc(String(su.score))}</span></div>
+      </div>`;
+    }
     // problem/solution beat: the work as Challenge -> Move -> Outcome, scannable
     if (s.p) txt += s.p.map((p) => `<p class="cs-p">${p}</p>`).join("");
     if (s.beat) {
