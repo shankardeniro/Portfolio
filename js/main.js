@@ -350,7 +350,7 @@ const CASES = {
       { h: "Compliance-heavy flows, made clear",
         p: ["I developed detailed wireframes mapping each step of the Swedish user journey, with particular attention to compliance-heavy areas like <b>registration</b> and <b>responsible gaming</b>, exactly where first-time players tend to quit. Each wireframe was tested for clarity, hierarchy, and alignment with both legal requirements and user expectations. Feedback loops with compliance and local testing led to clear, concise layouts with strong trust signals and support access.",
         "To accommodate tight timelines for getting our product licensed, I leveraged our established design language to move directly into high-fidelity, then refined the solution through iterative feedback loops with product and engineering."] },
-      { eyebrow: "The design system", h: "One system behind every screen",
+      { h: "The design system",
         p: ["Going straight to high-fidelity on a deadline only works if you're not redrawing everything each time. So it all sat on a shared system, tokens and components defined once and reused everywhere. That's what the licensing-critical screens were built from."] },
       { eyebrow: "Foundations", h: "Built on tokens",
         p: ["No screen uses a raw colour or size directly. Base values feed <b>semantic tokens</b>, each named for its job (<code>Surface · Brand · Default</code>), and the tokens feed the components. Change one token and every screen follows: dark mode, new themes, twenty-odd flows staying in sync. <em>Swipe through the foundations, tap any sheet to enlarge.</em>"],
