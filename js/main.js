@@ -415,7 +415,6 @@ const CASES = {
         blurb: "Smooth out the journey, and lead with the signals players said they trust." } },
       { p: ["I ran seven moderated think-aloud sessions over screen share, with players ranging from recreational to industry insiders. Participants came through UserInterviews.com, matched to our profile by a screener survey, and every session was recorded with consent and streamed live to stakeholders.",
         "The focus was where the money moves: onboarding, the bonus journey and payments, watching for hesitation, confusion or drop-off. Seeing where people stalled showed us exactly what to fix."],
-        beat: { outcome: "A dozen recurring patterns, from feature comprehension to money decisions." },
         figure: { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress." } },
       { h: "Excellent overall. Specific frictions.",
         sus: { score: "83.2", benchmark: 68, caption: "System Usability Scale across the seven sessions: “excellent”, an A grade, well above the industry benchmark of 68." },
