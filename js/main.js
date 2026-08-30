@@ -371,7 +371,8 @@ const CASES = {
       { eyebrow: "The screens that get us licensed",
         p: ["Engineering couldn't start on the architecture until the licensing-critical screens existed. So I took the responsible-gaming and account screens, deposit limits, account summary, reality check, straight to high-fidelity, and the team had something real to build against."],
         beat: { outcome: "Shipped the MVP the whole licence application was built on." },
-        gallery: [
+        carouselSide: true,
+        carousel: [
           { src: "images/winning-over-sweden/mvp-deposit-limit.webp", caption: "Deposit-limit step" },
           { src: "images/winning-over-sweden/mvp-account-summary.webp", caption: "Account-summary modal" },
           { src: "images/winning-over-sweden/mvp-reality-check.webp", caption: "Reality-check interruption" }] },
@@ -1189,7 +1190,10 @@ function renderCase(slug) {
     // be squashed side-by-side in a gallery
     if (s.figures) media += s.figures.map((f) => `<figure class="cs-figure">${framed(f.src, f.caption)}${f.caption ? `<figcaption>${esc(f.caption)}</figcaption>` : ""}</figure>`).join("");
     if (s.gallery) media += `<div class="cs-gallery">${s.gallery.map((g) => `<figure>${framed(g.src, g.caption)}${g.caption ? `<figcaption>${esc(g.caption)}</figcaption>` : ""}</figure>`).join("")}</div>`;
-    if (s.carousel) media += carouselHTML(s.carousel);
+    if (s.carousel) {
+      const carHtml = carouselHTML(s.carousel);
+      media += s.carouselSide ? carHtml.replace('class="cs-car"', 'class="cs-car cs-car--side"') : carHtml;
+    }
     if (s.flow) media += flowHTML();
     if (s.figrow) media += figrowHTML(s.figrow);
     if (s.donut) media += donutHTML(s.donut);
