@@ -440,7 +440,7 @@ const CASES = {
         beat: { quote: "I would prefer to do it in one flow, like not have to go back and forth.",
           cite: "Rolf, usability participant" },
         compare: { stacked: true, before: { src: "images/winning-over-sweden/bonus-before.webp" }, after: { src: "images/winning-over-sweden/bonus-after.webp" } } },
-      { eyebrow: "Craft, up close", h: "Why the redesign works, up close",
+      { eyebrow: "Craft, up close", h: "Why the redesign works",
         p: ["The before/after shows <em>what</em> changed. Here's <em>why</em>, four decisions on the redesigned bonus screen. <em>Hover or tap a marker.</em>"],
         annotate: {
           src: "images/winning-over-sweden/craft-welcome-bonus.webp",
