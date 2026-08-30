@@ -405,7 +405,6 @@ const CASES = {
 
       { eyebrow: "The follow-through", h: "What 97% really means",
         p: ["Players read <em>“97% RTP”</em> as <b>“this game pays big right now”</b>, the opposite of what it means. A fairness bet only works if people can read the fairness, so I put it where people pick a game. Every tile shows its RTP with a one-tap plain-language guide, and <b>Epic Pulse</b> plots each game's live payout numbers against the house average, where a sceptical player can check the claim themselves. The economics were part of the bet: offering a high RTP gives up some margin in the short term, but the trust it builds earns a higher lifetime value."],
-        beat: { outcome: "RTP went from a number people misread to a reason to pick a game." },
         gallery: [
           { src: "images/winning-over-sweden/rtp-lobby.webp", caption: "RTP surfaced on every game tile in the lobby, with a tap-through “Return to player (RTP): read guide” explainer." },
           { src: "images/winning-over-sweden/epic-pulse.webp", caption: "Epic Pulse, a live transparency readout: a game's recent RTP trend against the ~96% house average, plus how often small, big and mega wins have actually landed over the last 27,000 rounds." }] },
