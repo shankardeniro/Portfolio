@@ -405,7 +405,7 @@ const CASES = {
         figure: { src: "images/winning-over-sweden/competitive-audit.webp", caption: "Competitive audit: five Swedish operators scored on criteria adapted from Nielsen's heuristics." } },
       { verdict: { label: "What we decided", text: "The bet mostly held, with a twist. Savvy players who hunt <em>Max-RTP</em> games reward visible fairness, and their loyalty is worth a little margin. Most players, though, misread the number. So the plan became: explain fairness in plain language, and reassure everyone else with the things they already trust: familiar payment methods and game providers." } },
 
-      { eyebrow: "Making fairness legible", h: "What 97% really means",
+      { eyebrow: "The follow-through", h: "What 97% really means",
         p: ["Players read <em>“97% RTP”</em> as <b>“this game pays big right now”</b>, the opposite of what it means. A fairness bet only works if people can read the fairness, so I put it where people pick a game. Every tile shows its RTP with a one-tap plain-language guide, and <b>Epic Pulse</b> plots each game's live payout numbers against the house average, where a sceptical player can check the claim themselves."],
         beat: { outcome: "RTP went from a number people misread to a reason to pick a game." },
         gallery: [
