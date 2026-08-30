@@ -405,15 +405,15 @@ const CASES = {
         figure: { src: "images/winning-over-sweden/competitive-audit.webp", caption: "Competitive audit: five Swedish operators scored on criteria adapted from Nielsen's heuristics." } },
       { verdict: { label: "What we decided", text: "The bet mostly held, with a twist. Savvy players who hunt <em>Max-RTP</em> games reward visible fairness, and their loyalty is worth a little margin. Most players, though, misread the number. So the plan became: explain fairness in plain language, and reassure everyone else with the things they already trust: familiar payment methods and game providers." } },
 
-      // ---------- GOAL 3 ----------
-      { chapter: { no: "Goal 03", hud: "The journey", title: "Turn trust into players",
-        blurb: "Smooth out the journey, and lead with the signals players said they trust." } },
       { eyebrow: "Making fairness legible", h: "Putting it in plain language",
         p: ["Players read <em>“97% RTP”</em> as <b>“this game pays big right now”</b>, the opposite of what it means. A fairness bet only works if people can read the fairness, so I put it where people pick a game. Every tile shows its RTP with a one-tap plain-language guide, and <b>Epic Pulse</b> plots each game's live payout numbers against the house average, where a sceptical player can check the claim themselves."],
         beat: { outcome: "RTP went from a number people misread to a reason to pick a game." },
         gallery: [
           { src: "images/winning-over-sweden/rtp-lobby.webp", caption: "RTP surfaced on every game tile in the lobby, with a tap-through “Return to player (RTP): read guide” explainer." },
           { src: "images/winning-over-sweden/epic-pulse.webp", caption: "Epic Pulse, a live transparency readout: a game's recent RTP trend against the ~96% house average, plus how often small, big and mega wins have actually landed over the last 27,000 rounds." }] },
+      // ---------- GOAL 3 ----------
+      { chapter: { no: "Goal 03", hud: "The journey", title: "Turn trust into players",
+        blurb: "Smooth out the journey, and lead with the signals players said they trust." } },
       { eyebrow: "From BankID to gameplay",
         p: ["The end-to-end journey, BankID registration → first deposit → gameplay → responsible-gambling tools, is where a first-time player can quietly get lost. I mapped the whole thing to find where to make steps clearer and add reassurance before people needed to ask, so no one gets stranded partway through."],
         figure: { src: "images/winning-over-sweden/user-journey.webp", caption: "The complete end-to-end journey map." } },
