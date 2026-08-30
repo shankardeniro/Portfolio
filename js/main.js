@@ -450,7 +450,7 @@ const CASES = {
             { x: 46, y: 55, tag: "Hierarchy", text: "The benefit leads. <b>“100%”</b> is the single largest element on the screen, above the brand and even the CTA, so a first-time player grasps the upside in under a second." },
             { x: 50, y: 67, tag: "Microcopy", text: "The catch, up front. Min-deposit, <b>35× wagering</b> and 60-day expiry sit inline on the offer, in plain sight. Goal 02 showed Swedish players distrust hidden conditions, so honesty is the trust play." },
             { x: 51, y: 75, tag: "Component choice", text: "Two actions become one. Deposit and bonus-claim collapse into a <b>single primary button</b>, the Finding 01 fix, ending the back-and-forth between a deposit step and a separate claim." }] } },
-      { eyebrow: "Finding 02 · Live-casino navigation",
+      { eyebrow: "Finding 02 · Live-casino navigation", h: "Make the verticals obvious",
         p: ["Asked to open a live-casino game, participants couldn't find the live-casino navigation, buried in the bottom menu. I moved it up into a clear top tab bar, separating the two sections. Testers found it instantly and task success went up."],
         compare: { before: { src: "images/winning-over-sweden/livecasino-before.webp" }, after: { src: "images/winning-over-sweden/livecasino-after.webp" },
           decision: "<b>Moved up into a top tab bar.</b> Casino and Live Casino now sit side by side at the top, so the two read as separate the moment the lobby loads, no digging through the bottom menu to switch." } },
