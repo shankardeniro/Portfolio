@@ -415,7 +415,9 @@ const CASES = {
         blurb: "Smooth out the journey, and lead with the signals players said they trust." } },
       { p: ["I ran seven moderated think-aloud sessions over screen share, with players ranging from recreational to industry insiders. Participants came through UserInterviews.com, matched to our profile by a screener survey, and every session was recorded with consent and streamed live to stakeholders.",
         "The focus was where the money moves: onboarding, the bonus journey and payments, watching for hesitation, confusion or drop-off. Seeing where people stalled showed us exactly what to fix."],
-        figure: { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress." } },
+        figure: { src: "images/winning-over-sweden/research-plan.webp", zoom: true, caption: "The research plan: objectives, method, the task scenarios from first impression to gameplay, and the SUS questionnaire. Screens blurred for confidentiality; planned for ten sessions, seven ran. Tap to read in full." },
+        figures: [
+          { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress." } ] },
       { h: "Excellent overall. Specific frictions.",
         sus: { score: "83.2", benchmark: 68, caption: "System Usability Scale across the seven sessions: “excellent”, an A grade, well above the industry benchmark of 68." },
         p: ["A high score doesn't mean nothing is wrong; it means the problems are specific. The recordings surfaced a dozen recurring patterns, each backed by a participant quote and the moment it happened, and they clustered into three stories."],
@@ -700,6 +702,7 @@ const IMG_DIMS = {
   "reimagining-onboarding/iteration-6.webp": [1920, 1165], "reimagining-onboarding/iteration-7.webp": [1920, 937],
   "reimagining-onboarding/reg-step1.webp": [375, 779], "reimagining-onboarding/reg-step2.webp": [375, 1177],
   "reimagining-onboarding/usability-session.webp": [1600, 1198],
+  "winning-over-sweden/research-plan.webp": [1800, 1790],
 };
 function imgTag(src, alt) {
   const d = IMG_DIMS[src.split("/").slice(-2).join("/")];
