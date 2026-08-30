@@ -401,7 +401,7 @@ const CASES = {
       { eyebrow: "Reading the field",
         p: ["If players misread RTP, leading on it could be a costly mistake. To see whether an opening was still there, I audited five competitors on criteria adapted from Nielsen's heuristics: how clearly they handled RTP, responsible gaming and onboarding."],
         beat: { outcome: "There's a growing, valuable group who actively hunt for <b>Max-RTP</b> games, and no one had claimed that ground." },
-        figure: { src: "images/winning-over-sweden/competitive-audit.webp", caption: "Competitive audit: five Swedish operators scored on criteria adapted from Nielsen's heuristics." } },
+        figure: { src: "images/winning-over-sweden/competitive-audit.webp", zoom: true, side: true, caption: "Competitive audit: five operators scored on criteria adapted from Nielsen's heuristics. Tap to read in full." } },
       { verdict: { label: "What we decided", text: "The bet mostly held, with a twist. Savvy players who hunt <em>Max-RTP</em> games reward visible fairness, and their loyalty is worth a little margin. Most players, though, misread the number. So the plan became: explain fairness in plain language, and reassure everyone else with the things they already trust: familiar payment methods and game providers." } },
 
       { eyebrow: "The follow-through", h: "What 97% really means",
@@ -415,7 +415,7 @@ const CASES = {
         blurb: "Smooth out the journey, and lead with the signals players said they trust." } },
       { p: ["I ran seven moderated think-aloud sessions over screen share, with players ranging from recreational to industry insiders. Participants came through UserInterviews.com, matched to our profile by a screener survey, and every session was recorded with consent and streamed live to stakeholders.",
         "The focus was where the money moves: onboarding, the bonus journey and payments, watching for hesitation, confusion or drop-off. Seeing where people stalled showed us exactly what to fix."],
-        figure: { src: "images/winning-over-sweden/research-plan.webp", zoom: true, caption: "The research plan: objectives, method, the task scenarios from first impression to gameplay, and the SUS questionnaire. Screens blurred for confidentiality; planned for ten sessions, seven ran. Tap to read in full." },
+        figure: { src: "images/winning-over-sweden/research-plan.webp", zoom: true, side: true, caption: "The research plan: objectives, tasks and the SUS questionnaire. Screens blurred; planned for ten sessions, seven ran. Tap to read in full." },
         figures: [
           { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress." } ] },
       { h: "Excellent overall. Specific frictions.",
@@ -1184,7 +1184,7 @@ function renderCase(slug) {
       media += f.bare
         ? `<figure class="cs-figure cs-figure--bare${f.wide ? " cs-figure--wide" : ""}">${imgTag(f.src, f.caption)}${cap}</figure>`
         : f.zoom
-        ? `<figure class="cs-figure cs-figure--capped"><button class="cs-figzoom" data-zoom-src="${f.src}" aria-label="${esc("Expand: " + (f.caption || "image"))}">${framed(f.src, f.caption)}<span class="cs-expand" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span></button>${cap}</figure>`
+        ? `<figure class="cs-figure cs-figure--capped${f.side ? " cs-figure--side" : ""}"><button class="cs-figzoom" data-zoom-src="${f.src}" aria-label="${esc("Expand: " + (f.caption || "image"))}">${framed(f.src, f.caption)}<span class="cs-expand" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span></button>${cap}</figure>`
         : `<figure class="cs-figure">${framed(f.src, f.caption)}${cap}</figure>`;
     }
     // stacked full-width figures, for images of different aspect ratios that would
