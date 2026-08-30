@@ -635,10 +635,16 @@ main{position:relative;z-index:2}
   background:color-mix(in srgb,#05060a 52%,transparent);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
   opacity:0;transform:scale(.9);transition:opacity .2s,transform .2s}
 .cs-car__slide:hover .cs-expand,.cs-car__slide:focus-visible .cs-expand{opacity:1;transform:none}
-/* side carousels show each screen whole, no crop, no "more below" fade */
-.cs-car--side .cs-car__slide .cs-frame{height:auto}
-.cs-car--side .cs-car__slide .cs-frame img{height:auto;object-fit:initial;object-position:initial}
-.cs-car--side .cs-car__slide .cs-frame::after{content:none}
+/* side and whole-screen carousels show each screen uncropped, no fade */
+:is(.cs-car--side,.cs-car--whole) .cs-car__slide .cs-frame{height:auto}
+:is(.cs-car--side,.cs-car--whole) .cs-car__slide .cs-frame img{height:auto;object-fit:initial;object-position:initial}
+:is(.cs-car--side,.cs-car--whole) .cs-car__slide .cs-frame::after{content:none}
+.cs-car--whole .cs-car__slide{width:max(240px,calc((100% - 2rem)/3))}
+/* flush sections opt out of the Swiss offset: everything runs from the left edge */
+@media(min-width:861px){
+  .cs-section.cs-section--flush .cs-stage>*{grid-column:1/-1}
+  .cs-section.cs-section--flush.cs-section .cs-stage>.cs-eyebrow{grid-column:1/-1;grid-row:auto;padding-top:0;border-top:0}
+}
 .cs-expand svg{width:15px;height:15px}
 .cs-car__slide figcaption{font-size:var(--fs-caption);color:var(--ink-dim);text-align:center;
   letter-spacing:.02em;max-width:320px;margin:0 auto;line-height:1.4}
