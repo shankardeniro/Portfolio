@@ -327,7 +327,7 @@ const CASES = {
   "winning-over-sweden": {
     accent: "#c6f24e", num: "01",
     title: "Winning Over Sweden",
-    tagline: "Getting a new casino licensed and launched in Sweden, one of the strictest gambling markets there is.",
+    tagline: "Getting a new casino licensed and launched in Sweden, one of the strictest gambling markets.",
     meta: { Role: "Research, Regulatory & Design Strategy", Duration: "6 months", Team: "Sole designer · PM · 8 engineers", Year: "2025" },
     hero: "images/winning-over-sweden/hero.webp",
     heroStage: {

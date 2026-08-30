@@ -55,7 +55,7 @@ const base = [
         text: "The end-to-end journey, BankID registration → first deposit → gameplay → responsible-gambling tools, is where a first-time player can quietly get lost. I mapped the whole thing to add reassurance before people needed to ask." },
       { f: "lobby-desktop.webp", cap: "The launched lobby: Wunderino, Sweden, 2025.",
         sec: "The launch",
-        text: "Getting a new casino licensed and launched in Sweden, one of the strictest gambling markets there is: get the licence, bet on being the fairest option, then turn that into actual players." },
+        text: "Getting a new casino licensed and launched in Sweden, one of the strictest gambling markets: get the licence, bet on being the fairest option, then turn that into actual players." },
       { f: "ds-colors.webp", cap: "Primitives, the full brand, neutral and semantic colour ramps.",
         sec: "Goal 01 · Built on tokens",
         text: "Nothing points at a raw colour or size: primitives feed semantic tokens named for what they're for, and tokens feed the components. Change one token and it updates everywhere, twenty-odd flows in sync." },
