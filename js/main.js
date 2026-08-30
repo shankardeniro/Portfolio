@@ -416,7 +416,7 @@ const CASES = {
         beat: { outcomeLabel: "AI in the loop", outcome: "I used AI to generate alternative wordings for the interview guide and screener questions, then reviewed them for leading questions before anything reached a participant." },
         figure: { src: "images/winning-over-sweden/research-plan.webp", zoom: true, side: true, caption: "The research plan: objectives, tasks and the SUS questionnaire. Planned for ten sessions, seven ran. Tap to read in full." },
         figures: [
-          { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress." } ] },
+          { src: "images/winning-over-sweden/usability-session.mp4", caption: "A moderated think-aloud session in progress." } ] },
       { h: "Excellent overall. Specific frictions.",
         sus: { score: "83.2", benchmark: 68, caption: "System Usability Scale across the seven sessions: “excellent”, an A grade, well above the industry benchmark of 68." },
         p: ["A high score doesn't mean nothing is wrong; it means the problems are specific. The recordings surfaced a dozen recurring patterns, each backed by a participant quote and the moment it happened, and they clustered into three stories."],
@@ -701,6 +701,7 @@ const IMG_DIMS = {
   "reimagining-onboarding/reg-step1.webp": [375, 779], "reimagining-onboarding/reg-step2.webp": [375, 1177],
   "reimagining-onboarding/usability-session.webp": [1600, 1198],
   "winning-over-sweden/research-plan.webp": [1800, 1790],
+  "winning-over-sweden/usability-session.mp4": [800, 446],
 };
 function imgTag(src, alt) {
   const d = IMG_DIMS[src.split("/").slice(-2).join("/")];
