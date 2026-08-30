@@ -476,7 +476,7 @@ const CASES = {
             "A no-budget research sprint showed most players <b>misread RTP</b> before we'd bet the brand on it. Cheapest research I've run, and the most useful, it changed the whole strategy."] },
           { tone: "no", label: "Trust comes from familiar things", items: [
             "Players ignored licence badges and treated <b>BankID, Swish</b> and familiar providers as the real proof of safety. Reassurance has to sit where people already look."] }] },
-      { verdict: { label: "The takeaway", text: "In a mature, regulated market, features didn't win us anything. Trust did, and it had to be visible early. Fast, honest research, compliance in the wireframes from day one, and credibility borrowed from names players already believe. That's what I'd do again." } },
+      { verdict: { label: "The takeaway", text: "The localisation strategy made the entry smooth: built around Swedish regulations and Swedish expectations, the experience walked into a crowded market looking like a credible choice, and early adoption followed. What stayed with me is that little of it came from features. Players trusted us for smaller reasons: research that listened, safety rules designed in from the start, and the logos of things they already believed in. I'd start there again tomorrow." } },
     ],
   },
   "user-research-framework": {
