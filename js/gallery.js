@@ -67,7 +67,7 @@ const base = [
         text: "Engineering couldn't start until the licensing-critical screens existed, so the responsible-gaming and account screens went straight to high-fidelity, the MVP the whole licence application was built on." },
       { f: "trust-after.webp", cap: "Trust signals, after the redesign.",
         sec: "Goal 03 · Finding 03: Trust signals",
-        text: "Every participant scanned first for BankID, Swish and known provider logos as proof they could trust us, and read their absence as a red flag. So the redesign leads with the names people already believe." },
+        text: "Participants scanned the interface specifically for BankID, Swish and known provider logos, and read their absence as a significant red flag. So prominent logos of the deposit methods and BankID were added to reinforce trust." },
     ],
   },
   {
