@@ -377,7 +377,7 @@ const CASES = {
           { src: "images/winning-over-sweden/mvp-account-summary.webp", caption: "Account-summary modal" },
           { src: "images/winning-over-sweden/mvp-reality-check.webp", caption: "Reality-check interruption" }] },
       { result: { n: "0", label: "compliance violations in the first six months",
-        note: "Goal 1 done. Licence secured, and the baseline of trust everything else builds on." } },
+        note: "Licence secured, and the baseline of trust everything else builds on." } },
 
       // ---------- GOAL 2 ----------
       { chapter: { no: "Goal 02", hud: "The bet", title: "Bet on being the fairest",
@@ -448,18 +448,18 @@ const CASES = {
           notes: [
             { x: 93, y: 20, tag: "State · disclosure", text: "Detail on demand. The full bonus mechanics sit behind the <b>“i”</b>, a tap-through leaflet, so the screen stays scannable while the curious can still dig in. Progressive disclosure beats a wall of terms." },
             { x: 46, y: 55, tag: "Hierarchy", text: "The benefit leads. <b>“100%”</b> is the single largest element on the screen, above the brand and even the CTA, so a first-time player grasps the upside in under a second." },
-            { x: 50, y: 67, tag: "Microcopy", text: "The catch, up front. Min-deposit, <b>35× wagering</b> and 60-day expiry sit inline on the offer, in plain sight. Goal 02 showed Swedish players distrust hidden conditions, so honesty is the trust play." },
-            { x: 51, y: 75, tag: "Component choice", text: "Two actions become one. Deposit and bonus-claim collapse into a <b>single primary button</b>, the Finding 01 fix, ending the back-and-forth between a deposit step and a separate claim." }] } },
+            { x: 50, y: 67, tag: "Microcopy", text: "The catch, up front. Min-deposit, <b>35× wagering</b> and 60-day expiry sit inline on the offer, in plain sight. In testing, veterans went looking for gaps in bonus terms, so honesty is the trust play." },
+            { x: 51, y: 75, tag: "Component choice", text: "Two actions become one. Deposit and bonus-claim collapse into a <b>single primary button</b>, so players no longer bounce between a deposit step and a separate claim." }] } },
       { eyebrow: "Finding 02 · Live-casino navigation", h: "Make the verticals obvious",
         p: ["Asked to open a live-casino game, participants couldn't find the live-casino navigation, buried in the bottom menu. I moved it up into a clear top tab bar, separating the two sections. Testers found it instantly and task success went up."],
         compare: { before: { src: "images/winning-over-sweden/livecasino-before.webp" }, after: { src: "images/winning-over-sweden/livecasino-after.webp" },
           decision: "<b>Moved up into a top tab bar.</b> Casino and Live Casino now sit side by side at the top, so the two read as separate the moment the lobby loads, no digging through the bottom menu to switch." } },
       { eyebrow: "Finding 03 · Trust signals", h: "Borrow the trust they already have",
-        p: ["At first glance, participants scanned the interface specifically for “BankID”, “Swish” and known provider logos, just as Goal 02 predicted. These were consistently identified as key trust elements, and their absence was read as a significant red flag. So prominent logos of the deposit methods and BankID were added to reinforce trust with our users."],
+        p: ["At first glance, participants scanned the interface specifically for “BankID”, “Swish” and known provider logos, just as the kiosk interviews had predicted. These were consistently identified as key trust elements, and their absence was read as a significant red flag. So prominent logos of the deposit methods and BankID were added to reinforce trust with our users."],
         beat: { quote: "BankID is number one. That's the first thing I look at.",
           cite: "Rolf, usability participant" },
         compare: { before: { src: "images/winning-over-sweden/trust-before.webp" }, after: { src: "images/winning-over-sweden/trust-after.webp" },
-          decision: "<b>Lead with the logos people already trust.</b> BankID, Swish and Trustly sit right where the decision happens, each with a plain reassurance, secure login, fast withdrawals. Goal 02 showed people read familiar payment methods as proof of safety, so the screen <em>borrows</em> trust from names they already believe." } },
+          decision: "<b>Lead with the logos people already trust.</b> BankID, Swish and Trustly sit right where the decision happens, each with a plain reassurance, secure login, fast withdrawals. The interviews showed people read familiar payment methods as proof of safety, so the screen <em>borrows</em> trust from names they already believe." } },
       // ---------- CLOSE: outcome + learnings in one section ----------
       { eyebrow: "The outcome", h: "A smoother, more trusted journey",
         p: ["The localisation strategy helped us enter the Swedish market in a way that felt relevant and credible from the start. We built around local regulations, listened closely to players, and used familiar signals such as BankID and Swish to create confidence throughout the experience. Early adoption reinforced something I'd take into any future launch: understand what people already trust, design safety in from the beginning, and build from there."] },
