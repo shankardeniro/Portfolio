@@ -407,7 +407,7 @@ const CASES = {
 
       // ---------- GOAL 3 ----------
       { chapter: { no: "Goal 03", hud: "The journey", title: "Turn trust into players",
-        blurb: "Licence in hand, now make the fairness bet obvious in the product, smooth out the journey, and show players the things they told us they look for." } },
+        blurb: "Smooth out the journey, and lead with the signals players said they trust." } },
       { eyebrow: "Making fairness legible", h: "Putting it in plain language",
         p: ["Players read <em>“97% RTP”</em> as <b>“this game pays big right now”</b>, the opposite of what it means. A fairness bet only works if people can read the fairness, so I put it where people pick a game. Every tile shows its RTP with a one-tap plain-language guide, and <b>Epic Pulse</b> plots each game's live payout numbers against the house average, where a sceptical player can check the claim themselves."],
         beat: { outcome: "RTP went from a number people misread to a reason to pick a game." },
