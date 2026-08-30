@@ -569,7 +569,7 @@ const CASES = {
           { label: "Other", value: 7.7 },
           { label: "The instructions are unclear", value: 2.6 } ] } },
       { eyebrow: "User interviews", h: "Seven conversations, in depth", p: [
-        "I screened <b>7 participants</b> for in-house interviews on the whole onboarding journey, with the verification steps under the microscope, probing where people stall, what they misread about KYC, and where privacy worries set in." ],
+        "From the survey I picked <b>7 people</b> to sit down with. We walked through the whole onboarding journey together, slowing down at verification: where they stalled, what KYC meant to them, and what made them nervous about privacy." ],
         figure: { src: "images/reimagining-onboarding/interview.mp4", caption: "A video snippet from a user-interview session." } },
       { eyebrow: "Research synthesis", h: "From scattered insight to clear themes", p: [
         "We clustered everything from the surveys and interviews into an affinity map: four themes covering what users expected and where they got stuck." ],
