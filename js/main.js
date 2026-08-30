@@ -360,7 +360,7 @@ const CASES = {
           { src: "images/winning-over-sweden/ds-colors.webp", caption: "Primitives, the full brand, neutral and semantic colour ramps." },
           { src: "images/winning-over-sweden/ds-typography.webp", caption: "Type system, Bovine MVB for display, Noto Sans for everything else." },
           { src: "images/winning-over-sweden/ds-color-tokens.webp", caption: "Semantic colour tokens, each bound to a primitive so themes change in one place." }] },
-      { eyebrow: "Components", h: "Each one, fully specified",
+      { eyebrow: "The handover", h: "The component library",
         p: ["On top of the tokens sat the components, every variant, state and rule pinned down so engineering didn't have to guess. Here's the library as I handed it over:"],
         carousel: [
           { src: "images/winning-over-sweden/ds-buttons.webp", caption: "Buttons, the full hierarchy (primary to ghost) with every state and icon pairing." },

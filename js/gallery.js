@@ -63,7 +63,7 @@ const base = [
         sec: "Goal 01 · Built on tokens",
         text: "Going straight to high-fidelity on a licensing deadline only works if you're not redrawing everything each time, so it all sat on a shared system, tokens and components defined once and reused everywhere." },
       { f: "ds-game-card.webp", cap: "Game cards, the core lobby unit, with Epic Pulse built in.",
-        sec: "Goal 01 · Each one, fully specified",
+        sec: "Goal 01 · The component library",
         text: "On top of the tokens sat the components, every variant, state and rule pinned down so engineering didn't have to guess." },
       { f: "mvp-reality-check.webp", cap: "The reality-check interruption, a licence requirement made calm.",
         sec: "Goal 01 · The screens that get us licensed",
