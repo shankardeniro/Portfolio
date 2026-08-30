@@ -328,13 +328,13 @@ const CASES = {
     accent: "#c6f24e", num: "01",
     title: "Winning Over Sweden",
     tagline: "Getting a new casino licensed and launched in Sweden, one of the strictest gambling markets.",
-    meta: { Role: "Research, Regulatory & Design Strategy", Duration: "6 months", Team: "PM · 8 engineers", Year: "2025" },
+    meta: { Role: "Research, Regulatory & Design Strategy", Duration: "6 months", Team: "PM · 8 engineers", Year: "2025–2026" },
     hero: "images/winning-over-sweden/hero.webp",
     heroStage: {
       desktop: "images/winning-over-sweden/lobby-desktop.webp",
       mobile: "images/winning-over-sweden/lobby-mobile.webp",
       kicker: "Wunderino",
-      label: "Sweden · 2025",
+      label: "Sweden · 2025–2026",
     },
     sections: [
       { eyebrow: "Overview", h: "Launching where the rules are strict", p: [
@@ -418,7 +418,7 @@ const CASES = {
         figures: [
           { src: "images/winning-over-sweden/usability-session.mp4", caption: "A moderated think-aloud session in progress." } ] },
       { h: "Excellent overall. Specific frictions.",
-        sus: { score: "83.2", benchmark: 68, caption: "System Usability Scale across the seven sessions: “excellent”, an A grade, well above the industry benchmark of 68." },
+        sus: { score: "83.2", benchmark: 68, caption: "System Usability Scale across the seven sessions: “excellent”, an A grade, well above the cross-industry SUS average of 68 (Sauro & Lewis)." },
         p: ["A high score doesn't mean nothing is wrong; it means the problems are specific. The recordings surfaced a dozen recurring patterns, each backed by a participant quote and the moment it happened, and they clustered into three stories."],
         beat: { outcomeLabel: "AI in the loop", outcome: "AI accelerated synthesis and exploration; it did not replace participant evidence or design judgment. I checked every generated theme against the underlying notes and recordings." },
         cards: [
