@@ -33,7 +33,7 @@ const base = [
         sec: "Overview · Launching where the rules are strict",
         text: "Sweden has one of the strictest, most mature gambling markets in Europe. Spelinspektionen can revoke a licence over a single violation. Before we could convince any player of anything, we had to convince the regulator we were safe." },
       { f: "requirements-map.webp", cap: "The UX Requirements Map: regulation, to UI pattern, to design action.",
-        sec: "Goal 01 · Turning regulation into UX",
+        sec: "Goal 01 · Regulation, mapped to UX",
         text: "I went through every Spelinspektionen requirement and mapped each one to a UI pattern and the copy it needed. By the first wireframe, compliance was already part of the design." },
       { f: "rtp-lobby.webp", cap: "RTP surfaced on every game tile, with a tap-through explainer.",
         sec: "Goal 02 · What 97% really means",

@@ -345,10 +345,9 @@ const CASES = {
       // ---------- GOAL 1 ----------
       { chapter: { no: "Goal 01", hud: "Compliance", title: "Get the licence",
         blurb: "Meet every Swedish regulation. It's the price of entry, and the first thing that makes players trust you." } },
-      { eyebrow: "Turning regulation into UX",
-        p: ["Swedish law hands you dozens of player-safety rules: deposit limits, reality checks, session reminders. Add them at the end and the whole experience buckles under them. So I went through every <b>Spelinspektionen</b> (the regulator) requirement and mapped each one to a UI pattern and the copy it needed. By the first wireframe, compliance was already part of the design."],
+      { p: ["Swedish law hands you dozens of player-safety rules: deposit limits, reality checks, session reminders. Add them at the end and the whole experience buckles under them. So I went through every <b>Spelinspektionen</b> (the regulator) requirement and mapped each one to a UI pattern and the copy it needed. By the first wireframe, compliance was already part of the design."],
         figure: { src: "images/winning-over-sweden/requirements-map.webp", zoom: true, caption: "The UX Requirements Map, regulation → UX pattern → design action. Tap to read in full." } },
-      { eyebrow: "The heaviest flows", h: "Compliance-heavy flows, made clear",
+      { h: "Compliance-heavy flows, made clear",
         p: ["I developed detailed wireframes mapping each step of the Swedish user journey, with particular attention to compliance-heavy areas like <b>registration</b> and <b>responsible gaming</b>, exactly where first-time players tend to quit. Each wireframe was tested for clarity, hierarchy, and alignment with both legal requirements and user expectations. Feedback loops with compliance and local testing led to clear, concise layouts with strong trust signals and support access.",
         "To accommodate tight timelines for getting our product licensed, I leveraged our established design language to move directly into high-fidelity, then refined the solution through iterative feedback loops with product and engineering."] },
       { eyebrow: "The design system", h: "One system behind every screen",
@@ -417,7 +416,7 @@ const CASES = {
       { p: ["I ran seven moderated think-aloud sessions over screen share, with players ranging from recreational to industry insiders, and stakeholders watching live. Seeing where people hesitated showed us exactly what to fix."],
         beat: { outcome: "A dozen recurring patterns, from feature comprehension to money decisions." },
         figure: { src: "images/winning-over-sweden/usability-session.webp", caption: "A moderated think-aloud session in progress. Participants were recruited through UserInterviews.com and compensated for their time." } },
-      { eyebrow: "From signal to priorities", h: "Excellent overall. Specific frictions.",
+      { h: "Excellent overall. Specific frictions.",
         sus: { score: "83.2", benchmark: 68, caption: "System Usability Scale across the seven sessions: “excellent”, an A grade, well above the industry benchmark of 68." },
         p: ["A high score doesn't mean nothing is wrong; it means the problems are specific. The recordings surfaced a dozen recurring patterns, each backed by a participant quote and the moment it happened, and they clustered into three stories."],
         cards: [
