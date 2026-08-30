@@ -381,7 +381,6 @@ const CASES = {
       // ---------- GOAL 2 ----------
       { chapter: { no: "Goal 02", hud: "The bet", title: "Bet on being the fairest",
         blurb: "Stand out with the best payout rates in the market, but first check whether players actually care." } },
-      { quote: "The whole plan rested on an assumption nobody had tested." },
       { eyebrow: "The bet",
         p: ["Compliance got us in the door, but it wouldn't make us stand out. The plan was to be the fairest casino in the market, with the best <em>Return-to-Player</em> (RTP) rates anywhere, and it hinged on one thing nobody had checked: <em>do players even understand or care about RTP?</em> So before we bet the brand on it, I treated it as a question to test. With no budget, I ran short kiosk interviews with real players, using prompt cards they could answer in seconds."],
         figrow: [
