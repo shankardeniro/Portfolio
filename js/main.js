@@ -400,9 +400,9 @@ const CASES = {
           { tone: "aha", label: "What surprised us", items: [
             "Which games a casino had, and how well they were <b>curated</b>, mattered far more to people's choice than we'd assumed."] }] },
       { eyebrow: "Reading the field",
-        p: ["If players misread RTP, leading on it could be a costly mistake. To see whether an opening was still there, I scored five competitors against Nielsen's heuristics on how clearly they handled RTP, responsible gaming and onboarding."],
+        p: ["If players misread RTP, leading on it could be a costly mistake. To see whether an opening was still there, I audited five competitors on criteria adapted from Nielsen's heuristics: how clearly they handled RTP, responsible gaming and onboarding."],
         beat: { outcome: "There's a growing, valuable group who actively hunt for <b>Max-RTP</b> games, and no one had claimed that ground." },
-        figure: { src: "images/winning-over-sweden/competitive-audit.webp", caption: "Competitive audit, five Swedish operators scored against Nielsen's heuristics." } },
+        figure: { src: "images/winning-over-sweden/competitive-audit.webp", caption: "Competitive audit: five Swedish operators scored on criteria adapted from Nielsen's heuristics." } },
       { verdict: { label: "What we decided", text: "The bet mostly held, with a twist. Savvy players who hunt <em>Max-RTP</em> games reward visible fairness, and their loyalty is worth a little margin. Most players, though, misread the number. So the plan became: explain fairness in plain language, and reassure everyone else with the things they already trust: familiar payment methods and game providers." } },
 
       // ---------- GOAL 3 ----------

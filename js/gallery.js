@@ -41,7 +41,7 @@ const base = [
       { f: "epic-pulse.webp", cap: "Epic Pulse: a game's live RTP trend against the house average.",
         sec: "Goal 03 · Making fairness legible",
         text: "Epic Pulse plots each game's live payout numbers against the ~96% house average, where a sceptical player can check the fairness claim themselves. RTP went from a number people misread to a reason to pick a game." },
-      { f: "competitive-audit.webp", cap: "Five Swedish operators scored against Nielsen's heuristics.",
+      { f: "competitive-audit.webp", cap: "Five Swedish operators scored on criteria adapted from Nielsen's heuristics.",
         sec: "Goal 02 · Reading the field",
         text: "If players misread RTP, leading on it could be a costly mistake. Scoring five competitors showed a growing, valuable group who actively hunt Max-RTP games, and no one had claimed that ground." },
       { f: "interview-guide.webp", cap: "The kiosk-interview guide, used in the field across Stockholm.",
