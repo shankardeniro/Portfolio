@@ -371,7 +371,8 @@ const CASES = {
       { eyebrow: "The screens that get us licensed",
         p: ["Engineering couldn't start on the architecture until the licensing-critical screens existed. So I took the responsible-gaming and account screens, deposit limits, account summary, reality check, straight to high-fidelity, and the team had something real to build against."],
         beat: { outcome: "Shipped the MVP the whole licence application was built on." },
-        gallery: [
+        carouselSide: true,
+        carousel: [
           { src: "images/winning-over-sweden/mvp-deposit-limit.webp", caption: "Deposit-limit step" },
           { src: "images/winning-over-sweden/mvp-account-summary.webp", caption: "Account-summary modal" },
           { src: "images/winning-over-sweden/mvp-reality-check.webp", caption: "Reality-check interruption" }] },
@@ -458,15 +459,10 @@ const CASES = {
           cite: "Rolf, usability participant" },
         compare: { before: { src: "images/winning-over-sweden/trust-before.webp" }, after: { src: "images/winning-over-sweden/trust-after.webp" },
           decision: "<b>Lead with the logos people already trust.</b> BankID, Swish and Trustly sit right where the decision happens, each with a plain reassurance, secure login, fast withdrawals. Goal 02 showed people read familiar payment methods as proof of safety, so the screen <em>borrows</em> trust from names they already believe." } },
-      { eyebrow: "The payoff", h: "A smoother, more trusted journey", p: [
-        "Fixing those three findings moved the numbers the project was judged on: the jump in claimed bonuses and first-minute deposits." ] },
-
-      // ---------- CLOSE ----------
-      { verdict: { label: "The outcome", text: "Localising for Sweden was never about translation. Compliance got us the licence, the tested bet on fairness gave the brand its reason to exist, and the smoother journey turned that into players: zero violations in six months, 58% more claimed bonuses, and 86% of deposits landing inside the first minute." } },
-
-      // ---------- LEARNINGS & TAKEAWAY ----------
-      { eyebrow: "Learnings", h: "What I'd carry into the next launch",
-        p: ["Three things stuck with me, the ones I'd reach for the next time a regulated market comes up."],
+      // ---------- CLOSE: outcome + learnings in one section ----------
+      { eyebrow: "The outcome", h: "A smoother, more trusted journey",
+        p: ["Fixing those three findings moved the numbers the project was judged on. Localising for Sweden was never about translation: compliance got us the licence, the tested bet on fairness gave the brand its reason to exist, and the smoother journey turned that into players, zero violations in six months, 58% more claimed bonuses, and 86% of deposits landing inside the first minute.",
+        "Three things stuck with me, the ones I'd reach for the next time a regulated market comes up."],
         cards: [
           { tone: "yes", label: "Design compliance in", items: [
             "Mapping every <b>Spelinspektionen</b> rule to a UI pattern made safety part of the design from the first wireframe, and kept twenty-odd flows consistent under a deadline."] },
@@ -474,7 +470,6 @@ const CASES = {
             "A no-budget research sprint showed most players <b>misread RTP</b> before we'd bet the brand on it. Cheapest research I've run, and the most useful, it changed the whole strategy."] },
           { tone: "no", label: "Trust comes from familiar things", items: [
             "Players ignored licence badges and treated <b>BankID, Swish</b> and familiar providers as the real proof of safety. Reassurance has to sit where people already look."] }] },
-      { verdict: { label: "The takeaway", text: "The localisation strategy made the entry smooth: built around Swedish regulations and Swedish expectations, the experience walked into a crowded market looking like a credible choice, and early adoption followed. What stayed with me is that little of it came from features. Players trusted us for smaller reasons: research that listened, safety rules designed in from the start, and the logos of things they already believed in. I'd start there again tomorrow." } },
     ],
   },
   "user-research-framework": {

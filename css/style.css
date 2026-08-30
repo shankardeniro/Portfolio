@@ -358,6 +358,7 @@ main{position:relative;z-index:2}
   /* a figure flagged `side` sits in the open left column beside the prose */
   .cs-section:not(.cs-chapter) .cs-stage>:is(.cs-figure--side,.cs-car--side){grid-column:1;grid-row:1/span 8;align-self:start;margin:0}
   .cs-section:not(.cs-chapter) .cs-stage:has(>.cs-eyebrow)>:is(.cs-figure--side,.cs-car--side){grid-row:2/span 8}
+  .cs-section:not(.cs-chapter) .cs-stage>.cs-car--side{width:min(100%,316px)}
   .cs-section:not(.cs-chapter) .cs-stage>.cs-car--side .cs-car__slide{width:min(100%,316px)}
   .cs-section:not(.cs-chapter) .cs-stage>.cs-figure--side .cs-frame,
   .cs-section:not(.cs-chapter) .cs-stage>.cs-figure--side .cs-frame img{height:auto;width:100%;max-height:none}
@@ -734,7 +735,7 @@ body.zoom-open{overflow:hidden}
 /* capped / zoom figure + carousel slides — pin to the same height */
 [data-slug="winning-over-sweden"] .cs-figure--capped .cs-frame,
 [data-slug="winning-over-sweden"] .cs-figure--capped .cs-frame img{height:var(--cs-img-h);max-height:var(--cs-img-h)}
-[data-slug="winning-over-sweden"] .cs-car__slide .cs-frame{height:var(--cs-img-h)}
+[data-slug="winning-over-sweden"] .cs-car:not(.cs-car--side) .cs-car__slide .cs-frame{height:var(--cs-img-h)}
 /* gallery — centred flex row, each tile at the shared height, frame hugs the image */
 [data-slug="winning-over-sweden"] .cs-gallery{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start}
 [data-slug="winning-over-sweden"] .cs-gallery figure{flex:0 0 auto;width:-moz-fit-content;width:fit-content;min-width:0;max-width:100%}
