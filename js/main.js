@@ -550,7 +550,7 @@ const CASES = {
         "<em>How do we guide users through sign-up and KYC verification so more of them make it out the other side?</em>",
         "Before starting discovery, we asked ourselves two questions and planned the study around them:" ],
         list: [
-          "What might be the reasons for users not completing the process / getting verified?",
+          "Why do users drop out before getting verified?",
           "How efficient are our sign-up and KYC processes?"] },
 
       // ---------- ACT 1 ----------
