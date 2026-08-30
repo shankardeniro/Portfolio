@@ -543,7 +543,7 @@ const CASES = {
           { label: "Pre-checked", count: 66294, drop: "11,791", at: "pre-check" },
           { label: "Attempted verification", count: 44452, drop: "21,842", at: "KYC attempt", big: true },
           { label: "Verified", count: 39609, drop: "4,843", at: "verification" },
-          { label: "Verified depositors", count: 34462, drop: "5,147", at: "first deposit" } ] } },
+          { label: "Verified depositors", count: 34462, drop: "5,147", at: "never deposited" } ] } },
       { verdict: { label: "The biggest leak", text: "<b>21,842 users</b>, a full third of everyone who'd been pre-checked, vanished between <em>pre-checked</em> and <em>attempted verification</em>, right where they were meant to start KYC. Closing that gap became the goal: get the number of <em>verified</em> users as close as possible to the number who <em>registered</em>." } },
       { eyebrow: "Problem statement", h: "The question we set out to answer", p: [
         "<em>How do we guide users through sign-up and KYC verification so more of them make it out the other side?</em>",
@@ -597,6 +597,7 @@ const CASES = {
           "The overview of three statuses is appreciated and helpful, and users like the green confirmation after verifying.",
           "“Sofort verification” is the most preferred method because it's fast; ID upload is second, as a well-known procedure."] },
         { tone: "no", label: "Important findings", items: [
+          "A comprehension issue runs through the whole KYC flow, users don't fully follow what the process is, why each step exists or what happens next.",
           "Benefits and purpose of verification aren't clear to several users, we should explain it's German regulation / player protection.",
           "The verification reward (50 cash spins) confuses some, who mistake it for the welcome offer.",
           "Some tap <b>“Zahlungsmethode”</b> expecting to add a payment method (irritation).",
@@ -608,23 +609,24 @@ const CASES = {
       { chapter: { no: "03", hud: "The redesign", title: "Rebuilding onboarding",
         blurb: "Bring registration in-house, cut it to the essentials, and test it honestly before rolling it out." } },
       { eyebrow: "The opportunity", h: "Make the case to build in-house",
-        p: ["Registration ran on an external provider, a black box we couldn't tune, and every fix the research pointed to was a vendor ticket and a wait. So I turned the usability evidence into the case for bringing it in-house: control and faster iteration on the UX side, cheaper than the vendor on the financial side. Leadership bought it, and I owned the flow end-to-end from there."],
+        p: ["Registration ran on an external provider's software, so we couldn't change it ourselves. Every fix the research suggested meant a ticket to the vendor and a long wait. I used the usability findings to make the case for building it in-house: we could improve it faster, and it was cheaper than paying the vendor. Leadership agreed, and I owned the flow end to end from there."],
         beat: { outcomeLabel: "Why it mattered",
           outcome: "It turned a fixed, outsourced funnel into something the team controlled. Every problem the research had found was now ours to fix directly." } },
       { eyebrow: "Two-step registration", h: "Cut it to the essentials",
-        p: ["Testing's clearest complaint was blunt: registration felt <em>tedious</em>. The steps weren't hard, there were simply too many of them. I benchmarked competitors and industry leaders, stripped the form to only what we and the regulator need, and collapsed the rest into a concise <b>two-step</b> flow."],
+        p: ["Usability testing's clearest complaint was blunt: registration felt <em>tedious</em>. The steps weren't hard, there were simply too many of them. I benchmarked competitors and industry leaders, stripped the form to only what we and the regulator need, and collapsed the rest into a concise <b>two-step</b> flow."],
         beat: { outcomeLabel: "Why it works",
           outcome: "Fewer fields, fewer screens, less time on task, aimed squarely at the step where the funnel lost the most people." } },
       { eyebrow: "Design process", h: "From happy path to hi-fi",
-        p: ["A tight timeline meant I couldn't afford to design the same screens twice. I mapped the happy path, prototyped in Figma for fast internal and guerrilla tests, then used the design system to jump straight to high-fidelity. Skipping mid-fi was a calculated bet: hi-fi was cheap, so the time saved went into testing the flow instead of polishing throwaway screens."],
+        p: ["I created a list of tasks and user flows to identify the happy path while designing. To visualise how the flow might work, I began creating prototypes in Figma, which let us run internal and guerrilla tests on the task flows easily.",
+        "Due to the tight timeline, and an established design language, I opted to create high-fidelity screens directly, with regular feedback from product and engineering to refine the solution. Skipping lo-fi was a calculated bet: hi-fi was cheap, so the time saved went into testing the flow."],
         gallery: [
           { src: "images/reimagining-onboarding/iteration-6.webp", caption: "An early iteration of the registration → activation flow." },
           { src: "images/reimagining-onboarding/iteration-7.webp", caption: "Happy path, iteration 7, with regulatory requirements integrated." }] },
-      { eyebrow: "The new flow", h: "Two steps, each earning its keep", p: [
+      { eyebrow: "The new flow", h: "Two-step registration", p: [
         "The redesign splits registration into two deliberate steps, each answering a specific thing the research said was breaking patience or trust." ],
         gallery: [
-          { src: "images/reimagining-onboarding/reg-step1.webp", caption: "Step 1, the bare minimum to get started: country, email, password. A direct answer to the “it's tedious” complaint, you're in before you can feel the friction." },
-          { src: "images/reimagining-onboarding/reg-step2.webp", caption: "Step 2, identity details fronted by a plain-language banner, “enter your name and address as it appears on your identity document.” The “why am I giving this?” confusion, answered in context, right where users hesitated." }] },
+          { src: "images/reimagining-onboarding/reg-step1.webp" },
+          { src: "images/reimagining-onboarding/reg-step2.webp" }] },
       { eyebrow: "The KYC bottleneck", h: "Fix verification itself",
         p: ["A leaner form only got users <em>to</em> verification faster, and verification was where they dropped off. The top reason for quitting said it plainly: <b>they tried to verify, and it failed.</b> No copy could rewrite that, so I pushed the team to treat the KYC provider as a decision we owned. We benchmarked vendors and moved to <b>Sonio</b>, paired with faster verification methods, so more users cleared KYC on the first attempt."],
         beat: { outcomeLabel: "Why it mattered",
@@ -635,9 +637,9 @@ const CASES = {
           ["Control (previous flow)", "8,875", "22,181", "23.58%"],
           ["Test (new flow)", "2,352", "5,782", "76.42%"] ] },
         figure: { src: "images/reimagining-onboarding/ab-test.webp", caption: "A/B comparison, the test variant against the previous flow." } },
-      { verdict: { label: "Read honestly", text: "The test variant showed a higher win probability, <b>76.42%</b> vs <b>23.58%</b>, so it's <em>likely</em> the stronger flow for driving registrations. But the results weren't statistically significant, so we couldn't confidently conclude the test variant was superior on that data alone." } },
+      { verdict: { label: "Read honestly", text: "The test variant showed a higher win probability, <b>76.42%</b> vs <b>23.58%</b>, so it's <em>likely</em> the stronger flow for driving registrations. But the results weren't statistically significant, so we couldn't confidently conclude the test variant was superior on that data alone. I also triggered events in both flows to measure <b>time on task</b> and <b>completion rate</b>, where the test variant had a massive superiority over the control." } },
       { eyebrow: "Phased improvements", h: "Ship value early, improve over time", p: [
-        "Rather than wait on a clean experiment, we rolled the flow out in phases, a good experience out of the box, improvements prioritised over time, then watched the live funnel instead of a 20% sample." ] },
+        "To support the phased rollout, the designs allowed the engineering team to deliver a good experience right out of the box and prioritize improvements over time. This approach ensured that we could continuously enhance the user experience while maintaining a functional and appealing registration process from the start." ] },
       { eyebrow: "The payoff", h: "What the funnel did next", p: [
         "The controlled A/B never reached significance, but the full rollout removed the doubt. Once the leaner registration and <b>Sonio</b> reached every user, the live funnel moved, most at the exact step we'd set out to fix." ],
         metrics: [["54.4%", "end-to-end conversion, up from 43.3%"], ["75.2%", "cleared the KYC step, up from 67.1%"], ["25%", "drop-off before KYC, down from 33%"]] },
@@ -714,6 +716,12 @@ function imgTag(src, alt) {
 function framed(src, alt) {
   return `<span class="cs-frame">${imgTag(src, alt)}</span>`;
 }
+// click-to-zoom wrapper: a framed still image becomes a button that opens the
+// shared lightbox (wired via the .cs-figzoom handler); videos stay plain
+function zoomable(src, caption) {
+  if (/\.(mp4|webm)$/i.test(src)) return framed(src, caption);
+  return `<button class="cs-figzoom" data-zoom-src="${src}" aria-label="${esc("Expand: " + (caption || "image"))}">${framed(src, caption)}<span class="cs-expand" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span></button>`;
+}
 // Horizontal, space-saving carousel for dense reference sheets: scroll-snap track
 // + prev/next + dots, each slide click-to-zoom. Behaviour wired by initCarousels().
 function carouselHTML(items) {
@@ -753,7 +761,7 @@ function figrowHTML(items) {
   const cells = items.map((g) => {
     const d = IMG_DIMS[g.src.split("/").slice(-2).join("/")];
     const ar = d ? (d[0] / d[1]) : 1;
-    return `<figure style="flex-grow:${ar.toFixed(4)}">${framed(g.src, g.caption)}${g.caption ? `<figcaption>${esc(g.caption)}</figcaption>` : ""}</figure>`;
+    return `<figure style="flex-grow:${ar.toFixed(4)}">${zoomable(g.src, g.caption)}${g.caption ? `<figcaption>${esc(g.caption)}</figcaption>` : ""}</figure>`;
   }).join("");
   return `<div class="cs-figrow">${cells}</div>`;
 }
@@ -1165,7 +1173,7 @@ function renderCase(slug) {
       wf += wfCol(
         `<span class="cs-wf__bar cs-wf__bar--end" style="top:${pct(fmax - flast.count).toFixed(2)}%;height:${pct(flast.count).toFixed(2)}%"></span>` +
         `<span class="cs-wf__num cs-wf__num--end" style="top:calc(${pct(fmax - flast.count).toFixed(2)}% + 12px)" data-count="${flast.count}">0</span>`, flast.label);
-      txt += `<figure class="cs-wf-wrap" data-funnel role="img" aria-label="Onboarding waterfall: 79,602 registered; losses of 1,517 at activation, 11,791 at pre-check, 21,842 at the KYC attempt (the biggest single leak), 4,843 at verification and 5,147 before a first deposit leave 34,462 verified depositors (43%)."><div class="cs-wf">${wf}</div>${s.funnel.caption ? `<figcaption class="cs-cap">${esc(s.funnel.caption)}</figcaption>` : ""}</figure>`;
+      txt += `<figure class="cs-wf-wrap" data-funnel role="img" aria-label="Onboarding waterfall: 79,602 registered; losses of 1,517 at activation, 11,791 at pre-check, 21,842 at the KYC attempt (the biggest single leak), 4,843 at verification and 5,147 who never deposited leave 34,462 verified depositors (43%)."><div class="cs-wf">${wf}</div>${s.funnel.caption ? `<figcaption class="cs-cap">${esc(s.funnel.caption)}</figcaption>` : ""}</figure>`;
     }
     if (s.metrics) txt += `<div class="cs-metrics">${s.metrics.map((m) => `<div class="cs-metric"><b>${esc(m[0])}</b><span>${esc(m[1])}</span></div>`).join("")}</div>`;
     if (s.result) txt += `<div class="cs-result"><span class="cs-result__n">${esc(s.result.n)}</span><span class="cs-result__label">${esc(s.result.label)}</span>${s.result.note ? `<p class="cs-result__note">${s.result.note}</p>` : ""}</div>`;
@@ -1184,8 +1192,8 @@ function renderCase(slug) {
     }
     // stacked full-width figures, for images of different aspect ratios that would
     // be squashed side-by-side in a gallery
-    if (s.figures) media += s.figures.map((f) => `<figure class="cs-figure">${framed(f.src, f.caption)}${f.caption ? `<figcaption>${esc(f.caption)}</figcaption>` : ""}</figure>`).join("");
-    if (s.gallery) media += `<div class="cs-gallery">${s.gallery.map((g) => `<figure>${framed(g.src, g.caption)}${g.caption ? `<figcaption>${esc(g.caption)}</figcaption>` : ""}</figure>`).join("")}</div>`;
+    if (s.figures) media += s.figures.map((f) => `<figure class="cs-figure">${zoomable(f.src, f.caption)}${f.caption ? `<figcaption>${esc(f.caption)}</figcaption>` : ""}</figure>`).join("");
+    if (s.gallery) media += `<div class="cs-gallery">${s.gallery.map((g) => `<figure>${zoomable(g.src, g.caption)}${g.caption ? `<figcaption>${esc(g.caption)}</figcaption>` : ""}</figure>`).join("")}</div>`;
     if (s.carousel) {
       let carHtml = carouselHTML(s.carousel);
       const carCls = s.carouselSide ? "cs-car cs-car--side" : s.carouselWhole ? "cs-car cs-car--whole" : null;
