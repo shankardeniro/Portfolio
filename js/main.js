@@ -434,7 +434,7 @@ const CASES = {
             "The <b>bonus opt-in</b> arrived only at the deposit step, after the amount was chosen. All seven hit it, and the bonus multiplies the deposit.",
             "Veterans caught <b>gaps in the terms</b>: 35× wagering with no minimum bet listed.",
             "<b>Trust logos</b>, BankID, Swish and known providers, were what players looked for before any deposit."] }],
-        cap: "The three with the strongest signal, bonus timing, Live Casino wayfinding and trust signals, became the fixes below." },
+        cap: "Smaller signals went to the backlog: two of the seven researched the casino through ChatGPT before trusting it, and jackpots drew only one active player, who was missing the data a decision needs. The three strongest signals, bonus timing, Live Casino wayfinding and trust signals, became the fixes below." },
       { eyebrow: "Finding 01 · Bonus claim",
         p: ["People struggled to claim the deposit bonus right after signing up, the moment we could least afford to lose them. I redesigned the flow to keep people in context with a clear sense of progress, and folded the bonus claim into the deposit step."],
         beat: { quote: "I would prefer to do it in one flow, like not have to go back and forth.",
