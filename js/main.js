@@ -637,8 +637,7 @@ const CASES = {
       { eyebrow: "Phased improvements", h: "Ship value early, improve over time", p: [
         "To support the phased rollout, the designs allowed the engineering team to deliver a good experience right out of the box and prioritize improvements over time. This approach ensured that we could continuously enhance the user experience while maintaining a functional and appealing registration process from the start." ] },
       { eyebrow: "The payoff", h: "What the funnel did next", p: [
-        "The controlled A/B never reached significance, but the full rollout removed the doubt. Once the leaner registration and <b>Sonio</b> reached every user, the live funnel moved, most at the exact step we'd set out to fix." ],
-        metrics: [["54.4%", "end-to-end conversion, up from 43.3%"], ["75.2%", "cleared the KYC step, up from 67.1%"], ["25%", "drop-off before KYC, down from 33%"]] },
+        "The controlled A/B never reached significance, but the full rollout removed the doubt. Once the leaner registration and <b>Sonio</b> reached every user, the live funnel moved, most at the exact step we'd set out to fix." ] },
       { eyebrow: "Before / after", h: "The funnel, re-measured", p: [
         "Cumulative conversion at every step, the original flow against the redesigned one. The bridge between the dots is the share of users each step now keeps." ],
         dumbbell: { min: 40, max: 100, rows: [
