@@ -604,6 +604,18 @@ main{position:relative;z-index:2}
 .reel__shot--desk img{position:absolute;top:0;left:0;width:100%;height:auto;display:block;
   transform-origin:50% 0;will-change:transform}
 @media(max-width:640px){.cs-scanhero{aspect-ratio:4/3}}
+/* duo hero: desktop + phone, both manually scrollable full-page captures */
+.cs-duohero{position:relative;margin:0;padding-bottom:3rem}
+.cs-duohero__desk{width:88%;border-radius:16px;overflow:hidden;border:1px solid var(--line);
+  background:var(--bg-soft);box-shadow:0 30px 70px -40px rgba(10,10,14,.45)}
+.cs-duohero__scroll{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.cs-duohero__desk .cs-duohero__scroll{height:clamp(340px,52vh,520px)}
+.cs-duohero__scroll img{display:block;width:100%;height:auto}
+.cs-duohero__phone{position:absolute;right:0;bottom:0;width:clamp(140px,18vw,210px);
+  border-radius:26px;border:6px solid #17171b;overflow:hidden;background:var(--bg-soft);
+  box-shadow:0 26px 60px -28px rgba(10,10,14,.5)}
+.cs-duohero__phone .cs-duohero__scroll{height:clamp(280px,42vh,420px)}
+.cs-duohero__hint{text-align:center;margin:1rem 0 0}
 /* count-aware: 3 items -> 3 cols, 2 items -> 2 cols, narrow -> stacks. No empty columns. */
 .cs-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:.9rem;margin:1.8rem 0 .4rem;align-items:start}
 .cs-gallery figure{margin:0}

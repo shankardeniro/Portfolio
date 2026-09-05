@@ -327,7 +327,7 @@ const CASES = {
   "winning-over-sweden": {
     accent: "#c6f24e", num: "01",
     title: "Winning Over Sweden",
-    tagline: "Getting a new casino licensed and launched in Sweden, one of the strictest gambling markets.",
+    tagline: "A compliant, user-centered product tailored for Swedish preferences.",
     meta: { Role: "Research, Regulatory & Design Strategy", Duration: "6 months", Team: "PM · 8 engineers", Year: "2025–2026" },
     hero: "images/winning-over-sweden/hero.webp",
     heroStage: {
@@ -869,8 +869,11 @@ function initZoomables(root) {
 }
 function heroStage(c) {
   const s = c.heroStage;
-  return `<figure class="cs-scanhero" data-reel aria-label="${esc(c.title + ": product walkthrough")}">
-    <div class="reel__shot reel__shot--desk">${imgTag(s.desktop, c.title + " lobby")}</div>
+  // desktop + phone duo, both manually scrollable top-to-bottom captures
+  return `<figure class="cs-duohero" aria-label="${esc(c.title + ": the live lobby, desktop and mobile, scroll either screen")}">
+    <div class="cs-duohero__desk"><div class="cs-duohero__scroll">${imgTag(s.desktop, c.title + " desktop lobby")}</div></div>
+    <div class="cs-duohero__phone"><div class="cs-duohero__scroll">${imgTag(s.mobile, c.title + " mobile lobby")}</div></div>
+    <figcaption class="cs-cap cs-duohero__hint">The real lobby, top to bottom. Both screens scroll.</figcaption>
   </figure>`;
 }
 

@@ -29,7 +29,7 @@ const base = [
     panel: "#f0d9e6",
     stats: [["0", "violations in 6 months"], ["58%", "more claimed bonuses"]],
     shots: [
-      { f: "hero.webp", cap: "A compliant, user-centred casino built for the Swedish market.",
+      { f: "hero.webp", cap: "A compliant, user-centred product built for the Swedish market.",
         sec: "Overview · Launching where the rules are strict",
         text: "Sweden has one of the strictest, most mature gambling markets in Europe. Spelinspektionen can revoke a licence over a single violation. Before we could convince any player of anything, we had to convince the regulator we were safe." },
       { f: "requirements-map.webp", cap: "The UX Requirements Map: regulation, to UI pattern, to design action.",
