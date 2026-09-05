@@ -322,10 +322,10 @@ document.querySelectorAll('a[href^="#"]').forEach((a) => {
 })();
 
 /* ---------- CASE STUDIES ---------- */
-const ORDER = ["winning-over-sweden", "reimagining-onboarding", "user-research-framework"];
+const ORDER = ["reimagining-onboarding", "winning-over-sweden", "user-research-framework"];
 const CASES = {
   "winning-over-sweden": {
-    accent: "#c6f24e", num: "01",
+    accent: "#c6f24e", num: "02",
     title: "Winning Over Sweden",
     tagline: "A compliant, user-centered product tailored for Swedish preferences.",
     meta: { Role: "Research, Regulatory & Design Strategy", Duration: "6 months", Team: "PM · 8 engineers", Year: "2025–2026" },
@@ -520,7 +520,7 @@ const CASES = {
     ],
   },
   "reimagining-onboarding": {
-    accent: "#ff8a5c", num: "02",
+    accent: "#ff8a5c", num: "01",
     title: "Reimagining Onboarding",
     tagline: "Redesigning a heavy, regulated sign-up so fewer people quit before they finish verifying.",
     meta: { Role: "UX Designer / Researcher", Duration: "Sept 2023 – Jan 2024", Team: "Sole design & research · product · engineering · CRM", Year: "2024" },
